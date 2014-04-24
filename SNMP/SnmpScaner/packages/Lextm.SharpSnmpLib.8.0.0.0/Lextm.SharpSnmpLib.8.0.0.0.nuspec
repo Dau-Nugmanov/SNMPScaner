@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Lextm.SharpSnmpLib</id>
+    <version>8.0.0.0</version>
+    <title>#SNMP Library</title>
+    <authors>Malcolm Crowe, Lex Li, and other contributors.</authors>
+    <owners>Malcolm Crowe, Lex Li, and other contributors.</owners>
+    <licenseUrl>http://sharpsnmplib.codeplex.com/wikipage?title=600012&amp;referringTitle=KB</licenseUrl>
+    <projectUrl>http://sharpsnmplib.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>#SNMP (SharpSNMP) Suite is a set of free SNMP tools based on an open source library for developers who target Microsoft .NET/Xamarin Mono platforms. It's developed in C# and can be used for VB.NET, Delphi Prism, and more.</description>
+    <summary>#SNMP open source SNMP library for .NET and Mono.</summary>
+    <releaseNotes>* Work item 7239 Bug in SecureSnmpContext.HandleMembership method is closed.
+* Work item 7240 System.ArgumentException truncation error for 32-bit integer coding is closed.
+* Work item 7241 v1 walk throws exception on bad(?) data from printer is closed.
+* Work item 7243 SNMP v3 discovery bug is closed.
+* Work item 7245 Exception on V3 Inform discovery messages is closed.
+* Work item 7253 Report engine time exceeds RFC max value is closed.
+* Library re-licensed under MIT/X11.
+
+http://sharpsnmplib.codeplex.com/releases/view/79079</releaseNotes>
+    <copyright>(C) 2008-2013 Malcolm Crowe, Lex Li, and other contributors.</copyright>
+    <language>en-US</language>
+    <tags>snmp mib smi</tags>
+    <dependencies>
+      <dependency id="log4net" version="2.0.0" />
+      <dependency id="Antlr.Unofficial" version="3.4.1.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
