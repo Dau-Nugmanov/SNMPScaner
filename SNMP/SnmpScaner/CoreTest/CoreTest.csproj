@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2587D0D0-2477-4519-A817-0DA613C153EE}</ProjectGuid>
+    <ProjectGuid>{B0B7F6FF-8BBD-44BD-BEC9-5716597E3690}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoreTest</RootNamespace>
@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NUnitTestFixture.cs" />
+    <Compile Include="SnmpScanServerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8954ae76-32fc-4cac-9656-abc5ffd6bc52}</Project>
+      <Project>{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>

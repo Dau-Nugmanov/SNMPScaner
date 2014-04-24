@@ -7,14 +7,14 @@ using NUnit.Framework;
 namespace CoreTest
 {
 	[TestFixture]
-	public class CoreTest
+	public class SnmpScanServerTest
 	{
 		[Test]
 		public void Test()
 		{
-			SnmpScanServer t = new SnmpScanServer();
-			t.Run();
-		}
+			var server = new SnmpScanServer();
+			Assert.DoesNotThrow(server.Run);
+		} 
 	}
 }
 
