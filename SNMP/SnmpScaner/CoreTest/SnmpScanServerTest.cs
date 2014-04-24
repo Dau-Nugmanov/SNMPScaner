@@ -14,6 +14,13 @@ namespace CoreTest
 		{
 			var server = new SnmpScanServer();
 			Assert.DoesNotThrow(server.Run);
+		}
+
+		[Test]
+		public void TestAsync()
+		{
+			var server = new SnmpScanServer();
+			Assert.DoesNotThrow(server.RunAsync);
 		} 
 	}
 }
