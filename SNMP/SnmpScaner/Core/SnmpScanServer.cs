@@ -5,14 +5,32 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DomainModel;
+using DomainModel.Interfaces;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
 using Lextm.SharpSnmpLib.Security;
+using StructureMap;
+using Yarn;
 
 namespace Core
 {
 	public class SnmpScanServer
 	{
+		private readonly Cache _cache = new Cache();
+
+		public SnmpScanServer()
+		{
+			var repo = ObjectFactory.TryGetInstance<IConfigRepo>();
+			if(repo != null)
+				_cache.Devices.AddRange(repo.GetAllDevices());
+		}
+
+		public DeviceItem[] GetAllValues()
+		{
+			return _cache.Devices.SelectMany(d => d.Items).ToArray();
+		}
+
 		public void Run()
 		{
 			var ipAddress = Dns.GetHostAddresses("demo.snmplabs.com");
