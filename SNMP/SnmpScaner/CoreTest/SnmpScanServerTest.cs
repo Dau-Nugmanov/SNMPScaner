@@ -59,8 +59,8 @@ namespace CoreTest
 			var values = server.GetAllValues();
 			
 			Assert.AreEqual(values.Count(), devices.SelectMany(d=>d.Items).Count());
-			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.1.0").Value, "SunOS zeus.snmplabs.com 4.1.3_U1 1 sun4m");
-			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.5.0").Value, "zeus.snmplabs.com");
+			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.1.0").Value.ToString(), "SunOS zeus.snmplabs.com 4.1.3_U1 1 sun4m");
+			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.5.0").Value.ToString(), "zeus.snmplabs.com");
 		} 
 	}
 }

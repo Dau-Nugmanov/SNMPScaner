@@ -49,7 +49,7 @@ namespace DomainModel
 				.Join(result, item => item.Oid, variable => variable.Id,
 					(item, variable) => new{item, variable})
 				.ToList()
-				.ForEach(p => p.item.UpdateValue(p.variable.Data.ToString()));
+				.ForEach(p => p.item.UpdateValue(p.variable.Data));
 		}
 	}
 }

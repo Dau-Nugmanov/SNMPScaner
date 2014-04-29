@@ -31,6 +31,9 @@ namespace Core
 			return _cache.Devices.SelectMany(d => d.Items).ToArray();
 		}
 
+		/// <summary>
+		/// Нужно для теста. потом удалю
+		/// </summary>
 		public void Run()
 		{
 			var ipAddress = Dns.GetHostAddresses("demo.snmplabs.com");
@@ -45,7 +48,9 @@ namespace Core
 						   },
 						   6000);
 		}
-
+		/// <summary>
+		/// Нужно для теста. потом удалю
+		/// </summary>
 		public void RunAsync()
 		{
 			var ipAddress = Dns.GetHostAddresses("demo.snmplabs.com");
