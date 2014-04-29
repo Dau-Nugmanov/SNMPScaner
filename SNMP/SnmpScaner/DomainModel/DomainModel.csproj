@@ -81,6 +81,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="DeviceItem.cs" />
     <Compile Include="Interfaces\IConfigRepo.cs" />
+    <Compile Include="Interfaces\IHistoryRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

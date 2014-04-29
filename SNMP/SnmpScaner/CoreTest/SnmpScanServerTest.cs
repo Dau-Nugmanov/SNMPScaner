@@ -53,6 +53,10 @@ namespace CoreTest
 			};
 
 			ObjectFactory.Configure(item =>item.For<IConfigRepo>().Add(Mock.Of<IConfigRepo>(m => m.GetAllDevices() == devices)));
+			
+			var mock = new Mock<IHistoryRepo>();
+			mock.Setup(x => x.Save(It.Is<long>(v => v != 0), It.IsAny<ISnmpData>(), It.IsAny<DateTime>()));
+			ObjectFactory.Configure(item => item.For<IHistoryRepo>().Add(mock.Object));
 
 			var server = new SnmpScanServer();
 			Thread.Sleep(6000);

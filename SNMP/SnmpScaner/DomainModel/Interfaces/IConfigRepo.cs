@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DomainModel.Interfaces
+﻿namespace DomainModel.Interfaces
 {
 	public interface IConfigRepo
 	{
