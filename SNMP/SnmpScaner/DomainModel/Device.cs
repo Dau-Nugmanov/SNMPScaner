@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
 
@@ -11,13 +9,14 @@ namespace DomainModel
 {
 	public class Device
 	{
+		/// <summary>
+		/// Id в БД
+		/// </summary>
 		public long Id { get; set; }
 		public string Name { get; set; }
 		public IPAddress Ip { get; set; }
 		public VersionCode VersionCode { get; set; }
 		public int Port { get; set; }
-		public string Login { get; set; }
-		public string Password { get; set; }
 		public int Timeout { get; set; }
 
 		private List<DeviceItem> _items = new List<DeviceItem>();
@@ -36,21 +35,72 @@ namespace DomainModel
 			}
 		}
 
+		private DateTime _nextBadItemsUpdateTry = DateTime.MinValue;
+		private const long BadItemsUpdateFrequency = 600;
+
 		public void SyncUpdate()
 		{
-			var result = Messenger.Get(VersionCode,
-				new IPEndPoint(Ip, Port),
-				new OctetString("public"),
-				Items
-					.Select(i=> new Variable(i.Oid))
-					.ToList(),
-				Timeout);
+			SyncUpdate(Items.Where(i => !i.ExceptionType.HasValue));
+			
+			if (DateTime.Now <= _nextBadItemsUpdateTry) return;
+			SyncUpdate(Items.Where(i => i.ExceptionType.HasValue));
+			_nextBadItemsUpdateTry = DateTime.Now.AddSeconds(BadItemsUpdateFrequency);
+		}
 
-			_items
-				.Join(result, item => item.Oid, variable => variable.Id,
-					(item, variable) => new{item, variable})
-				.ToList()
-				.ForEach(p => p.item.UpdateValue(p.variable.Data));
+		private void SyncUpdate(IEnumerable<DeviceItem> items)
+		{
+			try
+			{
+				var result = Messenger.Get(VersionCode,
+					new IPEndPoint(Ip, Port),
+					new OctetString("public"),
+					items
+						.Select(i => new Variable(i.Oid))
+						.ToList(),
+					Timeout);
+
+				var timestamp = DateTime.Now;
+
+				_items
+					.Join(result, item => item.Oid, variable => variable.Id,
+						(item, variable) => new { item, variable })
+					.ToList()
+					.ForEach(p =>
+					{
+						p.item.UpdateValue(p.variable.Data, timestamp);
+						p.item.ExceptionType = null;
+					});
+			}
+			catch (ErrorException e)
+			{
+
+				var timestamp = DateTime.Now;
+				//Список значений с ошибками
+				var invalidItems = e.Body.Scope.Pdu.Variables
+					.Where(v => v.Data.TypeCode == SnmpType.NoSuchObject
+						|| v.Data.TypeCode == SnmpType.NoSuchInstance
+						|| v.Data.TypeCode == SnmpType.EndOfMibView
+						|| v.Data.TypeCode == SnmpType.Null)
+					.ToList();
+
+				//Помечаем DeviceItem как ошибочные чтобы их больше не читать
+				_items
+					.Join(invalidItems, item => item.Oid, variable => variable.Id,
+						(item, variable) => new { item, variable })
+					.ToList()
+					.ForEach(p => p.item.ExceptionType = p.variable.Data.TypeCode);
+
+				//Пытаемся сохранить то что осталось
+				_items
+					.Join(e.Body.Scope.Pdu.Variables.Except(invalidItems), item => item.Oid, variable => variable.Id,
+						(item, variable) => new { item, variable })
+					.ToList()
+					.ForEach(p =>
+					{
+						p.item.UpdateValue(p.variable.Data, timestamp);
+						p.item.ExceptionType = null;
+					});
+			}
 		}
 	}
 }

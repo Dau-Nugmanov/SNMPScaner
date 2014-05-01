@@ -28,7 +28,7 @@ namespace DomainModel
 
 		public void SyncUpdate(object state)
 		{
-			int delay = 0;
+			var delay = 0;
 			do
 			{
 				// sleep until next update.
