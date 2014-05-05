@@ -21,9 +21,9 @@ namespace Core
 
 		public SnmpScanServer()
 		{
-			var repo = ObjectFactory.TryGetInstance<IConfigRepo>();
-			if(repo != null)
-				_cache.Devices.AddRange(repo.GetAllDevices());
+			var repo = ObjectFactory.GetInstance<IConfigRepo>();
+			_cache.Devices.AddRange(repo.GetAllDevices());
+			_cache.Subscriptions.AddRange(repo.GetAllSubscriptions(_cache));
 		}
 
 		public DeviceItem[] GetAllValues()

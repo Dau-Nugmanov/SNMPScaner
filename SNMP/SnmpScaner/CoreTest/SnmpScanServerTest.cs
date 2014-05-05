@@ -74,6 +74,7 @@ namespace CoreTest
 		[Test]
 		public void TestLocalEmulator()
 		{
+			#region Init
 			var devices = new[]
 			{
 				new Device
@@ -141,7 +142,7 @@ namespace CoreTest
 						},
 						//new DeviceItem
 						//{
-						//	Id = 6,
+						//	Id = 7,
 						//	Oid = new ObjectIdentifier(".1.3.6.1.2.1.31.1.1.1.6.1"), //Counter64:  	
 						//	Timestamp = DateTime.MinValue,
 						//	Value = null,
@@ -151,12 +152,55 @@ namespace CoreTest
 					}
 				}
 			};
+			var subscriptions = new[]
+			{
+				new Subscription
+				{
+					Items = new List<SubscriptionItem>
+					{
+						new SubscriptionItem(devices[0].Items[0]),
+						new SubscriptionItem(devices[0].Items[1]),
+						new SubscriptionItem(devices[0].Items[2])
+					},
+					Notification = new Notification
+					{
+						Email = "Test@test.ru",
+						PhoneNumber = "+79110000000"
+					},
+					TimeDelta = 60
+				},
+				new Subscription
+				{
+					Items = new List<SubscriptionItem>
+					{
+						new SubscriptionItem(devices[0].Items[3]),
+						new SubscriptionItem(devices[0].Items[4]),
+						new SubscriptionItem(devices[0].Items[5])
+					},
+					Notification = new Notification
+					{
+						Email = "Test2@test.ru",
+						PhoneNumber = "+79220000000"
+					},
+					TimeDelta = 30
+				}
+			};
 
-			ObjectFactory.Configure(item => item.For<IConfigRepo>().Add(Mock.Of<IConfigRepo>(m => m.GetAllDevices() == devices)));
+			#endregion
 
-			var mock = new Mock<IHistoryRepo>();
-			mock.Setup(x => x.Save(It.Is<long>(v => v != 0), It.IsAny<ISnmpData>(), It.IsAny<DateTime>()));
-			ObjectFactory.Configure(item => item.For<IHistoryRepo>().Add(mock.Object));
+			ObjectFactory.Configure(item => item.For<IConfigRepo>().Add(Mock.Of<IConfigRepo>(m =>
+				m.GetAllDevices() == devices 
+					&& m.GetAllSubscriptions(It.IsAny<Cache>()) == subscriptions
+			)));
+
+			var historyMock = new Mock<IHistoryRepo>();
+			historyMock.Setup(x => x.Save(It.Is<long>(v => v != 0), It.IsAny<ISnmpData>(), It.IsAny<DateTime>()));
+			ObjectFactory.Configure(item => item.For<IHistoryRepo>().Add(historyMock.Object));
+
+			var executorMock = new Mock<INotificationExecutor>();
+			executorMock.Setup(x => x.Execute(It.IsAny<IEnumerable<SubscriptionItem>>(), It.IsAny<Notification>()))
+				.Callback<IEnumerable<SubscriptionItem>, Notification>((i, n)=>i.ToList().ForEach(item=>item.GetValue()));
+			ObjectFactory.Configure(item => item.For<INotificationExecutor>().Add(executorMock.Object));
 
 			var server = new SnmpScanServer();
 			//Long sleep for debug purpose

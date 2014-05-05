@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using DomainModel.Interfaces;
+using StructureMap;
 
 namespace DomainModel
 {
@@ -21,9 +24,23 @@ namespace DomainModel
 			}
 		}
 
+		private List<Subscription> _subscriptions = new List<Subscription>();
+		public List<Subscription> Subscriptions
+		{
+			get { return _subscriptions; }
+			set
+			{
+				if (value == null)
+					_subscriptions.Clear();
+				else
+					_subscriptions = value;
+			}
+		}
+
 		public Cache()
 		{
 			ThreadPool.QueueUserWorkItem(SyncUpdate);
+			ThreadPool.QueueUserWorkItem(SyncUpdateSubscriptions);
 		}
 
 		public void SyncUpdate(object state)
@@ -38,6 +55,27 @@ namespace DomainModel
 
 				Devices.ForEach(d => d.SyncUpdate());
 
+				delay = Environment.TickCount - delay;
+			} while (true);
+		}
+
+		public void SyncUpdateSubscriptions(object state)
+		{
+			var delay = 0;
+			var notificationExecutor = ObjectFactory.GetInstance<INotificationExecutor>();
+			do
+			{
+				// sleep until next update.
+				Thread.Sleep((delay > 0 && delay < MaxUpdateRate) ? MaxUpdateRate - delay : MaxUpdateRate);
+
+				delay = Environment.TickCount;
+
+				Subscriptions
+					.Select(s => new {Items = s.Update(), s.Notification})
+					.Where(i=>i.Items.Any())
+					.ToList()
+					.ForEach(i=> notificationExecutor.Execute(i.Items, i.Notification));
+				
 				delay = Environment.TickCount - delay;
 			} while (true);
 		}

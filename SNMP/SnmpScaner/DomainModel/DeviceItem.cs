@@ -13,6 +13,7 @@ namespace DomainModel
 		/// Id в БД
 		/// </summary>
 		public long Id { get; set; }
+		public string Name { get; set; }
 		public ObjectIdentifier Oid { get; set; }
 		
 		public DateTime Timestamp { get; set; }
@@ -50,11 +51,7 @@ namespace DomainModel
 		/// </summary>
 		private static readonly List<SnmpType> ValueTypes = new List<SnmpType>
 		{
-			SnmpType.Counter32, 
-			SnmpType.Counter64, 
-			SnmpType.Gauge32,
-			SnmpType.Integer32, 
-			SnmpType.TimeTicks
+			SnmpType.Counter32, SnmpType.Counter64, SnmpType.Gauge32,SnmpType.Integer32, SnmpType.TimeTicks
 		};
 		/// <summary>
 		/// Проверяет нужно ли делать обновление
