@@ -10,7 +10,7 @@ namespace DomainModel
 	public class DeviceItem
 	{
 		/// <summary>
-		/// Id в БД
+		/// Id в БД asdasd
 		/// </summary>
 		public long Id { get; set; }
 		public string Name { get; set; }
