@@ -38,16 +38,16 @@ namespace CoreTest
 			{
 				new Device
 				{
-					Name = "Test",
+					Id = 1,
 					Ip = Dns.GetHostAddresses("demo.snmplabs.com")[0],
 					Port = 161,
 					Timeout = 6000,
 					VersionCode = VersionCode.V1,
 					Items = new List<DeviceItem>
 					{
-						new DeviceItem {ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.1.0")}},
-						new DeviceItem {ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.3.0")}},
-						new DeviceItem {ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.5.0")}}
+						new DeviceItem{ Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.1.0")},
+						new DeviceItem {Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.3.0")},
+						new DeviceItem {Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.5.0")}
 					}
 				}
 			};
@@ -63,8 +63,8 @@ namespace CoreTest
 			var values = server.GetAllValues();
 			
 			Assert.AreEqual(values.Count(), devices.SelectMany(d=>d.Items).Count());
-			Assert.AreEqual(values.First(i => i.ModelItem.Oid.ToString() == ".1.3.6.1.2.1.1.1.0").Value.ToString(), "SunOS zeus.snmplabs.com 4.1.3_U1 1 sun4m");
-			Assert.AreEqual(values.First(i => i.ModelItem.Oid.ToString() == ".1.3.6.1.2.1.1.5.0").Value.ToString(), "zeus.snmplabs.com");
+			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.1.0").Value.ToString(), "SunOS zeus.snmplabs.com 4.1.3_U1 1 sun4m");
+			Assert.AreEqual(values.First(i => i.Oid.ToString() == ".1.3.6.1.2.1.1.5.0").Value.ToString(), "zeus.snmplabs.com");
 		}
 
 
@@ -79,7 +79,7 @@ namespace CoreTest
 			{
 				new Device
 				{
-					Name = "Test",
+					Id = 1,
 					Ip = IPAddress.Parse("127.0.0.1"),
 					Port = 162,
 					Timeout = 6000,
@@ -89,7 +89,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 1,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.3.0")}, //TimeTicks
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.3.0"), //TimeTicks
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 2,
@@ -98,7 +98,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 2,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.9.1.2.1")}, //Oid
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.9.1.2.1"), //Oid
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 4,
@@ -107,7 +107,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 3,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.9.1.3.800")}, //String Invalid OID
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.1.9.1.3.800"), //String Invalid OID
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 6,
@@ -116,7 +116,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 4,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.1.110")}, //INTEGER	Invalid OID
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.1.110"), //INTEGER	Invalid OID
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 60,
@@ -125,7 +125,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 5,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.5.16")}, //Gauge32: 	
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.5.16"), //Gauge32: 	
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 6,
@@ -134,7 +134,7 @@ namespace CoreTest
 						new DeviceItem
 						{
 							Id = 6,
-							ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.12.2")}, //Counter32 	
+							Oid = new ObjectIdentifier(".1.3.6.1.2.1.2.2.1.12.2"), //Counter32 	
 							Timestamp = DateTime.MinValue,
 							Value = null,
 							TimeDelta = 2,
@@ -143,7 +143,7 @@ namespace CoreTest
 						//new DeviceItem
 						//{
 						//	Id = 7,
-						//	ModelItem = new DeviceModelItem{Oid = new ObjectIdentifier(".1.3.6.1.2.1.31.1.1.1.6.1")}, //Counter64:  	
+						//	Oid = new ObjectIdentifier(".1.3.6.1.2.1.31.1.1.1.6.1"), //Counter64:  	
 						//	Timestamp = DateTime.MinValue,
 						//	Value = null,
 						//	TimeDelta = 2,
@@ -154,36 +154,12 @@ namespace CoreTest
 			};
 			var subscriptions = new[]
 			{
-				new Subscription
-				{
-					Items = new List<SubscriptionItem>
-					{
-						new SubscriptionItem(devices[0].Items[0]),
-						new SubscriptionItem(devices[0].Items[1]),
-						new SubscriptionItem(devices[0].Items[2])
-					},
-					Notification = new Notification
-					{
-						Email = "Test@test.ru",
-						PhoneNumber = "+79110000000"
-					},
-					TimeDelta = 60
-				},
-				new Subscription
-				{
-					Items = new List<SubscriptionItem>
-					{
-						new SubscriptionItem(devices[0].Items[3]),
-						new SubscriptionItem(devices[0].Items[4]),
-						new SubscriptionItem(devices[0].Items[5])
-					},
-					Notification = new Notification
-					{
-						Email = "Test2@test.ru",
-						PhoneNumber = "+79220000000"
-					},
-					TimeDelta = 30
-				}
+				new SubscriptionItem(devices[0].Items[0]){Id = 1, TimeDelta = 60, ValueDelta = devices[0].Items[0].ValueDelta},
+				new SubscriptionItem(devices[0].Items[1]){Id = 2, TimeDelta = 60, ValueDelta = devices[0].Items[1].ValueDelta},
+				new SubscriptionItem(devices[0].Items[2]){Id = 3, TimeDelta = 60, ValueDelta = devices[0].Items[2].ValueDelta},
+				new SubscriptionItem(devices[0].Items[3]){Id = 4, TimeDelta = 60, ValueDelta = devices[0].Items[3].ValueDelta},
+				new SubscriptionItem(devices[0].Items[4]){Id = 5, TimeDelta = 60, ValueDelta = devices[0].Items[4].ValueDelta},
+				new SubscriptionItem(devices[0].Items[5]){Id = 6, TimeDelta = 60, ValueDelta = devices[0].Items[5].ValueDelta}
 			};
 
 			#endregion
@@ -198,8 +174,7 @@ namespace CoreTest
 			ObjectFactory.Configure(item => item.For<IHistoryRepo>().Add(historyMock.Object));
 
 			var executorMock = new Mock<INotificationExecutor>();
-			executorMock.Setup(x => x.Execute(It.IsAny<IEnumerable<SubscriptionItem>>(), It.IsAny<Notification>()))
-				.Callback<IEnumerable<SubscriptionItem>, Notification>((i, n)=>i.ToList().ForEach(item=>item.GetValue()));
+			executorMock.Setup(x => x.Execute(It.IsAny<IEnumerable<Notification>>()));
 			ObjectFactory.Configure(item => item.For<INotificationExecutor>().Add(executorMock.Object));
 
 			var server = new SnmpScanServer();

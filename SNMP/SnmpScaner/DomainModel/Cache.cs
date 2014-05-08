@@ -24,8 +24,8 @@ namespace DomainModel
 			}
 		}
 
-		private List<Subscription> _subscriptions = new List<Subscription>();
-		public List<Subscription> Subscriptions
+		private List<SubscriptionItem> _subscriptions = new List<SubscriptionItem>();
+		public List<SubscriptionItem> Subscriptions
 		{
 			get { return _subscriptions; }
 			set
@@ -70,11 +70,11 @@ namespace DomainModel
 
 				delay = Environment.TickCount;
 
-				Subscriptions
-					.Select(s => new {Items = s.Update(), s.Notification})
-					.Where(i=>i.Items.Any())
-					.ToList()
-					.ForEach(i=> notificationExecutor.Execute(i.Items, i.Notification));
+				var res = Subscriptions
+					.Select(s => s.Update())
+					.Where(n => !n.Equals(Notification.Empty))
+					.ToList();
+				notificationExecutor.Execute(res);
 				
 				delay = Environment.TickCount - delay;
 			} while (true);

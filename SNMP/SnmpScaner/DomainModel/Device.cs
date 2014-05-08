@@ -13,10 +13,7 @@ namespace DomainModel
 		/// Id в БД
 		/// </summary>
 		public long Id { get; set; }
-		public DeviceModel Model { get; set; }
-		public Customer Customer { get; set; }
-		public string Name { get; set; }
-
+		
 		public IPAddress Ip { get; set; }
 		public VersionCode VersionCode { get; set; }
 		public int Port { get; set; }
@@ -58,14 +55,14 @@ namespace DomainModel
 					new IPEndPoint(Ip, Port),
 					new OctetString("public"),
 					items
-						.Select(i => new Variable(i.ModelItem.Oid))
+						.Select(i => new Variable(i.Oid))
 						.ToList(),
 					Timeout);
 
 				var timestamp = DateTime.Now;
 
 				_items
-					.Join(result, item => item.ModelItem.Oid, variable => variable.Id,
+					.Join(result, item => item.Oid, variable => variable.Id,
 						(item, variable) => new { item, variable })
 					.ToList()
 					.ForEach(p =>
@@ -88,14 +85,14 @@ namespace DomainModel
 
 				//Помечаем DeviceItem как ошибочные чтобы их больше не читать
 				_items
-					.Join(invalidItems, item => item.ModelItem.Oid, variable => variable.Id,
+					.Join(invalidItems, item => item.Oid, variable => variable.Id,
 						(item, variable) => new { item, variable })
 					.ToList()
 					.ForEach(p => p.item.ExceptionType = p.variable.Data.TypeCode);
 
 				//Пытаемся сохранить то что осталось
 				_items
-					.Join(e.Body.Scope.Pdu.Variables.Except(invalidItems), item => item.ModelItem.Oid, variable => variable.Id,
+					.Join(e.Body.Scope.Pdu.Variables.Except(invalidItems), item => item.Oid, variable => variable.Id,
 						(item, variable) => new { item, variable })
 					.ToList()
 					.ForEach(p =>
