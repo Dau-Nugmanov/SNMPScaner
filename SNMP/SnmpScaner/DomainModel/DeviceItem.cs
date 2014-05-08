@@ -10,12 +10,10 @@ namespace DomainModel
 	public class DeviceItem
 	{
 		/// <summary>
-		/// Id в БД asdasd
+		/// Id в БД
 		/// </summary>
 		public long Id { get; set; }
-		public string Name { get; set; }
-		public ObjectIdentifier Oid { get; set; }
-		
+		public DeviceModelItem ModelItem { get; set; }
 		public DateTime Timestamp { get; set; }
 		public ISnmpData Value { get; set; }
 
@@ -46,13 +44,7 @@ namespace DomainModel
 				.Save(Id, Value, Timestamp);
 		}
 
-		/// <summary>
-		/// Список с типами, для которых вычисляется разность значений
-		/// </summary>
-		private static readonly List<SnmpType> ValueTypes = new List<SnmpType>
-		{
-			SnmpType.Counter32, SnmpType.Counter64, SnmpType.Gauge32,SnmpType.Integer32, SnmpType.TimeTicks
-		};
+		
 		/// <summary>
 		/// Проверяет нужно ли делать обновление
 		/// </summary>
@@ -72,7 +64,7 @@ namespace DomainModel
 			if (diff == null) return true;
 
 			if (value.TypeCode != newValue.TypeCode || newValue.TypeCode != diff.TypeCode) return true;
-			if (!ValueTypes.Contains(newValue.TypeCode)) return true;
+			if (!DeviceModel.ValueTypes.Contains(newValue.TypeCode)) return true;
 			
 			switch (value.TypeCode)
 			{
