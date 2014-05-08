@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5C8A269C-D367-4472-9D8A-3A07F7245679}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{4BA58447-45F4-43A1-B66A-4CEE0CB88697}"
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BA0E7D
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTest", "CoreTest\CoreTest.csproj", "{B0B7F6FF-8BBD-44BD-BEC9-5716597E3690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{D6838D09-37C0-489F-BC5A-4C9B7F26A76D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{B0B7F6FF-8BBD-44BD-BEC9-5716597E3690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0B7F6FF-8BBD-44BD-BEC9-5716597E3690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0B7F6FF-8BBD-44BD-BEC9-5716597E3690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6838D09-37C0-489F-BC5A-4C9B7F26A76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6838D09-37C0-489F-BC5A-4C9B7F26A76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6838D09-37C0-489F-BC5A-4C9B7F26A76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6838D09-37C0-489F-BC5A-4C9B7F26A76D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
