@@ -1,29 +1,49 @@
-﻿using Lextm.SharpSnmpLib;
+﻿using System;
+using Lextm.SharpSnmpLib;
 
 namespace DomainModel
 {
 	public class SubscriptionItem
 	{
-		public SubscriptionItem(DeviceItem item)
-		{
-			Item = item;
-			OldValue = item.Value;
-		}
-		
-		private DeviceItem Item { get; set; }
-		private ISnmpData OldValue { get; set; }
+		public long Id { get; set; }
+		/// <summary>
+		/// Частота обновления в секундах - показывает как часто надо обновлять значение
+		/// </summary>
+		public long TimeDelta { get; set; }
+		/// <summary>
+		/// Разность в значении. Показывает какое изменение значения надо сохранять. Будет работать только для числовых типов
+		/// </summary>
+		public ISnmpData ValueDelta { get; set; }
 
-		public ISnmpData GetValue()
-		{
-			OldValue = Item.Value;
-			return OldValue;
-		}
-		public bool WasChanged
+		private bool WasChanged
 		{
 			get
 			{
-				return Item != null && Item.Value!= null && !Item.Value.Equals(OldValue);
+				return Item != null && Item.Value != null && ItemHelper.NeedUpdate(LastValue, Item.Value, ValueDelta);
 			}
+		}
+		private DeviceItem Item { get; set; }
+		private ISnmpData OldValue { get; set; }
+		private ISnmpData LastValue { get; set; }
+		
+		public SubscriptionItem(DeviceItem item)
+		{
+			if (item == null) throw new ArgumentNullException("item");
+			Item = item;
+			LastValue = item.Value;
+		}
+		
+		private DateTime _nextUpdateTime = DateTime.MinValue;
+
+		public Notification Update()
+		{
+			if (DateTime.Now <= _nextUpdateTime || !WasChanged) return Notification.Empty;
+			
+			_nextUpdateTime = DateTime.Now.AddSeconds(TimeDelta);
+			
+			OldValue = LastValue;
+			LastValue = Item.Value;
+			return new Notification(Id, LastValue, OldValue);
 		}
 	}
 }
