@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DAL.EfModels.DeviceItemEntity>
+
+@{
+    Layout = null;
+}
+
+<div id="paramsListForModel">
+    <div>
+        @{
+            var m = Model.FirstOrDefault();
+            if(m != null)
+            {
+                <p>Модель: @m.Model.ModelName</p>
+            }
+        }
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="well">
+            <div>
+                @Html.CheckBox("paramCheck", new { idParam = item.IdDeviceItemEntity, paramName = item.Name, paramOid = item.Oid })
+            </div>
+            <div>
+                <b>Название: </b>
+                @item.Name
+            </div>
+            <div>
+                <b>OID: </b>
+                @item.Oid
+            </div>
+        </div>
+        <hr />
+    }
+</div>
+
+

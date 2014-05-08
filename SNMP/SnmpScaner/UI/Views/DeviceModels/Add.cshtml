@@ -1,0 +1,184 @@
+﻿@model UI.Models.DeviceModelModel
+
+@{
+    ViewBag.Title = "Add";
+}
+<script src="~/Scripts/jquery-1.7.1.js"></script>
+<script src="~/Scripts/jquery.simplemodal.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
+<link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
+<link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#btnAddParam').click(function () {
+            $('#basic-modal-content').modal({
+                autoResize: true
+            });
+        })
+
+        $('#btnNotifications').click(function () {
+            //$('#btnAddParam').click(function () {
+            $('#modalNotifications').html('');
+
+            $('#modalNotifications').dialog({
+                autoOpen: false,
+                height: 500,
+                width: 400,
+                show: { effect: "toggle", duration: 800 },
+                zIndex: 10000000,
+                buttons: {
+                    "Применить": function () {
+                        $('#notif-emails').html('');
+                        $('#notif-numbers').html('');
+
+                        $("input#notif:checked").each(function () {
+
+                            if ($(this).attr('objType') == 'email') {
+                                $('#notif-emails').append('<p>' + $(this).attr('objVal') + '</p>');
+                            }
+                            else {
+                                $('#notif-numbers').append('<p>' + $(this).attr('objVal') + '</p>');
+                            }
+                        });
+                        $('#modalNotifications').dialog('close');
+                    }
+                },
+                zIndex: 100000
+            });
+            $.ajax({
+                url: "/Users/NotificationsUsers",
+                type: "GET",
+                success: function (data) {
+                    $('#modalNotifications').html(data);
+                }
+            })
+            $('#modalNotifications').dialog('open');
+        })
+
+        var itemCnt = 0;
+        $('#btnParameterAdd').click(function () {
+            var paramName = $('#ParameterName').val();
+            var oid = $('#OID').val();
+            var paramSelector = $('.device-parameters');
+
+            if (!paramName || !oid) {
+                alert('Заполнены не все поля');
+                return;
+            }
+            var notifEmailCnt = 0;
+            var notifNumberCnt = 0;
+            var html = '<div class="well">'
+                    + '<div><b>Название параметра: </b>' 
+                        + '<input type="text" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                    + '</div>'
+                    + '<div><b>OID: </b> '
+                        + '<input type="text" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
+                    + '</div>'
+                + '</div>';
+            //alert(html);
+            paramSelector.append(html);
+            itemCnt++;
+            $('#basic-modal-content').modal('close');
+        })
+
+    })
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Добавление модели</legend>
+        @if (ViewData["message_error"] != null)
+        {
+            <div class="alert alert-error field-validation-error">
+                <p>@ViewData["message_error"]</p>
+            </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-success">
+                <p>@ViewData["message"]</p>
+            </div>
+
+        }
+        <div class="well device-well">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ModelName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ModelName)
+                @Html.ValidationMessageFor(model => model.ModelName)
+            </div>
+
+            <div class="editor-label">
+                Тип устройства
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("IdDeviceType", (ViewData["types"] as SelectList))
+            </div>
+
+            <div class="editor-label">
+                Производитель
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("IdMaker", (ViewData["makers"] as SelectList))
+            </div>
+
+            <p style="margin-top: 10px">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </p>
+        </div>
+        <div class="well device-parameters">
+            <input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр" />
+        </div>
+
+
+        <div id="basic-modal-content">
+            <h3>Добавление параметра</h3>
+            <hr />
+            <div>
+                <div style="float: left; width: 30%; border-color: green; height: 140px;">
+                    <div class="editor-label">
+                        Название параметра
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("ParameterName")
+                    </div>
+
+                    <div class="editor-label">
+                        OID параметра
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("OID")
+                    </div>
+
+                </div>
+                <div class="notif-wrap">
+                </div>
+                <div class="notif-wrap">
+                </div>
+
+            </div>
+
+            <div>
+                <div style="margin-top: 10px;">
+                    <p>
+                        <input type="button" value="Добавить" class="btn btn-primary" id="btnParameterAdd" />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

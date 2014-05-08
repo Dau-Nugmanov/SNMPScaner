@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DAL.EfModels.User>
+
+@{
+    ViewBag.Title = "NotificationsUsers";
+    Layout = null;
+}
+<div id="notifications">
+    @foreach (var user in Model)
+    {
+        <div>
+           <h3>@user.Name @user.LastName</h3>
+        </div>
+        <div>
+            <p class="btn btn-link">Emails</p>
+        </div>
+        if (user.Emails != null)
+        {
+            foreach (var email in user.Emails)
+            {
+                <div>
+                    @Html.CheckBox("notif", new { objVal = email.Email, objType = "email" }) @email.Email
+                </div>
+            }
+        }
+        <div>
+            <p class="btn btn-link">Номера телефонов</p>
+        </div>
+        if (user.PhoneNumbers != null)
+        {
+            foreach (var number in user.PhoneNumbers)
+            {
+                <div>
+                    @Html.CheckBox("notif", new { objVal = number.Number, objType = "number" })  @number.Number
+                </div>
+            }
+        }
+        <hr />
+    }
+</div>

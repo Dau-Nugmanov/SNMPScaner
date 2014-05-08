@@ -208,6 +208,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\Bootstrap\bootstrap.css" />
+    <Content Include="Content\DialogWindow\basic.css" />
+    <Content Include="Content\DialogWindow\demo.css" />
+    <Content Include="Content\DialogWindow\img\x.png" />
+    <Content Include="Content\images\icons\logotip.png" />
+    <Content Include="Content\images\icons\logotip2.png" />
+    <Content Include="Content\images\icons\main\Document.png" />
+    <Content Include="Content\images\icons\main\Document_hover.png" />
+    <Content Include="Content\images\icons\main\Monitor.png" />
+    <Content Include="Content\images\icons\main\Monitor_hover.png" />
+    <Content Include="Content\images\icons\main\Ustroist.png" />
+    <Content Include="Content\images\icons\main\Ustroist_hover.png" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\MyStyles.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -262,15 +278,19 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\jquery-ui.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.simplemodal.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -288,7 +308,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -307,6 +326,31 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Customers\Add.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\GetAll.cshtml" />
+    <Content Include="Views\DeviceModels\Add.cshtml" />
+    <Content Include="Views\DeviceModels\Edit.cshtml" />
+    <Content Include="Views\DeviceModels\GetAll.cshtml" />
+    <Content Include="Views\DeviceModels\GetParametersByModel.cshtml" />
+    <Content Include="Views\Devices\Add.cshtml" />
+    <Content Include="Views\Devices\Edit.cshtml" />
+    <Content Include="Views\Devices\GetAll.cshtml" />
+    <Content Include="Views\DeviceTypes\Add.cshtml" />
+    <Content Include="Views\DeviceTypes\Edit.cshtml" />
+    <Content Include="Views\DeviceTypes\GetAll.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\MainPanel\Index.cshtml" />
+    <Content Include="Views\Makers\Add.cshtml" />
+    <Content Include="Views\Makers\Edit.cshtml" />
+    <Content Include="Views\Makers\GetAll.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\GetAll.cshtml" />
+    <Content Include="Views\Users\NotificationsUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

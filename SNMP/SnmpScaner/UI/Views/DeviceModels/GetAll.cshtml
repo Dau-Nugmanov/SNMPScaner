@@ -1,0 +1,42 @@
+﻿@model IEnumerable <DAL.EfModels.DeviceModel >
+
+@{
+    Layout = null;
+}
+<h2>Список моделей</h2>
+    <p>
+        @Html.ActionLink("Добавить новую модель", "Add")
+    </p>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Производитель
+            </th>
+            <th>
+                Тип устройства
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maker.MakerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceType.DeviceTypeName)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id=item.IdDeviceModel }) |
+                @Html.ActionLink("Удалить", "Remove", new { id=item.IdDeviceModel })
+            </td>
+        </tr>
+    }
+    
+    </table>

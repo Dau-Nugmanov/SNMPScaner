@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DAL.EfModels.User>
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = null;
+}
+
+<h2>Список пользователей</h2>
+
+<p>
+    @Html.ActionLink("Добавить нового", "Add", "Users")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Имя
+        </th>
+        <th>
+            Фамилия
+        </th>
+        <th>
+            Логин
+        </th>
+        <th>
+            Действия
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (Session["user"] == null)
+    {
+        FormsAuthentication.SignOut();
+        FormsAuthentication.RedirectToLoginPage();
+    }
+    if (((DomainModel.User)Session["user"]).IdUser == item.IdUser)
+    {
+        continue;
+    }
+     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.ActionLink("Подробно", "Details", new { id=item.IdUser }) |
+            @Html.ActionLink("Сбросить пароль", "RefreshPassword", new { idUser = item.IdUser }, new { onclick="return confirm('Вы уверены?')" }) |
+            @Html.ActionLink("Удалить", "Remove", new { idUser = item.IdUser }, new { onclick="return confirm('Вы уверены?')" })
+        </td>
+    </tr>
+}
+
+</table>
