@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using DAL.EfModels;
+using DAL.Interfaces;
 
 namespace DAL
 {
-    public class DeviceModelsRepository : BaseRepository<DeviceModel>
+    public class DeviceModelsRepository : BaseRepository<DeviceModel>, IDeviceModelsRepo
     {
         private SnmpDbContext _context;
         public DeviceModelsRepository(SnmpDbContext context)

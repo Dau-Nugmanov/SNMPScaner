@@ -1,4 +1,5 @@
 ﻿using DAL.EfModels;
+using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class EmailNotificationsRepository : BaseRepository<EmailNotification>
+    public class EmailNotificationsRepository : BaseRepository<EmailNotification>, IEmailNotificationsRepo
     {
         private SnmpDbContext _context;
         public EmailNotificationsRepository(SnmpDbContext context)
