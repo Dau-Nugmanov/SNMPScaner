@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IPhoneNotificationsRepo
+    public interface INotificationsRepo
     {
-        IEnumerable<PhoneNotification> GetAllByNotifId(long id);
+        Notification GetByDeviceIdAndItemId(int idDevice, int idItem);
+        void Edit(Notification notification);
     }
 }

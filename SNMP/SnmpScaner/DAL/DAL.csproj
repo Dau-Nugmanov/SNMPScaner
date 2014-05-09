@@ -91,10 +91,12 @@
     <Compile Include="Interfaces\IEmailNotificationsRepo.cs" />
     <Compile Include="Interfaces\IEmailsRepo.cs" />
     <Compile Include="Interfaces\IMakersRepository.cs" />
+    <Compile Include="Interfaces\INotificationsRepo.cs" />
     <Compile Include="Interfaces\IPhoneNotificationsRepo.cs" />
     <Compile Include="Interfaces\IPhoneNumbersRepo.cs" />
     <Compile Include="Interfaces\IUsersRepo.cs" />
     <Compile Include="MakersRepository.cs" />
+    <Compile Include="NotificationsRepository.cs" />
     <Compile Include="PhoneNotificationsRepository.cs" />
     <Compile Include="PhoneNumbersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

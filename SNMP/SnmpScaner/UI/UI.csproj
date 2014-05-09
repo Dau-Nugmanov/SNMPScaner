@@ -187,6 +187,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainPanelController.cs" />
     <Compile Include="Controllers\MakersController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -200,14 +201,18 @@
     <Compile Include="Models\DeviceModelModel.cs" />
     <Compile Include="Models\DeviceTypeModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\EmailNotificationModel.cs" />
     <Compile Include="Models\IModelEntity.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\MakerModel.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
+    <Compile Include="Models\PhoneNotificationModel.cs" />
     <Compile Include="Models\PhoneNumberModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Bootstrap\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\bootstrap.css" />
     <Content Include="Content\DialogWindow\basic.css" />
@@ -351,6 +356,10 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\GetAll.cshtml" />
     <Content Include="Views\Users\NotificationsUsers.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\Notifications\GetDeviceParameters.cshtml" />
+    <Content Include="Views\Notifications\Add.cshtml" />
+    <Content Include="Views\Notifications\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

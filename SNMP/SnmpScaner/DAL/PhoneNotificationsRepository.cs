@@ -17,15 +17,11 @@ namespace DAL
             _context = context;
         }
 
-        //public void RemoveByItemId(long idItem)
-        //{
-        //    dbSet
-        //        .Where(t => t.IdDeviceItemEntity == idItem)
-        //        .ToList()
-        //        .ForEach(t =>
-        //        {
-        //            dbSet.Remove(t);
-        //        });
-        //}
+        public IEnumerable<PhoneNotification> GetAllByNotifId(long id)
+        {
+            return dbSet
+                .Where(t => t.IdNotification == id)
+                .AsEnumerable<PhoneNotification>();
+        }
     }
 }

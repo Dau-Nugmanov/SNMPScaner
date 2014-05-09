@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DAL.EfModels.DeviceEntity>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+
+    $(document).ready(function () {
+    })
+
+    function liDevClick(e) {
+        var idDev = $(e.currentTarget).attr('idDev');
+        $.ajax({
+            url: "/Notifications/GetDeviceParameters",
+            data: { idDevice: idDev },
+            type: "GET",
+            beforeSend: function () {
+            },
+            success: function (data) {
+                $('.device-parameters').html('');
+                $('.device-parameters').html(data);
+            }
+        })
+    }
+</script>
+
+
+<fieldset>
+    <div class="well device-well sidebar-nav main-block">
+        <div>Устройства</div>
+        <ul class="nav nav-list">
+
+            @foreach (var item in Model)
+            {
+                <li id="devName" idDev="@item.IdDeviceEntity" onclick="liDevClick(event);"><a href="#" >@item.Name</a></li>
+            }
+        </ul>
+            
+    </div>
+    <div class="device-parameters">
+        
+    </div>
+</fieldset>

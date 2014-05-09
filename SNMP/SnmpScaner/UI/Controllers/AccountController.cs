@@ -38,8 +38,8 @@ namespace UI.Controllers
                 ViewData["message"] = "Данные не верны";
                 return View(user);
             }
-            var usersRepo = ObjectFactory.With("context").EqualTo(new SnmpDbContext())
-                .GetInstance<IBaseRepository<User>>();
+            var usersRepo = new UsersRepository(new SnmpDbContext());
+            usersRepo.Edit(user.ToEfEntity());
             usersRepo.SaveChanges();
             return View(user);
         }

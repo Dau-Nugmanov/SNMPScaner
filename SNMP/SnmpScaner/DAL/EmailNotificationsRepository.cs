@@ -27,5 +27,12 @@ namespace DAL
         //            dbSet.Remove(t);
         //        });
         //}
+
+        public IEnumerable<EmailNotification> GetAllByNotifId(long id)
+        {
+            return dbSet
+                .Where(t => t.IdNotification == id)
+                .AsEnumerable<EmailNotification>();
+        }
     }
 }
