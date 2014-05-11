@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DAL.EfModels.DeviceType>
+
+@{
+    Layout = null;
+}
+
+<h3>Список типов устройств</h3>
+    <p>
+        @Html.ActionLink("Добавить новый тип", "Add")
+    </p>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Название типа
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceTypeName)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { idDeviceType=item.IdDeviceType }) |
+                @Html.ActionLink("Удалить", "Remove", new { idDeviceType = item.IdDeviceType }, new { onclick = "return confirm('Вы уверены? При удалении типа устройств, будут так же удалены все устройства, имеющие данный тип!!!');" })
+            </td>
+        </tr>
+    }
+    
+    </table>

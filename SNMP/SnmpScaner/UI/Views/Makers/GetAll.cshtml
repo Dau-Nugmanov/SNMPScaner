@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DAL.EfModels.Maker>
+
+@{
+    Layout = null;
+}
+<h2>Список производителей</h2>
+
+<p>
+    @Html.ActionLink("Добавить нового", "Add")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Нименование
+        </th>
+        <th>
+            Действия
+        </th>
+    </tr>
+    @foreach (var maker in Model)
+    {
+        <tr>
+            <td>
+                @maker.MakerName
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = maker.IdMaker }) |
+                @Html.ActionLink("Удалить", "Remove", new { id = maker.IdMaker }, new { onclick = "return confirm('Внимание!!! При удалении производителя будут удалены все модели устройств, а так же все устройства этих моделей!!!');" })
+            </td>
+        </tr>
+    }
+</table>

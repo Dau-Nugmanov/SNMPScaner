@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Параметры системы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(function () {
+        $("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+        $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+    });
+</script>
+
+<div class="contentInner">
+    <div class="header">
+        <h1>@ViewBag.Title</h1>
+    </div>
+
+    <div id="tabs">
+        <ul>
+            <li>@Html.ActionLink("Пользователи", "GetAll", "Users")</li>
+            <li>@Html.ActionLink("Заказчики", "GetAll", "Customers")</li>
+            <li>@Html.ActionLink("Типы устройств", "GetAll", "DeviceTypes")</li>
+            <li>@Html.ActionLink("Устройства", "GetAll", "Devices")</li>
+            <li>@Html.ActionLink("Производители оборудования", "GetAll", "Makers")</li>
+            <li>@Html.ActionLink("Модели устройств", "GetAll", "DeviceModels")</li>
+        </ul>
+        <div id="tabs-1">
+        </div>
+
+        <div id="tabs-2">
+        </div>
+
+        <div id="tabs-3">
+        </div>
+    </div>
+</div>

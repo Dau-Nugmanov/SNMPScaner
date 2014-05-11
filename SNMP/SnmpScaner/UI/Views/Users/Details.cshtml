@@ -1,0 +1,75 @@
+﻿@model DomainModel.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Подробности пользователя</h2>
+
+<fieldset>
+    <legend>@Model.Name @Model.LastName</legend>
+
+    <div class="well">
+
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.LastName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Login)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Login)
+        </div>
+
+        @if (Model.IsAdmin)
+        {
+            <div class="display-label">
+                Администратор
+            </div>
+        }
+
+        @if (Model.FirstEntry)
+        {
+            <div class="display-label">
+                В систему еще не заходил
+            </div>
+        }
+
+        @if (Model.Emails != null)
+        {
+            <p class="btn btn-link">Список адресов</p>
+            foreach (var email in Model.Emails)
+            {
+                <div class="well">
+                     <p>@email.Email</p>
+                </div>
+            }
+        }
+        @if (Model.PhoneNumbers != null)
+        {
+            <p class="btn btn-link">Список телефонов</p>
+            foreach (var number in Model.PhoneNumbers)
+            {
+                <div class="well">
+                     <p>@number.Number</p>
+                </div>
+            }
+        }
+
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Назад", "Index", "Settings", null, new { @class = "btn btn-primary" })
+</p>

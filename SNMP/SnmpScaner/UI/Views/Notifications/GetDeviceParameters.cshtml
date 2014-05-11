@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DAL.EfModels.DevicesItems>
+
+
+@{
+    Layout = null;
+}
+
+<h3>Список параметров для устройства @Model.FirstOrDefault().DeviceEntity.Name
+</h3>
+
+@foreach (var item in Model)
+{
+    <div class="well">
+        <div>
+            <b>Название: </b> @item.DeviceItemEntity.Name
+        </div>
+        <div>
+            <b>OID: </b> @item.DeviceItemEntity.Oid
+        </div>
+        <div>
+            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevice = item.IdDeviceEntity, idItem = item.IdDeviceItemEntity }, new { @class = "btn btn-link" })
+        </div>
+    </div>
+}
+

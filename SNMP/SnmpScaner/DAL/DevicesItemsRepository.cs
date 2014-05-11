@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -31,6 +32,8 @@ namespace DAL
         public IEnumerable<DevicesItems> GetByDeviceId(long id)
         {
             return dbSet
+                .Include(t => t.DeviceEntity)
+                .Include(t => t.DeviceItemEntity)
                 .Where(t => t.IdDeviceEntity == id);
         }
 

@@ -1,0 +1,54 @@
+﻿@model UI.Models.DeviceTypeModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Добавление нового типа устройств</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend></legend>
+            @if (ViewData["message_error"] != null)
+            {
+                <div class="alert alert-error field-validation-error">
+                    <p>@ViewData["message_error"]</p>
+                </div>
+            }
+            @if (ViewData["message"] != null)
+            {
+                <div class="alert alert-success">
+                    <p>@ViewData["message"]</p>
+                </div>
+
+            }
+            <div class="well">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DeviceTypeName)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DeviceTypeName)
+                    @Html.ValidationMessageFor(model => model.DeviceTypeName)
+                </div>
+
+                <p style="margin-top: 10px;">
+                    <input type="submit" value="Добавить" class="btn btn-primary" />
+                </p>
+            </div>
+        </fieldset>
+    }
+</body>
+</html>

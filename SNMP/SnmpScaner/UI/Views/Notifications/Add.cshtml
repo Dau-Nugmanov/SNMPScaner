@@ -1,0 +1,128 @@
+﻿@model UI.Models.NotificationModel
+
+@{
+    ViewBag.Title = "Add";
+}
+<script src="~/Scripts/jquery-1.7.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+<script>
+
+    var notifEmailCnt = 0;
+    var notifNumberCnt = 0;
+    $(document).ready(function () {
+
+        $('#btnNotifications').click(function () {
+            $('#modalNotifications').html('');
+
+            $('#modalNotifications').dialog({
+                autoOpen: false,
+                height: 500,
+                width: 400,
+                show: { effect: "toggle", duration: 800 },
+                zIndex: 10000000,
+                buttons: {
+                    "Применить": function () {
+                        $('#notif-emails').html('');
+                        $('#notif-numbers').html('');
+
+                        $("input#notif:checked").each(function () {
+
+                            if ($(this).attr('objType') == 'email') {
+                                $('#notif-emails').append('<div>' + $(this).attr('objVal')
+                                        + '<input type="hidden" name="EmailNotifications[' + notifEmailCnt + '].IdEmailEntity" value="' + $(this).attr('objVal') + '" />'
+                                    + '</div>');
+                                notifEmailCnt++;
+                            }
+                            else {
+                                $('#notif-numbers').append('<div>' + $(this).attr('objVal')
+                                        + '<input type="hidden" name="PhoneNotifications[' + notifNumberCnt + '].IdPhoneEntity" value="' + $(this).attr('objVal') + '" />'
+                                    + '</div>');
+                                notifNumberCnt++;
+                            }
+                        });
+                        $('#modalNotifications').dialog('close');
+                    }
+                },
+                zIndex: 100000
+            });
+            $.ajax({
+                url: "/Users/NotificationsUsers",
+                type: "GET",
+                success: function (data) {
+                    $('#modalNotifications').html(data);
+                }
+            })
+            $('#modalNotifications').dialog('open');
+        })
+
+    })
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Добавление оповещения</legend>
+         @if (ViewData["message_error"] != null)
+        {
+            <div class="alert alert-error field-validation-error">
+                <p>@ViewData["message_error"]</p>
+            </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-success">
+                <p>@ViewData["message"]</p>
+            </div>
+
+        }
+        <div class="well">
+            <div class="editor-label">
+                @Html.Hidden("IdDevice", TempData["IdDevice"])
+            </div>
+
+            <div class="editor-label">
+                @Html.Hidden("IdItem", TempData["IdItem"])
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DeltaTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DeltaTime)
+                @Html.ValidationMessageFor(model => model.DeltaTime)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DeltaValue)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DeltaValue)
+                @Html.ValidationMessageFor(model => model.DeltaValue)
+            </div>
+
+            <div id="notifsList">
+                <p class="btn btn-link">Список адресов</p>
+                <div id="notif-emails">
+                </div>
+                <p class="btn btn-link">Список телефонов</p>
+                <div id="notif-numbers">
+                </div>
+            </div>
+
+            <p class="btn btn-link" id="btnNotifications">Добавить оповещения</p>
+
+            <div id="modalNotifications" title="Выберите, кого нужно оповестить"></div>
+
+            <p>
+                <input type="submit" value="Добавить" class="btn btn-primary"/>
+            </p>
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

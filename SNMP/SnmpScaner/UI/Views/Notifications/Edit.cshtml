@@ -1,0 +1,274 @@
+﻿@model UI.Models.NotificationModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<script src="~/Scripts/jquery-1.7.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#btnNotifications').click(function () {
+            $('#modalNotifications').html('');
+
+            $('#modalNotifications').dialog({
+                autoOpen: false,
+                height: 500,
+                width: 400,
+                show: { effect: "toggle", duration: 800 },
+                zIndex: 10000000,
+                buttons: {
+                    "Применить": function () {
+                        $('#notif-emails').html('');
+                        $('#notif-numbers').html('');
+
+                        $("input#notif:checked").each(function () {
+
+                            var curVal = $(this).attr('objVal');
+                           
+                            if ($(this).attr('objType') == 'email') {
+                                var isExists = false;
+                                $('span#emailVal').each(function () {
+                                    if ($(this).text() == curVal) {
+                                        isExists = true;
+                                    }
+                                })
+                                if (isExists) {
+                                    alert('email ' + curVal + ' уже добавлен');
+                                    return;
+                                }
+                                $('.notif-emails').append('<li>' 
+                                    +'<p>'
+                                        + '<span id="emailVal">'
+                                                + $(this).attr('objVal')
+                                        + '</span>'
+                                        + '<span class="btn-small btn-link" onclick="removeNotif(event);" notiftype="email">Удалить'
+                                        +'</span>'
+                                    + '</p>'
+                                    + '<input type="hidden" name="EmailNotifications[' + 1 + '].IdEmailEntity" value="' + $(this).attr('objVal') + '" />'
+                                        + '<input type="hidden" name="EmailNotifications[' + 1 + '].IdNotification" value="@Model.IdNotification" />'
+
+                                    +'</li>'
+                                    );
+                                //notifEmailCnt++;
+                            }
+                            else {
+                                var isExists = false;
+                                $('span#phoneVal').each(function () {
+                                    if ($(this).text() == curVal) {
+                                        isExists = true;
+                                    }
+                                })
+                                if (isExists) {
+                                    alert('телефон ' + curVal + ' уже добавлен');
+                                    return;
+                                }
+                                $('.notif-numbers').append('<li>' 
+                                    +'<p>'
+                                        + '<span id="phoneVal">'
+                                                + $(this).attr('objVal')
+                                        + '</span>'
+                                        + '<span class="btn-small btn-link" onclick="removeNotif(event);" notiftype="phone">Удалить'
+                                        +'</span>'
+                                    + '</p>'
+                                        + '<input type="hidden" name="PhoneNotifications[' + 1 + '].IdPhoneEntity" value="' + $(this).attr('objVal') + '" />'
+                                        + '<input type="hidden" name="PhoneNotifications[' + 1 + '].IdNotification" value="@Model.IdNotification" />'
+                                    +'</li>'
+                                    );
+                                //notifNumberCnt++;
+                            }
+                        });
+                        updateIndexesInUl($('.notif-emails'), 'email');
+                        updateIndexesInUl($('.notif-numbers'), 'phone');
+                        $('#modalNotifications').dialog('close');
+                    }
+                },
+                zIndex: 100000
+            });
+            $.ajax({
+                url: "/Users/NotificationsUsers",
+                type: "GET",
+                success: function (data) {
+                    $('#modalNotifications').html(data);
+                }
+            })
+
+            $('#modalNotifications').dialog('open');
+        })
+    })
+        
+    function updateIndexesInUl(curUl, notifType) {
+        var regexPattern = /Items\[[0-9]{1,}\]/gi;
+        var index = 0;
+        console.log('curUL = ' + $(curUl).prop('tagName'));
+        curUl.children('li').each(function (ind, element) {
+
+
+            $(this).children('input[type="hidden"]').each(function () {
+
+                var nameInput = $(this).attr('name');
+                //console.log(nameInput);
+                //console.log(notifType);
+                if (notifType == 'email') {
+                    replacedAttr = nameInput.replace(/EmailNotifications\[[0-9]{1,}\]/gi, 'EmailNotifications[' + index + ']');
+                    console.log('inside email replaced = ' + replacedAttr);
+                } else {
+                    replacedAttr = nameInput.replace(/PhoneNotifications\[[0-9]{1,}\]/gi, 'PhoneNotifications[' + index + ']');
+                    console.log('inside number replaced = ' + replacedAttr);
+                }
+                console.log(nameInput);
+                console.log(replacedAttr);
+                $(this).attr('name', replacedAttr);
+
+               
+
+
+
+            })
+
+            index++;
+
+            //var nameInput = $(this).children('input[type="hidden"]').attr('name');
+            ////console.log(nameInput);
+            ////console.log(notifType);
+            //if (notifType == 'email') {
+            //    replacedAttr = nameInput.replace(/EmailNotifications\[[0-9]{1,}\]/gi, 'EmailNotifications[' + index + ']');
+            //    console.log('inside email replaced = ' + replacedAttr);
+            //} else {
+            //    replacedAttr = nameInput.replace(/PhoneNotifications\[[0-9]{1,}\]/gi, 'PhoneNotifications[' + index + ']');
+            //    console.log('inside number replaced = ' + replacedAttr);
+            //}
+            //console.log(nameInput);
+            //console.log(replacedAttr);
+            ////$(this).children('input[type="hidden"]').attr('name', replacedAttr);
+           
+            //index++;
+        })
+    }
+
+
+        function removeNotif(e) {
+            var curElement = $(e.currentTarget);
+            var notifType = $(curElement).attr('notifType');
+            var curLi = $(curElement).parent().parent('li');
+            var curUl = $(curLi).parent('ul#notis');
+            console.log('curLi = ' + $(curLi).prop('tagName'));
+            $(curLi).remove();
+            updateIndexesInUl(curUl, notifType);
+        }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Редактирование оповещения</legend>
+         @if (ViewData["message_error"] != null)
+        {
+            <div class="alert alert-error field-validation-error">
+                <p>@ViewData["message_error"]</p>
+            </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-success">
+                <p>@ViewData["message"]</p>
+            </div>
+
+        }
+        @Html.ActionLink("Удалить", "Remove", new { id = Model.IdNotification }, new { onclick = "return confirm('Вы уверены?');" })
+        <div class="well">
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.IdNotification)
+            </div>
+
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.IdDevice)
+            </div>
+
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.IdItem)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DeltaTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DeltaTime)
+                @Html.ValidationMessageFor(model => model.DeltaTime)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DeltaValue)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DeltaValue)
+                @Html.ValidationMessageFor(model => model.DeltaValue)
+            </div>
+
+            <div id="notifsAll">
+                @{
+    int cntEmails = 0;
+    int cntPhones = 0;
+                }
+                <p class="btn btn-link">Список адресов</p>
+                <div id="emailNotifs">
+                    @if (Model.EmailNotifications != null)
+                    {
+                        <ul id="notis" class='notif-emails'>
+                            @foreach (var item in Model.EmailNotifications)
+                            {
+                                <li>
+                                    <p>
+                                            <span id="emailVal">@item.IdEmailEntity</span>
+                                            <span class="btn-small btn-link" onclick="removeNotif(event);" notiftype="email">Удалить</span>
+                                    </p>
+                                    <input type="hidden" name="EmailNotifications[@cntEmails].IdEmailNotification" value="@item.IdEmailNotification" />
+                                    <input type="hidden" name="EmailNotifications[@cntEmails].IdNotification" value="@item.IdNotification" />
+                                    <input type="hidden" name="EmailNotifications[@cntEmails].IdEmailEntity" value="@item.IdEmailEntity" />
+
+                                </li>
+                                cntEmails++;
+                            }
+                        </ul>
+                    }
+                </div>
+                <p class="btn btn-link">Список телефонов</p>
+                <div id="phonesNotifs">
+                    @if (Model.PhoneNotifications != null)
+                    {
+                        <ul id="notis" class="notif-numbers">
+                            @foreach (var item in Model.PhoneNotifications)
+                            {
+                                <li>
+                                    <p>
+                                        <span id="phoneVal">@item.IdPhoneEntity</span>
+                                        <span class="btn-small btn-link" onclick="removeNotif(event);" notiftype="phone">Удалить</span>
+                                    </p>
+                                    <input type="hidden" name="PhoneNotifications[@cntPhones].IdNotification" value="@item.IdNotification" />
+                                    <input type="hidden" name="PhoneNotifications[@cntPhones].IdPhoneEntity" value="@item.IdPhoneEntity" />
+                                    <input type="hidden" name="PhoneNotifications[@cntPhones].IdPhoneNotification" value="@item.IdPhoneNotification" />
+                                </li>
+                                cntPhones++;
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+
+            <p class="btn btn-link" id="btnNotifications">Добавить оповещения</p>
+
+            <div id="modalNotifications" title="Выберите, кого нужно оповестить"></div>
+
+
+            <p>
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </p>
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

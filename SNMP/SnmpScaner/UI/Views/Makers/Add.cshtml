@@ -1,0 +1,40 @@
+﻿@model UI.Models.MakerModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend></legend>
+        @if (ViewData["message_error"] != null)
+        {
+            <div class="alert alert-error field-validation-error">
+                <p>@ViewData["message_error"]</p>
+            </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-success">
+                <p>@ViewData["message"]</p>
+            </div>
+
+        }
+        <div class="well">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MakerName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MakerName)
+                @Html.ValidationMessageFor(model => model.MakerName)
+            </div>
+
+            <p style="margin-top: 10px;">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </p>
+        </div>
+    </fieldset>
+}

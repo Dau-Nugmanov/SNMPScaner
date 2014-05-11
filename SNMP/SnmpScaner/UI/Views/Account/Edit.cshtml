@@ -1,0 +1,218 @@
+﻿@model UI.Models.UserModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script>
+    function setCountEmails(cnt) {
+        countEmails = cnt;
+    }
+
+    function setCountNumbers(cnt) {
+        countPhoneNumbers = cnt;
+    }
+
+    function validateEmail(email) { 
+        var re = /\S+@@\S+\.\S+/;
+        return re.test(email);
+    }
+
+        function validatePhoneNumber(number) {
+            var re = /\+7[0-9]{10}/;
+            return re.test(number);
+        }
+
+        var countEmails = 1;
+        var countPhoneNumbers = 1;
+        var cnt = 1;
+        $(document).ready(function () {
+       
+            $('#AddEmail').click(function () {
+                var email = prompt("Введите Email адрес");
+                if(!validateEmail(email)){
+                    alert('Некорректный Email');
+                    return;
+                }
+                var idUser = '@(Model.IdUser)'
+                $.ajax({
+                    url: "/Account/IsEmailExists",
+                    data: { email: email },
+                    type: "GET",
+                    beforeSend: function () {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            alert('Извините, Такой Email уже зарегистрирован в системе');
+                            return;
+                        }
+                        else {
+
+                            var html = '<div class="well" idWrap=' + countEmails + '>'
+                                + '<div >'
+                                    + countEmails + '. ' + email
+                                + '</div>'
+                                + '<div class="hide">'
+                                    + '<input type="text" id="iEmail" name=Emails[' + (countEmails - 1) + '].Email Value=' + email + ' />'
+                                    + '<input type="text" id="iIdUser" name=Emails[' + (countEmails - 1) + '].IdUser Value=' + idUser + ' />'
+                                + '</div>'
+                            + '</div>';
+                            //alert(html);
+                            $('.emails-list').append(html);
+                            countEmails++;
+                        }
+                    }
+                })
+            })
+
+            $('#AddPhoneNumber').click(function () {
+                var number = prompt("Введите номер телефона в формате +79376567253");
+                if (!validatePhoneNumber(number)) {
+                    alert('Некорректный номер телефона');
+                    return;
+                }
+                var idUser = '@(Model.IdUser)'
+                $.ajax({
+                    url: "/Account/IsPhoneNumberExists",
+                    data: { number: number },
+                    type: "GET",
+                    beforeSend: function () {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            alert('Извините, Такой номер телефона уже зарегистрирован в системе');
+                            return;
+                        }
+                        else {
+
+                            var html = '<div class="well" idWrap=' + countPhoneNumbers + '>'
+                                + '<div >'
+                                    + countPhoneNumbers + '. ' + number
+                                + '</div>'
+                                + '<div class="hide">'
+                                    + '<input type="text" id="iPhoneNumber" name=PhoneNumbers[' + (countPhoneNumbers - 1) + '].PhoneNumber Value=' + number + ' />'
+                                    + '<input type="text" id="iIdUser" name=PhoneNumbers[' + (countPhoneNumbers - 1) + '].IdUser Value=' + idUser + ' />'
+                                + '</div>'
+                            + '</div>';
+                            //alert(html);
+                            $('.phones-list').append(html);
+                            countPhoneNumbers++;
+                        }
+                    }
+                })
+            })
+
+        })
+</script>
+
+<h2>Редактирование пользователя</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend></legend>
+
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-error">
+                <p>@ViewData["message"]</p>
+            </div>
+        }
+        <div class="well">
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.IdUser)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Login)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
+
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.IsAdmin)
+            </div>
+
+            <div>
+                <input type="button" id="AddEmail" value="Добавить Email" class="btn btn-link" />
+            </div>
+            <div class="emails-list">
+                @if (Model.Emails != null)
+                {
+                    int cnt = 1;
+                    foreach (var email in Model.Emails)
+                    {
+                        
+                        <div class="well" idWrap="@cnt">
+                             <div>
+                                @cnt . @email.Email
+                            </div>
+                            <div class="hide">
+                                <input type="text" id="iEmail" name='Emails[@(cnt - 1)].Email' Value='@email.Email' />
+                                 <input type="text" id="iIdUser" name='Emails[@(cnt - 1)].IdUser' Value='@email.IdUser' />
+                            </div>
+                        </div>
+                        cnt++;
+                    }
+                     <script>
+                         setCountEmails(@cnt);
+                    </script>
+                }
+            </div>
+
+            <div>
+                <input type="button" id="AddPhoneNumber" value="Добавить Номер телефона" class="btn btn-link" />
+            </div>
+            <div class="phones-list">
+                @if (Model.PhoneNumbers != null)
+                {
+                    int cnt = 1;
+                    foreach (var number in Model.PhoneNumbers)
+                    {
+                        <div class="well" idWrap="@cnt">
+                             <div>
+                                @cnt . @number.PhoneNumber
+                            </div>
+                            <div class="hide">
+                                <input type="text" id="iPhoneNumber" name='PhoneNumbers[@(cnt - 1)].PhoneNumber' Value='@number.PhoneNumber' />
+                                 <input type="text" id="iIdUser" name='PhoneNumbers[@(cnt - 1)].IdUser' Value='@number.IdUser' />
+                            </div>
+                        </div>
+                        cnt++;
+                    }
+                     <script>
+                         setCountNumbers(@cnt);
+                    </script>
+                }
+                
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
