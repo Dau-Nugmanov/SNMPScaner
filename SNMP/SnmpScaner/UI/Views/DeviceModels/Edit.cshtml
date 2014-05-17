@@ -3,225 +3,228 @@
 @{
     ViewBag.Title = "Edit";
 }
-<script src="~/Scripts/jquery-1.7.1.js"></script>
-<script src="~/Scripts/jquery.simplemodal.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
-<link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
-<link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
-<link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
-<script>
 
-    $(document).ready(function () {
+@section Scripts {
 
-    
-        $('#btnAddParam').click(function () {
-            $('#basic-modal-content').modal({
-                autoResize: true
-            });
-        })
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.simplemodal.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+    <link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
+    <link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
+    <link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
 
-        $('#btnNotifications').click(function () {
-            //$('#btnAddParam').click(function () {
-            $('#modalNotifications').html('');
 
-            $('#modalNotifications').dialog({
-                autoOpen: false,
-                height: 500,
-                width: 400,
-                show: { effect: "toggle", duration: 800 },
-                zIndex: 10000000,
-                buttons: {
-                    "Применить": function () {
-                        $('#notif-emails').html('');
-                        $('#notif-numbers').html('');
-
-                        $("input#notif:checked").each(function () {
-
-                            if ($(this).attr('objType') == 'email') {
-                                $('#notif-emails').append('<p>' + $(this).attr('objVal') + '</p>');
-                            }
-                            else {
-                                $('#notif-numbers').append('<p>' + $(this).attr('objVal') + '</p>');
-                            }
-                        });
-                        $('#modalNotifications').dialog('close');
-                    }
-                },
-                zIndex: 100000
-            });
-            $.ajax({
-                url: "/Users/NotificationsUsers",
-                type: "GET",
-                success: function (data) {
-                    $('#modalNotifications').html(data);
-                }
+            $('#btnAddParam').click(function () {
+                $('#basic-modal-content').modal({
+                    autoResize: true
+                });
             })
-            $('#modalNotifications').dialog('open');
-        })
 
-        var itemCnt = 0;
-        $('#btnParameterAdd').click(function () {
-            var paramName = $('#ParameterName').val();
-            var oid = $('#OID').val();
-            var paramSelector = $('#parameters_list');
+            $('#btnNotifications').click(function () {
+                //$('#btnAddParam').click(function () {
+                $('#modalNotifications').html('');
 
-            if (!paramName || !oid) {
-                alert('Заполнены не все поля');
-                return;
-            }
-            //"well" id="param" idCnt=
-            itemCnt = $('div#param:last-child').attr("idCnt");
-            //alert(itemCnt);
-            itemCnt++;
-            var notifEmailCnt = 0;
-            var notifNumberCnt = 0;
-            var html = '<div class="well" id="param" idCnt="' + itemCnt + '">'
-                  +'<div style="float: right;">'
-                       +'<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt + '" onclick="removeParam(event);">Удалить параметр</span>'
-                    + '</div>'
-                    +'<div id="paramValues">'
-                        + '<div id="divParamName"><b>Название параметра: </b>'
-                            + '<input type="text" id="paramName" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                $('#modalNotifications').dialog({
+                    autoOpen: false,
+                    height: 500,
+                    width: 400,
+                    show: { effect: "toggle", duration: 800 },
+                    zIndex: 10000000,
+                    buttons: {
+                        "Применить": function () {
+                            $('#notif-emails').html('');
+                            $('#notif-numbers').html('');
+
+                            $("input#notif:checked").each(function () {
+
+                                if ($(this).attr('objType') == 'email') {
+                                    $('#notif-emails').append('<p>' + $(this).attr('objVal') + '</p>');
+                                }
+                                else {
+                                    $('#notif-numbers').append('<p>' + $(this).attr('objVal') + '</p>');
+                                }
+                            });
+                            $('#modalNotifications').dialog('close');
+                        }
+                    },
+                    zIndex: 100000
+                });
+                $.ajax({
+                    url: "/Users/NotificationsUsers",
+                    type: "GET",
+                    success: function (data) {
+                        $('#modalNotifications').html(data);
+                    }
+                })
+                $('#modalNotifications').dialog('open');
+            })
+
+            var itemCnt = 0;
+            $('#btnParameterAdd').click(function () {
+                var paramName = $('#ParameterName').val();
+                var oid = $('#OID').val();
+                var paramSelector = $('#parameters_list');
+
+                if (!paramName || !oid) {
+                    alert('Заполнены не все поля');
+                    return;
+                }
+                //"well" id="param" idCnt=
+                itemCnt = $('div#param:last-child').attr("idCnt");
+                //alert(itemCnt);
+                itemCnt++;
+                var notifEmailCnt = 0;
+                var notifNumberCnt = 0;
+                var html = '<div class="well" id="param" idCnt="' + itemCnt + '">'
+                      + '<div style="float: right;">'
+                           + '<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt + '" onclick="removeParam(event);">Удалить параметр</span>'
                         + '</div>'
-                        + '<div id="divParamOid"><b>OID: </b>'
-                            + '<input type="text" id="paramOid" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
-                        + '</div>'
-                        + '<div id="divParamIds">'
-                            + '<input type="hidden" id="idModel" name="Items[' + itemCnt + '].IdModel" value="@Model.IdDeviceModel" />'
+                        + '<div id="paramValues">'
+                            + '<div id="divParamName"><b>Название параметра: </b>'
+                                + '<input type="text" id="paramName" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                            + '</div>'
+                            + '<div id="divParamOid"><b>OID: </b>'
+                                + '<input type="text" id="paramOid" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
+                            + '</div>'
+                            + '<div id="divParamIds">'
+                                + '<input type="hidden" id="idModel" name="Items[' + itemCnt + '].IdModel" value="@Model.IdDeviceModel" />'
                          + '</div>'
                     + '</div>'
             + '</div>';
-            //alert(html);
-            paramSelector.append(html);
-            itemCnt++;
-            $('#basic-modal-content').modal('close');
+                //alert(html);
+                paramSelector.append(html);
+                itemCnt++;
+                $('#basic-modal-content').modal('close');
+            })
+
         })
 
-    })
+            function removeNotif(e) {
+                var curElement = $(e.currentTarget);
 
-        function removeNotif(e) {
-            var curElement = $(e.currentTarget);
+                var paramCntNotif = $(curElement).attr('paramCntNotif');
+                var notifType = $(curElement).attr('notifType');
+                //alert(notifType);
+                //remove li
+                var curLi = $(curElement).parent().parent('li');
+                var curUl = $(curLi).parent('ul#notis');
 
-            var paramCntNotif = $(curElement).attr('paramCntNotif');
-            var notifType = $(curElement).attr('notifType');
-            //alert(notifType);
-            //remove li
-            var curLi = $(curElement).parent().parent('li');
-            var curUl = $(curLi).parent('ul#notis');
+                console.log('curLi = ' + $(curLi).prop('tagName'));
+                $(curLi).remove();
 
-            console.log('curLi = ' + $(curLi).prop('tagName'));
-            $(curLi).remove();
 
-            
-            console.log('curUl = ' + $(curUl).prop('tagName'));
+                console.log('curUl = ' + $(curUl).prop('tagName'));
 
-            //---
-            var regexPattern = /Items\[[0-9]{1,}\]/gi;
-            var index = 0;
+                //---
+                var regexPattern = /Items\[[0-9]{1,}\]/gi;
+                var index = 0;
 
-            //alert(curUl.prop('tagName'));
-            //var obj = $(curLi).parent('ul li').prop('tagName');
-            
-            curUl.children('li').each(function (ind, element) {
+                //alert(curUl.prop('tagName'));
+                //var obj = $(curLi).parent('ul li').prop('tagName');
 
-                var nameInput = $(this).children('input[type="hidden"]').attr('name');
-                //alert(nameInput);
-                //var replacedAttr = nameInput.replace(regexPattern, 'Items[' + paramCntNotif + ']');
-                console.log(notifType);
-                if (notifType == 'email') {
-                    replacedAttr = nameInput.replace(/EmailNotifications\[[0-9]{1,}\]/gi, 'EmailNotifications[' + index + ']');
-                    console.log('inside email replaced = ' + replacedAttr);
-                } else {
-                    replacedAttr = nameInput.replace(/PhoneNumbersNotifications\[[0-9]{1,}\]/gi, 'PhoneNumbersNotifications[' + index + ']');
-                    console.log('inside number replaced = ' + replacedAttr);
-                }
-                console.log(nameInput);
-                $(this).children('input[type="hidden"]').attr('name', replacedAttr);
+                curUl.children('li').each(function (ind, element) {
 
-            })
+                    var nameInput = $(this).children('input[type="hidden"]').attr('name');
+                    //alert(nameInput);
+                    //var replacedAttr = nameInput.replace(regexPattern, 'Items[' + paramCntNotif + ']');
+                    console.log(notifType);
+                    if (notifType == 'email') {
+                        replacedAttr = nameInput.replace(/EmailNotifications\[[0-9]{1,}\]/gi, 'EmailNotifications[' + index + ']');
+                        console.log('inside email replaced = ' + replacedAttr);
+                    } else {
+                        replacedAttr = nameInput.replace(/PhoneNumbersNotifications\[[0-9]{1,}\]/gi, 'PhoneNumbersNotifications[' + index + ']');
+                        console.log('inside number replaced = ' + replacedAttr);
+                    }
+                    console.log(nameInput);
+                    $(this).children('input[type="hidden"]').attr('name', replacedAttr);
 
-        }
+                })
 
-        function removeParam(e) {
-            var cntParam = $(e.currentTarget).attr('idCnt');
-            $("#param[idCnt='" + cntParam + "']").remove();
-            updateParamIndexes();
-        }
+            }
 
-        function updateParamIndexes() {
-            var index = 0;
-            var regexPattern = /\[[0-9]{1,}\]/gi;
-            var notisPattern = /Items\[[0-9]{1,}\]/gi;
-            $('#parameters_list #param').each(function () {
-                $(this).attr("idCnt", index);
-                var selectorParamValues = $(this)
-                    .children('div#paramValues');
+            function removeParam(e) {
+                var cntParam = $(e.currentTarget).attr('idCnt');
+                $("#param[idCnt='" + cntParam + "']").remove();
+                updateParamIndexes();
+            }
 
-                //изменяю имя параметра
-                var selectorParamName = $(selectorParamValues)
-                    .children('div#divParamName')
-                    .children('input#paramName');
-                var nameAttrName = $(selectorParamName).attr('name');
-                var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
-                $(selectorParamName).attr('name', replaceAttrName);
+            function updateParamIndexes() {
+                var index = 0;
+                var regexPattern = /\[[0-9]{1,}\]/gi;
+                var notisPattern = /Items\[[0-9]{1,}\]/gi;
+                $('#parameters_list #param').each(function () {
+                    $(this).attr("idCnt", index);
+                    var selectorParamValues = $(this)
+                        .children('div#paramValues');
 
-                //изменяю оид
-                var selectorParamOid = $(selectorParamValues)
-                    .children('div#divParamOid')
-                    .children('input#paramOid');
-                var nameAttrOid = $(selectorParamOid).attr('name');
-                var replaceAttrOid = nameAttrOid.replace(regexPattern, '[' + index + ']');
-                $(selectorParamOid).attr('name', replaceAttrOid);
+                    //изменяю имя параметра
+                    var selectorParamName = $(selectorParamValues)
+                        .children('div#divParamName')
+                        .children('input#paramName');
+                    var nameAttrName = $(selectorParamName).attr('name');
+                    var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
+                    $(selectorParamName).attr('name', replaceAttrName);
 
-                //изменяю ид модели
-                var selectorParamIds = $(selectorParamValues)
-                    .children('div#divParamIds')
-                    .children('input#idModel');
-                var idAttrModel = $(selectorParamIds).attr('name');
-                var replaceIdModel = idAttrModel.replace(regexPattern, '[' + index + ']');
-                $(selectorParamIds).attr('name', replaceIdModel);
+                    //изменяю оид
+                    var selectorParamOid = $(selectorParamValues)
+                        .children('div#divParamOid')
+                        .children('input#paramOid');
+                    var nameAttrOid = $(selectorParamOid).attr('name');
+                    var replaceAttrOid = nameAttrOid.replace(regexPattern, '[' + index + ']');
+                    $(selectorParamOid).attr('name', replaceAttrOid);
 
-                //изменяю ид производителя
-                var selectorParamIds = $(selectorParamValues)
-                    .children('div#divParamIds')
-                    .children('input#idMaker');
-                var idAttrMaker = $(selectorParamIds).attr('name');
-                var replaceIdMaker = idAttrMaker.replace(regexPattern, '[' + index + ']');
-                $(selectorParamIds).attr('name', replaceIdMaker);
+                    //изменяю ид модели
+                    var selectorParamIds = $(selectorParamValues)
+                        .children('div#divParamIds')
+                        .children('input#idModel');
+                    var idAttrModel = $(selectorParamIds).attr('name');
+                    var replaceIdModel = idAttrModel.replace(regexPattern, '[' + index + ']');
+                    $(selectorParamIds).attr('name', replaceIdModel);
 
-                //------изменяю нотификации
-                //emails
-                //var selectorNotisEmails = $(this)
-                //    .children("div#notifsEmails")
-                //    .children('ul#notis')
-                //    .children('li').each(function () {
+                    //изменяю ид производителя
+                    var selectorParamIds = $(selectorParamValues)
+                        .children('div#divParamIds')
+                        .children('input#idMaker');
+                    var idAttrMaker = $(selectorParamIds).attr('name');
+                    var replaceIdMaker = idAttrMaker.replace(regexPattern, '[' + index + ']');
+                    $(selectorParamIds).attr('name', replaceIdMaker);
 
-                //        var elem = $(this)
-                //        .children('input[type="hidden"]');
+                    //------изменяю нотификации
+                    //emails
+                    //var selectorNotisEmails = $(this)
+                    //    .children("div#notifsEmails")
+                    //    .children('ul#notis')
+                    //    .children('li').each(function () {
 
-                //        var nameAttr = $(elem).attr('name');
-                //        var replaceAttr = nameAttr.replace(notisPattern, 'Items[' + index + ']');
-                //        $(elem).attr('name', replaceAttr);
-                //    })
-                ////phones
-                //var selectorNotisEmails = $(this)
-                //    .children("div#notifsPhones")
-                //    .children('ul#notis')
-                //    .children('li').each(function () {
+                    //        var elem = $(this)
+                    //        .children('input[type="hidden"]');
 
-                //        var elem = $(this)
-                //        .children('input[type="hidden"]');
+                    //        var nameAttr = $(elem).attr('name');
+                    //        var replaceAttr = nameAttr.replace(notisPattern, 'Items[' + index + ']');
+                    //        $(elem).attr('name', replaceAttr);
+                    //    })
+                    ////phones
+                    //var selectorNotisEmails = $(this)
+                    //    .children("div#notifsPhones")
+                    //    .children('ul#notis')
+                    //    .children('li').each(function () {
 
-                //        var nameAttr = $(elem).attr('name');
-                //        var replaceAttr = nameAttr.replace(notisPattern, 'Items[' + index + ']');
-                //        $(elem).attr('name', replaceAttr);
-                //    })
+                    //        var elem = $(this)
+                    //        .children('input[type="hidden"]');
 
-                
-                index++;
-            })
-        }
-</script>
+                    //        var nameAttr = $(elem).attr('name');
+                    //        var replaceAttr = nameAttr.replace(notisPattern, 'Items[' + index + ']');
+                    //        $(elem).attr('name', replaceAttr);
+                    //    })
+
+
+                    index++;
+                })
+            }
+    </script>
+}
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -271,7 +274,7 @@
                 </div>
 
                 <p>
-                    <input type="submit" value="Сохранить" class="btn btn-primary"/>
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
                 </p>
             </div>
         </div>
@@ -303,9 +306,9 @@
                                 </div>
                             </div>
                         </div>
-                                {
-                                    cnt++;
-                                }
+                        {
+                            cnt++;
+                        }
                     }
                 </div>
             }

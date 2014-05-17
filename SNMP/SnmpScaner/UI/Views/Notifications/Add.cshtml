@@ -3,69 +3,71 @@
 @{
     ViewBag.Title = "Add";
 }
-<script src="~/Scripts/jquery-1.7.1.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
-<script>
+@*    <script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
+@section scripts
+{
+    <script>
 
-    var notifEmailCnt = 0;
-    var notifNumberCnt = 0;
-    $(document).ready(function () {
+        var notifEmailCnt = 0;
+        var notifNumberCnt = 0;
+        $(document).ready(function () {
 
-        $('#btnNotifications').click(function () {
-            $('#modalNotifications').html('');
+            $('#btnNotifications').click(function () {
+                $('#modalNotifications').html('');
 
-            $('#modalNotifications').dialog({
-                autoOpen: false,
-                height: 500,
-                width: 400,
-                show: { effect: "toggle", duration: 800 },
-                zIndex: 10000000,
-                buttons: {
-                    "Применить": function () {
-                        $('#notif-emails').html('');
-                        $('#notif-numbers').html('');
+                $('#modalNotifications').dialog({
+                    autoOpen: false,
+                    height: 500,
+                    width: 400,
+                    show: { effect: "toggle", duration: 800 },
+                    zIndex: 10000000,
+                    buttons: {
+                        "Применить": function () {
+                            $('#notif-emails').html('');
+                            $('#notif-numbers').html('');
 
-                        $("input#notif:checked").each(function () {
+                            $("input#notif:checked").each(function () {
 
-                            if ($(this).attr('objType') == 'email') {
-                                $('#notif-emails').append('<div>' + $(this).attr('objVal')
-                                        + '<input type="hidden" name="EmailNotifications[' + notifEmailCnt + '].IdEmailEntity" value="' + $(this).attr('objVal') + '" />'
-                                    + '</div>');
-                                notifEmailCnt++;
-                            }
-                            else {
-                                $('#notif-numbers').append('<div>' + $(this).attr('objVal')
-                                        + '<input type="hidden" name="PhoneNotifications[' + notifNumberCnt + '].IdPhoneEntity" value="' + $(this).attr('objVal') + '" />'
-                                    + '</div>');
-                                notifNumberCnt++;
-                            }
-                        });
-                        $('#modalNotifications').dialog('close');
+                                if ($(this).attr('objType') == 'email') {
+                                    $('#notif-emails').append('<div>' + $(this).attr('objVal')
+                                            + '<input type="hidden" name="EmailNotifications[' + notifEmailCnt + '].IdEmailEntity" value="' + $(this).attr('objVal') + '" />'
+                                        + '</div>');
+                                    notifEmailCnt++;
+                                }
+                                else {
+                                    $('#notif-numbers').append('<div>' + $(this).attr('objVal')
+                                            + '<input type="hidden" name="PhoneNotifications[' + notifNumberCnt + '].IdPhoneEntity" value="' + $(this).attr('objVal') + '" />'
+                                        + '</div>');
+                                    notifNumberCnt++;
+                                }
+                            });
+                            $('#modalNotifications').dialog('close');
+                        }
+                    },
+                    zIndex: 100000
+                });
+                $.ajax({
+                    url: "/Users/NotificationsUsers",
+                    type: "GET",
+                    success: function (data) {
+                        $('#modalNotifications').html(data);
                     }
-                },
-                zIndex: 100000
-            });
-            $.ajax({
-                url: "/Users/NotificationsUsers",
-                type: "GET",
-                success: function (data) {
-                    $('#modalNotifications').html(data);
-                }
+                })
+                $('#modalNotifications').dialog('open');
             })
-            $('#modalNotifications').dialog('open');
+
         })
 
-    })
-
-</script>
-
+    </script>
+}
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Добавление оповещения</legend>
-         @if (ViewData["message_error"] != null)
+        @if (ViewData["message_error"] != null)
         {
             <div class="alert alert-error field-validation-error">
                 <p>@ViewData["message_error"]</p>
@@ -117,12 +119,9 @@
             <div id="modalNotifications" title="Выберите, кого нужно оповестить"></div>
 
             <p>
-                <input type="submit" value="Добавить" class="btn btn-primary"/>
+                <input type="submit" value="Добавить" class="btn btn-primary" />
             </p>
         </div>
     </fieldset>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

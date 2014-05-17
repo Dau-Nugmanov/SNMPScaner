@@ -4,19 +4,21 @@
     ViewBag.Title = "Edit";
 }
 
-<script>
-    function setCountEmails(cnt) {
-        countEmails = cnt;
-    }
+@section Scripts {
 
-    function setCountNumbers(cnt) {
-        countPhoneNumbers = cnt;
-    }
+    <script>
+        function setCountEmails(cnt) {
+            countEmails = cnt;
+        }
 
-    function validateEmail(email) { 
-        var re = /\S+@@\S+\.\S+/;
-        return re.test(email);
-    }
+        function setCountNumbers(cnt) {
+            countPhoneNumbers = cnt;
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@@\S+\.\S+/;
+            return re.test(email);
+        }
 
         function validatePhoneNumber(number) {
             var re = /\+7[0-9]{10}/;
@@ -27,10 +29,10 @@
         var countPhoneNumbers = 1;
         var cnt = 1;
         $(document).ready(function () {
-       
+
             $('#AddEmail').click(function () {
                 var email = prompt("Введите Email адрес");
-                if(!validateEmail(email)){
+                if (!validateEmail(email)) {
                     alert('Некорректный Email');
                     return;
                 }
@@ -103,8 +105,8 @@
             })
 
         })
-</script>
-
+    </script>
+}
 <h2>Редактирование пользователя</h2>
 
 @using (Html.BeginForm())
@@ -162,19 +164,19 @@
                     foreach (var email in Model.Emails)
                     {
                         
-                        <div class="well" idWrap="@cnt">
-                             <div>
-                                @cnt . @email.Email
-                            </div>
-                            <div class="hide">
-                                <input type="text" id="iEmail" name='Emails[@(cnt - 1)].Email' Value='@email.Email' />
-                                 <input type="text" id="iIdUser" name='Emails[@(cnt - 1)].IdUser' Value='@email.IdUser' />
-                            </div>
+                    <div class="well" idWrap="@cnt">
+                        <div>
+                            @cnt . @email.Email
                         </div>
+                        <div class="hide">
+                            <input type="text" id="iEmail" name='Emails[@(cnt - 1)].Email' Value='@email.Email' />
+                            <input type="text" id="iIdUser" name='Emails[@(cnt - 1)].IdUser' Value='@email.IdUser' />
+                        </div>
+                    </div>
                         cnt++;
                     }
-                     <script>
-                         setCountEmails(@cnt);
+                    <script>
+                        setCountEmails(@cnt);
                     </script>
                 }
             </div>
@@ -188,22 +190,22 @@
                     int cnt = 1;
                     foreach (var number in Model.PhoneNumbers)
                     {
-                        <div class="well" idWrap="@cnt">
-                             <div>
-                                @cnt . @number.PhoneNumber
-                            </div>
-                            <div class="hide">
-                                <input type="text" id="iPhoneNumber" name='PhoneNumbers[@(cnt - 1)].PhoneNumber' Value='@number.PhoneNumber' />
-                                 <input type="text" id="iIdUser" name='PhoneNumbers[@(cnt - 1)].IdUser' Value='@number.IdUser' />
-                            </div>
+                    <div class="well" idWrap="@cnt">
+                        <div>
+                            @cnt . @number.PhoneNumber
                         </div>
+                        <div class="hide">
+                            <input type="text" id="iPhoneNumber" name='PhoneNumbers[@(cnt - 1)].PhoneNumber' Value='@number.PhoneNumber' />
+                            <input type="text" id="iIdUser" name='PhoneNumbers[@(cnt - 1)].IdUser' Value='@number.IdUser' />
+                        </div>
+                    </div>
                         cnt++;
                     }
-                     <script>
-                         setCountNumbers(@cnt);
+                    <script>
+                        setCountNumbers(@cnt);
                     </script>
                 }
-                
+
             </div>
         </div>
         <p>
@@ -212,7 +214,3 @@
     </fieldset>
 }
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

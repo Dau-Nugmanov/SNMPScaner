@@ -12,32 +12,76 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    @*	<link href="@Url.Content("~/Content/themes/black-tie/jquery-ui.css")" rel="stylesheet" type="text/css" />
-	*@
-    @*<link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />*@
-    @*	<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />*@
+
     <link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/Bootstrap/bootstrap.css" rel="stylesheet" />
-    @*<link href="~/Content/Bootstrap/bootstrap-theme.css" rel="stylesheet" />*@
-    @*<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/jquery-ui-1.10.4.custom.js"></script>
     <link href="~/Content/MyStyles.css" rel="stylesheet" />
+    <link href="~/Content/kendo.common.css" rel="stylesheet" />
+    <link href="~/Content/kendo.default.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.8.3.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+     <script src="~/Scripts/jquery-1.8.3.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.custom.js"></script>
     <script src="~/Scripts/modernizr-2.5.3.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-    @*	<script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
-	<script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.custom.js")" type="text/javascript"></script>
-	<script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/main.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/validate-form.js")" type="text/javascript"></script>*@
+    <script src="~/Scripts/kendo.ui.core.js"></script>
 
+    <script>
+
+        var popupNotification;
+        var intervalTime = 3000;
+        function initNotif(){
+            popupNotification = $("#popupNotification").kendoNotification(
+                 {
+                     autoHideAfter: 15000,
+                     button: true,
+                     hideOnClick: true
+                 }).data("kendoNotification");
+        }
+
+        function alertNotification() {
+            popupNotification.show("Внимание!!! Доступны непрочитанные оповещения!", "error");
+        }
+
+        function checkWarnings() {
+            var currentNumber = $('#LastWarningTimeStamp').html();
+
+            $.ajax({
+                url: "/Warnings/IsHavNewWarnings",
+                type: "POST",
+                data: {currentNumber: currentNumber},
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    if (data) {
+                        $('#warningsMess').css("color", "#FF1515").html('<a href="#">(Есть непрочитанные оповещения)</a>');
+                        $('#LastWarningTimeStamp').html(data.count);
+                        alertNotification();
+                    } else {
+                        $('#warningsMess').css("color", '#A5A5A5').html('<a href="#">Оповещения</a>');
+                    }
+                }
+            })
+        }
+
+        window.setInterval(function () { checkWarnings() }, intervalTime);
+
+        $(document).ready(function () {
+
+           
+            $("#showPopupNotification").click(function () {
+                var d = new Date();                
+                popupNotification.show("ВНИМАНИЕ!!!!!", "error");
+            });
+        })
+    </script>
     @RenderSection("scripts", required: false)
 </head>
 
-<body>
+<body onload="initNotif();">
     <header>
         <div class="line"></div>
         <div>
@@ -60,17 +104,23 @@
                 </ul>
 
             </nav>
+            <div id="popupNotification">
+            </div>
+            <div>
+                <input type="button" id="showPopupNotification" value="show notif" />
+            </div>
             <div class="sign-out">
-                
+
                 @if (User.Identity.IsAuthenticated)
                 {
+                    //style="color:#FF1515;"
                     <div>
-                        Пользователь: @User.Identity.Name @Html.ActionLink("Выход", "SignOut", "Home")
+                        Пользователь: @User.Identity.Name <span  id="warningsMess"><a href="#">Оповещения</a></span> @Html.ActionLink("Выход", "SignOut", "Home")
                     </div>
                 }
             </div>
         </div>
-
+        <div style="visibility:hidden;" id="LastWarningTimeStamp"></div>
     </header>
 
     <div class="contentWrap">

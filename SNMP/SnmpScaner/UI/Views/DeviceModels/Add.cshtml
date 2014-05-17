@@ -3,92 +3,98 @@
 @{
     ViewBag.Title = "Add";
 }
-<script src="~/Scripts/jquery-1.7.1.js"></script>
-<script src="~/Scripts/jquery.simplemodal.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+@*<script src="~/Scripts/jquery-1.9.1.js"></script>
+
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
+
 <link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
 <link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
 <link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
 
-<script>
 
-    $(document).ready(function () {
+@section scripts{
+    <script src="~/Scripts/jquery.simplemodal.js"></script>
 
-        $('#btnAddParam').click(function () {
-            $('#basic-modal-content').modal({
-                autoResize: true
-            });
-        })
+    <script>
 
-        $('#btnNotifications').click(function () {
-            //$('#btnAddParam').click(function () {
-            $('#modalNotifications').html('');
+        $(document).ready(function () {
 
-            $('#modalNotifications').dialog({
-                autoOpen: false,
-                height: 500,
-                width: 400,
-                show: { effect: "toggle", duration: 800 },
-                zIndex: 10000000,
-                buttons: {
-                    "Применить": function () {
-                        $('#notif-emails').html('');
-                        $('#notif-numbers').html('');
-
-                        $("input#notif:checked").each(function () {
-
-                            if ($(this).attr('objType') == 'email') {
-                                $('#notif-emails').append('<p>' + $(this).attr('objVal') + '</p>');
-                            }
-                            else {
-                                $('#notif-numbers').append('<p>' + $(this).attr('objVal') + '</p>');
-                            }
-                        });
-                        $('#modalNotifications').dialog('close');
-                    }
-                },
-                zIndex: 100000
-            });
-            $.ajax({
-                url: "/Users/NotificationsUsers",
-                type: "GET",
-                success: function (data) {
-                    $('#modalNotifications').html(data);
-                }
+            $('#btnAddParam').click(function () {
+                $('#basic-modal-content').modal({
+                    autoResize: true
+                });
             })
-            $('#modalNotifications').dialog('open');
+
+            $('#btnNotifications').click(function () {
+                //$('#btnAddParam').click(function () {
+                $('#modalNotifications').html('');
+
+                $('#modalNotifications').dialog({
+                    autoOpen: false,
+                    height: 500,
+                    width: 400,
+                    show: { effect: "toggle", duration: 800 },
+                    zIndex: 10000000,
+                    buttons: {
+                        "Применить": function () {
+                            $('#notif-emails').html('');
+                            $('#notif-numbers').html('');
+
+                            $("input#notif:checked").each(function () {
+
+                                if ($(this).attr('objType') == 'email') {
+                                    $('#notif-emails').append('<p>' + $(this).attr('objVal') + '</p>');
+                                }
+                                else {
+                                    $('#notif-numbers').append('<p>' + $(this).attr('objVal') + '</p>');
+                                }
+                            });
+                            $('#modalNotifications').dialog('close');
+                        }
+                    },
+                    zIndex: 100000
+                });
+                $.ajax({
+                    url: "/Users/NotificationsUsers",
+                    type: "GET",
+                    success: function (data) {
+                        $('#modalNotifications').html(data);
+                    }
+                })
+                $('#modalNotifications').dialog('open');
+            })
+
+            var itemCnt = 0;
+            $('#btnParameterAdd').click(function () {
+                var paramName = $('#ParameterName').val();
+                var oid = $('#OID').val();
+                var paramSelector = $('.device-parameters');
+
+                if (!paramName || !oid) {
+                    alert('Заполнены не все поля');
+                    return;
+                }
+                var notifEmailCnt = 0;
+                var notifNumberCnt = 0;
+                var html = '<div class="well">'
+                        + '<div><b>Название параметра: </b>'
+                            + '<input type="text" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                        + '</div>'
+                        + '<div><b>OID: </b> '
+                            + '<input type="text" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
+                        + '</div>'
+                    + '</div>';
+                //alert(html);
+                paramSelector.append(html);
+                itemCnt++;
+                $('#basic-modal-content').modal('close');
+            })
+
         })
 
-        var itemCnt = 0;
-        $('#btnParameterAdd').click(function () {
-            var paramName = $('#ParameterName').val();
-            var oid = $('#OID').val();
-            var paramSelector = $('.device-parameters');
-
-            if (!paramName || !oid) {
-                alert('Заполнены не все поля');
-                return;
-            }
-            var notifEmailCnt = 0;
-            var notifNumberCnt = 0;
-            var html = '<div class="well">'
-                    + '<div><b>Название параметра: </b>' 
-                        + '<input type="text" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
-                    + '</div>'
-                    + '<div><b>OID: </b> '
-                        + '<input type="text" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
-                    + '</div>'
-                + '</div>';
-            //alert(html);
-            paramSelector.append(html);
-            itemCnt++;
-            $('#basic-modal-content').modal('close');
-        })
-
-    })
-
-</script>
-
+    </script>
+}
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -179,6 +185,3 @@
 }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

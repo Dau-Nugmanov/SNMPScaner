@@ -3,148 +3,149 @@
 @{
     ViewBag.Title = "Add";
 }
-<script src="~/Scripts/jquery-1.7.1.js"></script>
-<script src="~/Scripts/jquery.simplemodal.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
-<link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
-<link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
-<link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
-@*<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">*@
+@section Scripts {
 
-<script src="~/Scripts/My/DdlsAjaxFill.js"></script>
-<script>
+    @*<script src="~/Scripts/jquery-1.8.3.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+    <script src="~/Scripts/jquery.simplemodal.js"></script>
+    @*<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
+    <link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
+    <link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
+    @*<link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />*@
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">*@
 
-   
+    <script src="~/Scripts/My/DdlsAjaxFill.js"></script>
+    <script>
+        $(document).ready(function () {
 
-    $(document).ready(function () {
-
-        fillDepartmentsDdl();
-        $("#BranchOfficesDdl").change(function () {
             fillDepartmentsDdl();
-        });
-
-        var itemCnt = 0;
-        $('#btnAddParam').click(function () {
-
-            var idModel = $('#IdModel').val();
-            if (idModel == null || idModel == 'undefined') {
-                alert('Выберите модель устройства');
-                return;
-            }
-
-            $('#parametersList').dialog({
-                autoOpen: false,
-                height: 500,
-                width: 400,
-                show: { effect: "toggle", duration: 800 },
-                zIndex: 10000000,
-                buttons: {
-                    "Добавить": function () {
-                        $('#paramCheck:checked').each(function () {
-
-                            var idParam = $(this).attr('idParam');
-                            var paramName = $(this).attr('paramName');
-                            var paramOid = $(this).attr('paramOid');
-
-                            var html = '<div class="well">'
-                              + '<div><b>Название параметра: </b>' + paramName + '</div>'
-                              //+ '<input type="hidden" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
-                              + '<div><b>OID: </b>' + paramOid + '</div>'
-                              //+ '<input type="hidden" name=Items[' + itemCnt + '].Oid_s value=' + paramOid + ' />'
-                              + '<div>'
-                              + '<div id="concreteValues">'
-                                    + '<p>Частота опроса: </p>'
-                                    + '<input type="text" name="Items[' + itemCnt + '].DeltaT" value=""/>'
-                                    + '<input type="hidden" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
-                              + '<div>'
-                            + '</div>'
-                            itemCnt++;
-                            $('.device-parameters').append(html);
-                        })
-                    }
-                },
-                zIndex: 100000
+            $("#BranchOfficesDdl").change(function () {
+                fillDepartmentsDdl();
             });
 
-            $.ajax({
-                url: "/DeviceModels/GetParametersByModel",
-                type: "GET",
-                data: { idModel: idModel },
-                success: function (data) {
-                    $('#parametersList').html(data);
+            var itemCnt = 0;
+            $('#btnAddParam').click(function () {
+
+                var idModel = $('#IdModel').val();
+                if (idModel == null || idModel == 'undefined') {
+                    alert('Выберите модель устройства');
+                    return;
                 }
+
+                $('#parametersList').dialog({
+                    autoOpen: false,
+                    height: 500,
+                    width: 400,
+                    show: { effect: "toggle", duration: 800 },
+                    zIndex: 10000000,
+                    buttons: {
+                        "Добавить": function () {
+                            $('#paramCheck:checked').each(function () {
+
+                                var idParam = $(this).attr('idParam');
+                                var paramName = $(this).attr('paramName');
+                                var paramOid = $(this).attr('paramOid');
+
+                                var html = '<div class="well">'
+                                  + '<div><b>Название параметра: </b>' + paramName + '</div>'
+                                  //+ '<input type="hidden" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                                  + '<div><b>OID: </b>' + paramOid + '</div>'
+                                  //+ '<input type="hidden" name=Items[' + itemCnt + '].Oid_s value=' + paramOid + ' />'
+                                  + '<div>'
+                                  + '<div id="concreteValues">'
+                                        + '<p>Частота опроса: </p>'
+                                        + '<input type="text" name="Items[' + itemCnt + '].DeltaT" value=""/>'
+                                        + '<input type="hidden" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
+                                  + '<div>'
+                                + '</div>'
+                                itemCnt++;
+                                $('.device-parameters').append(html);
+                            })
+                        }
+                    },
+                    zIndex: 100000
+                });
+
+                $.ajax({
+                    url: "/DeviceModels/GetParametersByModel",
+                    type: "GET",
+                    data: { idModel: idModel },
+                    success: function (data) {
+                        $('#parametersList').html(data);
+                    }
+                })
+                $('#parametersList').dialog('open');
+
             })
-            $('#parametersList').dialog('open');
+
+            var itemCnt = 0;
+            $('#btnParameterAdd').click(function () {
+                var paramName = $('#ParameterName').val();
+                var oid = $('#OID').val();
+                var paramSelector = $('.device-parameters');
+
+                if (!paramName || !oid) {
+                    alert('Заполнены не все поля');
+                    return;
+                }
+                var notifEmailCnt = 0;
+                var notifNumberCnt = 0;
+                var html = '<div class="well">'
+                        + '<div><b>Название параметра: </b>' + paramName + '</div>'
+                        + '<input type="hidden" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
+                        + '<div><b>OID: </b>' + oid + '</div>'
+                        + '<input type="hidden" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
+                        + '<p class="btn btn-link">Оповещения по Email:</p>'
+                        + '<div>'
+                            + '<ul>';
+                //+ '</div>'
+                $('#notif-emails p').each(function () {
+                    var tag = '<li>' + $(this).html() + '</li>';
+                    tag += '<input type="hidden" name=Items[' + itemCnt + '].EmailNotifications[' + notifEmailCnt + '] value=' + $(this).html() + ' />';
+                    notifEmailCnt++;
+                    html += tag;
+                })
+                html += '</ul>'
+                + '</div>'
+                + '<p class="btn btn-link">Оповещения по телефону:</p>'
+                + '<div>'
+                      + '<ul>';
+
+                $('#notif-numbers p').each(function () {
+                    var tag = '<li>' + $(this).html() + '</li>';
+                    tag += '<input type="hidden" name=Items[' + itemCnt + '].PhoneNumbersNotifications[' + notifNumberCnt + '] value=' + $(this).html() + ' />';
+                    notifNumberCnt++;
+                    html += tag;
+                })
+
+                html += '</ul>'
+                + '</div>'
+                + '</div>';
+                //alert(html);
+                paramSelector.append(html);
+                itemCnt++;
+                $('#basic-modal-content').modal('close');
+            })
+
+            $('#enableTxts').click(function () {
+                if ($('input#Login').attr('readonly')) {
+                    $('input#Login').removeAttr('readonly');
+                } else {
+                    $('input#Login').attr('readonly', 'true');
+                }
+
+                if ($('input#Password').attr('readonly')) {
+                    $('input#Password').removeAttr('readonly');
+                } else {
+                    $('input#Password').attr('readonly', 'true');
+                }
+
+            })
 
         })
 
-        var itemCnt = 0;
-        $('#btnParameterAdd').click(function () {
-            var paramName = $('#ParameterName').val();
-            var oid = $('#OID').val();
-            var paramSelector = $('.device-parameters');
-
-            if (!paramName || !oid) {
-                alert('Заполнены не все поля');
-                return;
-            }
-            var notifEmailCnt = 0;
-            var notifNumberCnt = 0;
-            var html = '<div class="well">'
-                    + '<div><b>Название параметра: </b>' + paramName + '</div>'
-                    + '<input type="hidden" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
-                    + '<div><b>OID: </b>' + oid + '</div>'
-                    + '<input type="hidden" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
-                    + '<p class="btn btn-link">Оповещения по Email:</p>'
-                    + '<div>'
-                        + '<ul>';
-            //+ '</div>'
-            $('#notif-emails p').each(function () {
-                var tag = '<li>' + $(this).html() + '</li>';
-                tag += '<input type="hidden" name=Items[' + itemCnt + '].EmailNotifications[' + notifEmailCnt + '] value=' + $(this).html() + ' />';
-                notifEmailCnt++;
-                html += tag;
-            })
-            html += '</ul>'
-            + '</div>'
-            + '<p class="btn btn-link">Оповещения по телефону:</p>'
-            + '<div>'
-                  + '<ul>';
-
-            $('#notif-numbers p').each(function () {
-                var tag = '<li>' + $(this).html() + '</li>';
-                tag += '<input type="hidden" name=Items[' + itemCnt + '].PhoneNumbersNotifications[' + notifNumberCnt + '] value=' + $(this).html() + ' />';
-                notifNumberCnt++;
-                html += tag;
-            })
-
-            html += '</ul>'
-            + '</div>'
-            + '</div>';
-            //alert(html);
-            paramSelector.append(html);
-            itemCnt++;
-            $('#basic-modal-content').modal('close');
-        })
-
-        $('#enableTxts').click(function () {
-            if ($('input#Login').attr('readonly')) {
-                $('input#Login').removeAttr('readonly');
-            } else {
-                $('input#Login').attr('readonly', 'true');
-            }
-
-            if ($('input#Password').attr('readonly')) {
-                $('input#Password').removeAttr('readonly');
-            } else {
-                $('input#Password').attr('readonly', 'true');
-            }
-            
-        })
-
-    })
-
-</script>
+    </script>
+}
 <h2>Добавление нового устройства</h2>
 
 @using (Html.BeginForm())
@@ -183,7 +184,7 @@
                     @Html.EditorFor(model => model.Name)
                     @Html.ValidationMessageFor(model => model.Name)
                 </div>
-                
+
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Ip_s)
                 </div>
@@ -206,7 +207,7 @@
                 <div class="editor-field">
                     @if (ViewData["defaultLogin"] != null)
                     {
-                        @*@Html.EditorFor(model => model.Login, new {Value = ViewData["defaultLogin"], @readonly = true})
+@*@Html.EditorFor(model => model.Login, new {Value = ViewData["defaultLogin"], @readonly = true})
                         *@
                         <input type="text" id="Login" name="Login" value="@ViewData["defaultLogin"]" readonly="true"/>
                         
@@ -223,18 +224,18 @@
                     @Html.LabelFor(model => model.Password)
                 </div>
                 <div class="editor-field">
-                     @if (ViewData["defaultPassword"] != null)
+                    @if (ViewData["defaultPassword"] != null)
                     {
-                        @*@Html.EditorFor(model => model.Password, new {@Value = ViewData["defaultPassword"], @readonly = true})
+@*@Html.EditorFor(model => model.Password, new {@Value = ViewData["defaultPassword"], @readonly = true})
                          *@
                     
-                     <input type="password" id="Password" name="Password" value="@ViewData["defaultPassword"]" readonly="true" />
+                        <input type="password" id="Password" name="Password" value="@ViewData["defaultPassword"]" readonly="true" />
                     }
                     else
                     {
                         @Html.EditorFor(model => model.Password)
                     }
-                    
+
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
                 <div>
@@ -255,7 +256,7 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
-                 <div class="editor-label">
+                <div class="editor-label">
                     Производитель
                 </div>
                 <div class="editor-field">
@@ -269,7 +270,7 @@
                     <select id="IdModel" name="IdModel" class="selectpickerDeps"></select>
                 </div>
 
-               <div class="editor-label">
+                <div class="editor-label">
                     @Html.CheckBox("IsActive") Активно
                 </div>
 
@@ -289,6 +290,4 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
