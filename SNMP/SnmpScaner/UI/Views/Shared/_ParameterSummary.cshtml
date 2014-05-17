@@ -1,0 +1,30 @@
+﻿@model UI.Models.DeviceItemWrap
+
+<div>
+    <b>OID: </b>@Model.DeviceItem.DeviceItemEntity.Oid
+    @if (Model.DeviceItem.ItemHistory != null)
+    {
+        <div id="historyAccordion" class="accordion">
+            <h3>История параметра</h3>
+            <div>
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdfg &nbsp
+                sdf &nbsp
+                gsdfg &nbsp
+                sdfg &nbsp
+                sfd &nbsp
+                @foreach (var itemHistory in Model.DeviceItem.ItemHistory.OrderBy(t => t.Timestamp))
+                {
+
+                }
+            </div>
+        </div>
+    }
+</div>
+

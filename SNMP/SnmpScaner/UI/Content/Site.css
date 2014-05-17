@@ -109,3 +109,9 @@ textarea
 .left-margin {
     margin-left:10px;
 }
+.critical {
+    border-color: #ff0000 !important;
+}
+.warning-text {
+    color: #FF1515; 
+}

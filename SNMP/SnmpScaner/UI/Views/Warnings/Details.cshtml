@@ -1,0 +1,90 @@
+﻿@model DAL.EfModels.DeviceEntity
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script>
+
+        function refreshHistoryAccordion() {
+            $('#historyAccordion').accordion('refresh');
+        }
+
+        $(document).ready(function () {
+            $(".accordion").accordion({
+                autoHeight: false,
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+        })
+
+    </script>
+
+}
+
+<h2>Подробности устройтва @Model.Name</h2>
+
+<div class="well">
+
+    <div>
+        <b>Название устройства: </b>@Model.Name
+    </div>
+    <div>
+        <b>Изготовитель: </b>@Model.DeviceModel.Maker.MakerName
+    </div>
+    <div>
+        <b>Модель: </b>@Model.DeviceModel.ModelName
+    </div>
+    <div>
+        <b>Дата добавления в систему: </b>@Model.DateCreate
+    </div>
+    <div>
+        <b>Заказчик: </b>@Model.Customer
+    </div>
+    <div>
+        <b>Описание: </b>@Model.Description
+    </div>
+    <div>
+        <b>Параметры устройства: </b>
+    </div>
+    @{int cnt = 1;
+      bool isCritical;
+      string className;}
+    <div id="parameters" class="accordion">
+        @if (Model.DevicesItems != null)
+        {
+            foreach (var item in Model.DevicesItems)
+            {
+                if (cnt == 1)
+                {
+                    className = "critical";
+                    isCritical = true;
+                }
+                else
+                {
+                    className = "";
+                    isCritical = false;
+                }
+               <h3 class="@className">
+                   @item.DeviceItemEntity.Name
+                   @if(isCritical)
+                   {
+                       <span class="warning-text">(Внимание!Критическое значение!)</span>
+                   }
+               </h3>
+                if(cnt == 1){
+                    isCritical = true;
+                }
+                else {
+                    isCritical = false;
+                }
+               @Html.Partial("~/Views/Shared/_ParameterSummary.cshtml"
+               , new UI.Models.DeviceItemWrap { DeviceItem = item, IsCritical = isCritical })
+            cnt++;
+            }
+        }
+    </div>
+</div>

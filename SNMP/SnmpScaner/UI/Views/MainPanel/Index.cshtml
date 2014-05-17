@@ -2,37 +2,33 @@
     //ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
-  $(function() {
-	$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-	$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-  });
-</script>
+@section Scripts {
 
+    <script>
+        $(function () {
+            $("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+            $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+        });
+    </script>
+
+}
 
 <div class="contentInner">
-	<div class="header">
-		<h1>@ViewBag.Title</h1>
-	</div>
+    <div class="header">
+        <h1>@ViewBag.Title</h1>
+    </div>
 
-	<div id="tabs">
-	  <ul>
-		<li><a href="#tabs-1">Аварийные устройства</a></li>
-		<li><a href="#tabs-2">Расширенная настройка</a></li>
-		<li><a href="#tabs-3">Сохраненые настройки</a></li>
-	  </ul>
-	  <div id="tabs-1">
-		  @*@Html.Partial("_deviceList")*@
-	  </div>
+    <div id="tabs">
+        <ul>
+            <li>@Html.ActionLink("Аварийные устройства", "GetAll", "Warnings")</li>
+            <li><a href="#tabs-2">Все устройства</a></li>
+        </ul>   
+        <div id="tabs-1">
+        </div>
 
-	  <div id="tabs-2">
-		@*@Html.Partial("_deviceList")*@
-	  </div>
+        <div id="tabs-2">
+            @*@Html.Partial("_deviceList")*@
+        </div>
 
-	  <div id="tabs-3">
-		<h2>Content heading 3</h2>
-		<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-		<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-	  </div>
-	</div>
+    </div>
 </div>

@@ -12,6 +12,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using UI.Code;
+using UI.Models;
 
 namespace UI
 {
@@ -44,7 +46,38 @@ namespace UI
                 x.For<IPhoneNumbersRepo>().Use<PhoneNumbersRepository>().Ctor<SnmpDbContext>("context");
                 x.For<IUsersRepo>().Use<UsersRepository>().Ctor<SnmpDbContext>("context");
             });
+            ///////
 
+            WarningsStorage.AddWarning(new WarningModel
+            {
+                DeviceName = "device1",
+                IdDevice = 1,
+                IdParameter = 11,
+                //TimeStamp = DateTime.Now.AddDays(-10),
+                DeviceMaker = "Samsung",
+                DeviceModel = "ht23",
+                Value = "Value!"
+            });
+            WarningsStorage.AddWarning(new WarningModel
+            {
+                DeviceName = "device1",
+                IdDevice = 2,
+                IdParameter = 11,
+                //TimeStamp = DateTime.Now.AddDays(-8),
+                DeviceMaker = "Samsung",
+                DeviceModel = "fer321",
+                Value = "Value!"
+            }); WarningsStorage.AddWarning(new WarningModel
+            {
+                DeviceName = "device1",
+                IdDevice = 3,
+                IdParameter = 11,
+                DeviceMaker = "HP",
+                DeviceModel = "qqq",
+                //TimeStamp = DateTime.Now.AddDays(-5),
+                Value = "Value!"
+            });
+            /////
             SnmpDbContext context = new SnmpDbContext();
             if (!context.Database.Exists())
             {

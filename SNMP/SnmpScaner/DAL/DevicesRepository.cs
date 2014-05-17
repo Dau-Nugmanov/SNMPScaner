@@ -31,6 +31,7 @@ namespace DAL
         {
             return dbSet
                 .Include(t => t.DeviceModel)
+                .Include(t => t.DeviceModel.Maker)
                 .Include(t => t.DevicesItems)
                 .Include(t => t.DevicesItems.Select(x => x.DeviceItemEntity))
                 .FirstOrDefault(t => t.IdDeviceEntity == (int)id);

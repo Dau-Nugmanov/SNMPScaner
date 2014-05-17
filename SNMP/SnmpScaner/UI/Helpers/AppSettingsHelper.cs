@@ -23,5 +23,18 @@ namespace UI.Helpers
                 return new AppSettingsReader().GetValue("defaultPassword", typeof(String)).ToString();
             }
         }
+
+        public static Int32 GetMaxWarningsCount
+        {
+            get
+            {
+                Int32 maxWarningCount = 0;
+                if(!Int32.TryParse(new AppSettingsReader().GetValue("maxWarningsCount", typeof(string)).ToString(), out maxWarningCount))
+                {
+                    throw new InvalidOperationException("Неверное значение количества оповещений");
+                }
+                return maxWarningCount;
+            }
+        }
     }
 }

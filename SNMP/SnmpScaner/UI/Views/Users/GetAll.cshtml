@@ -32,7 +32,7 @@
         FormsAuthentication.SignOut();
         FormsAuthentication.RedirectToLoginPage();
     }
-    if (((DomainModel.User)Session["user"]).IdUser == item.IdUser)
+    if (((DAL.EfModels.User)Session["user"]).IdUser == item.IdUser)
     {
         continue;
     }
