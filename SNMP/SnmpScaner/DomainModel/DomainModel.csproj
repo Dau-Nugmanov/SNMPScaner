@@ -63,6 +63,7 @@
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,15 +79,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
-    <Compile Include="Device.cs" />
-    <Compile Include="DeviceItem.cs" />
+    <Compile Include="DaInterfaces\IBaseRepository.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DeviceItem.cs" />
+    <Compile Include="EfModels\Customer.cs" />
+    <Compile Include="EfModels\DeviceEntity.cs" />
+    <Compile Include="EfModels\DeviceItemEntity.cs" />
+    <Compile Include="EfModels\DeviceItemHistory.cs" />
+    <Compile Include="EfModels\DeviceModel.cs" />
+    <Compile Include="EfModels\DevicesItems.cs" />
+    <Compile Include="EfModels\DeviceType.cs" />
+    <Compile Include="EfModels\EmailEntity.cs" />
+    <Compile Include="EfModels\EmailNotification.cs" />
+    <Compile Include="EfModels\Maker.cs" />
+    <Compile Include="EfModels\Notification.cs" />
+    <Compile Include="EfModels\PhoneNotification.cs" />
+    <Compile Include="EfModels\PhoneNumber.cs" />
+    <Compile Include="EfModels\User.cs" />
+    <Compile Include="DaInterfaces\ICustomersRepo.cs" />
+    <Compile Include="DaInterfaces\IDeviceItemsRepo.cs" />
+    <Compile Include="DaInterfaces\IDeviceModelsRepo.cs" />
+    <Compile Include="DaInterfaces\IDevicesItemsRepo.cs" />
+    <Compile Include="DaInterfaces\IDevicesRepo.cs" />
+    <Compile Include="DaInterfaces\IDeviceTypesRepo.cs" />
+    <Compile Include="DaInterfaces\IEmailNotificationsRepo.cs" />
+    <Compile Include="DaInterfaces\IEmailsRepo.cs" />
+    <Compile Include="DaInterfaces\IMakersRepository.cs" />
+    <Compile Include="DaInterfaces\INotificationsRepo.cs" />
+    <Compile Include="DaInterfaces\IPhoneNotificationsRepo.cs" />
+    <Compile Include="DaInterfaces\IPhoneNumbersRepo.cs" />
+    <Compile Include="DaInterfaces\IUsersRepo.cs" />
     <Compile Include="Interfaces\IConfigRepo.cs" />
     <Compile Include="Interfaces\IHistoryRepo.cs" />
     <Compile Include="Interfaces\INotificationExecutor.cs" />
     <Compile Include="ItemHelper.cs" />
-    <Compile Include="Notification.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubscriptionItem.cs" />
+    <Compile Include="Models\SubscriptionItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

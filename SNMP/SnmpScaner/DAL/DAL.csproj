@@ -91,53 +91,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseRepository.cs" />
-    <Compile Include="ConfigRepo.cs" />
-    <Compile Include="CustomersRepository.cs" />
+    <Compile Include="Repos\BaseRepository.cs" />
+    <Compile Include="Repos\ConfigRepo.cs" />
+    <Compile Include="Repos\CustomersRepository.cs" />
     <Compile Include="DatabaseInitializer.cs" />
-    <Compile Include="DeviceItemsRepository.cs" />
-    <Compile Include="DeviceModelsRepository.cs" />
-    <Compile Include="DevicesItemsRepository.cs" />
-    <Compile Include="DevicesRepository.cs" />
-    <Compile Include="DeviceTypesRepository.cs" />
-    <Compile Include="EfModels\Customer.cs" />
-    <Compile Include="EfModels\DeviceEntity.cs" />
-    <Compile Include="EfModels\DeviceItemEntity.cs" />
-    <Compile Include="EfModels\DeviceItemHistory.cs" />
-    <Compile Include="EfModels\DeviceModel.cs" />
-    <Compile Include="EfModels\DevicesItems.cs" />
-    <Compile Include="EfModels\DeviceType.cs" />
-    <Compile Include="EfModels\EmailEntity.cs" />
-    <Compile Include="EfModels\EmailNotification.cs" />
-    <Compile Include="EfModels\Maker.cs" />
-    <Compile Include="EfModels\Notification.cs" />
-    <Compile Include="EfModels\PhoneNotification.cs" />
-    <Compile Include="EfModels\PhoneNumber.cs" />
-    <Compile Include="EfModels\User.cs" />
-    <Compile Include="EmailNotificationsRepository.cs" />
-    <Compile Include="EmailsRepository.cs" />
-    <Compile Include="IBaseRepository.cs" />
-    <Compile Include="Interfaces\ICustomersRepo.cs" />
-    <Compile Include="Interfaces\IDeviceItemsRepo.cs" />
-    <Compile Include="Interfaces\IDeviceModelsRepo.cs" />
-    <Compile Include="Interfaces\IDevicesItemsRepo.cs" />
-    <Compile Include="Interfaces\IDevicesRepo.cs" />
-    <Compile Include="Interfaces\IDeviceTypesRepo.cs" />
-    <Compile Include="Interfaces\IEmailNotificationsRepo.cs" />
-    <Compile Include="Interfaces\IEmailsRepo.cs" />
-    <Compile Include="Interfaces\IMakersRepository.cs" />
-    <Compile Include="Interfaces\INotificationsRepo.cs" />
-    <Compile Include="Interfaces\IPhoneNotificationsRepo.cs" />
-    <Compile Include="Interfaces\IPhoneNumbersRepo.cs" />
-    <Compile Include="Interfaces\IUsersRepo.cs" />
-    <Compile Include="MakersRepository.cs" />
+    <Compile Include="Repos\DeviceItemsRepository.cs" />
+    <Compile Include="Repos\DeviceModelsRepository.cs" />
+    <Compile Include="Repos\DevicesItemsRepository.cs" />
+    <Compile Include="Repos\DevicesRepository.cs" />
+    <Compile Include="Repos\DeviceTypesRepository.cs" />
+    <Compile Include="Repos\EmailNotificationsRepository.cs" />
+    <Compile Include="Repos\EmailsRepository.cs" />
+    <Compile Include="Repos\MakersRepository.cs" />
     <Compile Include="DalInit.cs" />
-    <Compile Include="NotificationsRepository.cs" />
-    <Compile Include="PhoneNotificationsRepository.cs" />
-    <Compile Include="PhoneNumbersRepository.cs" />
+    <Compile Include="Repos\NotificationsRepository.cs" />
+    <Compile Include="Repos\PhoneNotificationsRepository.cs" />
+    <Compile Include="Repos\PhoneNumbersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnmpDbContext.cs" />
-    <Compile Include="UsersRepository.cs" />
+    <Compile Include="Repos\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -149,6 +121,7 @@
       <Name>DomainModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

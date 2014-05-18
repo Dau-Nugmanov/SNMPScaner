@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5C8A269C-D367-4472-9D8A-3A07F7245679}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{4BA58447-45F4-43A1-B66A-4CEE0CB88697}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{75D60B1E-50F2-4FDB-A54F-9DD030488849}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}"
 EndProject
@@ -34,10 +32,6 @@ Global
 		{4BA58447-45F4-43A1-B66A-4CEE0CB88697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BA58447-45F4-43A1-B66A-4CEE0CB88697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA58447-45F4-43A1-B66A-4CEE0CB88697}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75D60B1E-50F2-4FDB-A54F-9DD030488849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75D60B1E-50F2-4FDB-A54F-9DD030488849}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75D60B1E-50F2-4FDB-A54F-9DD030488849}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75D60B1E-50F2-4FDB-A54F-9DD030488849}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}.Release|Any CPU.ActiveCfg = Release|Any CPU

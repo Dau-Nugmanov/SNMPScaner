@@ -9,6 +9,7 @@ using AutoMapper;
 using DAL.EfModels;
 using DAL.Interfaces;
 using DomainModel;
+using DomainModel.Interfaces;
 using StructureMap;
 
 namespace DAL
@@ -36,6 +37,7 @@ namespace DAL
 				x.For<IPhoneNotificationsRepo>().Use<PhoneNotificationsRepository>().Ctor<SnmpDbContext>("context");
 				x.For<IPhoneNumbersRepo>().Use<PhoneNumbersRepository>().Ctor<SnmpDbContext>("context");
 				x.For<IUsersRepo>().Use<UsersRepository>().Ctor<SnmpDbContext>("context");
+				x.For<IConfigRepo>().Use<ConfigRepo>();
 			});
 		}
 

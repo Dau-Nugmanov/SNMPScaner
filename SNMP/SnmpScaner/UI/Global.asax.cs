@@ -1,6 +1,8 @@
-﻿using DAL;
+﻿using Core;
+using DAL;
 using DAL.EfModels;
 using DAL.Interfaces;
+using DomainModel.Interfaces;
 using StructureMap;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,7 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
+	    private static SnmpScanServer _server;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -34,6 +37,8 @@ namespace UI
 
 			DalInit.Init();
             ///////
+
+	        _server = new SnmpScanServer();
 
             WarningsStorage.AddWarning(new WarningModel
             {

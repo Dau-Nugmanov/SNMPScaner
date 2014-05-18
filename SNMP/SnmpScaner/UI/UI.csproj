@@ -765,6 +765,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{8954AE76-32FC-4CAC-9656-ABC5FFD6BC52}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{5c8a269c-d367-4472-9d8a-3a07f7245679}</Project>
       <Name>DAL</Name>
@@ -772,10 +776,6 @@
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{4ba58447-45f4-43a1-b66a-4cee0cb88697}</Project>
       <Name>DomainModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
-      <Project>{75d60b1e-50f2-4fdb-a54f-9dd030488849}</Project>
-      <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
