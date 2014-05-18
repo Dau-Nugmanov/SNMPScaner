@@ -1,0 +1,204 @@
+[33mcommit 0b558c5338951488700c3ec70119a14bf0278f01[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sun May 18 18:29:01 2014 +0400
+
+    Непонятный докоммит
+
+[33mcommit daa65ddc5e150ff35ecef43c7ccf73b007f6b22b[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sun May 18 17:57:56 2014 +0400
+
+    Рефакторинг
+    
+    Перенес интерфейсы и модели в Models
+
+[33mcommit eda4bead8bd960a6d41f6734067f53f0f1251ef4[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sun May 18 16:38:26 2014 +0400
+
+    Добавил автомаппер
+
+[33mcommit 234555cb3bbb39bcf8493b4a3cebf0dc54e53ebb[m
+Merge: 241609e 6aef0ba
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sat May 17 07:55:50 2014 -0700
+
+    Merge pull request #5 from alborozd/master
+    
+    Оповещение на страницу + аварийные устройства
+
+[33mcommit 6aef0ba402c17699dcb35fd53d1c8a18aa2816a2[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Sat May 17 18:40:58 2014 +0400
+
+    Оповещение на страницу + аварийные устройства
+
+[33mcommit 241609eccb012ea1fee15faa4d68fd1d4229368d[m
+Merge: 9e17dc8 354b767
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sun May 11 09:40:01 2014 -0700
+
+    Merge pull request #4 from alborozd/master
+    
+    Контроллеры и хелперы
+
+[33mcommit 354b76702af55469448aaea651f24fc66d1ee917[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Fri May 9 11:18:23 2014 +0400
+
+    Добавление и редактирование оповещений
+
+[33mcommit 9ea4305970c7914dd712c5c7f68b87861ec3f860[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 22:42:50 2014 +0400
+
+    Все остальное
+
+[33mcommit baf7ee1574295a77da07c2a23e959a1c8460523e[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 20:43:37 2014 +0400
+
+    добавил стили
+
+[33mcommit 5b1522370dce2f852a01af644511313d6b643a6b[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 20:35:22 2014 +0400
+
+    Добавил контроллеры и хелперы
+
+[33mcommit 9e17dc89476f015fe21a72c537f13a819dd5a013[m
+Merge: 319b495 f5e0f68
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu May 8 09:30:34 2014 -0700
+
+    Merge pull request #3 from alborozd/master
+    
+    dal + пустой UI
+
+[33mcommit 9c2e0d56c63c2083dad4a43733530f43ca44ea49[m
+Merge: f5e0f68 319b495
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 20:22:03 2014 +0400
+
+    Merge remote-tracking branch 'upstream/master'
+
+[33mcommit f5e0f68064430d877333f78a9bba712f112ed9e3[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 20:17:23 2014 +0400
+
+    Добавил интерфейсы в dal
+
+[33mcommit 11483d7eb1396e9f6a4a2289af69ced2617b02a9[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Thu May 8 19:33:59 2014 +0400
+
+    добавил DAL + добавил пустой UI
+
+[33mcommit fe19ba05765f410d8d05770d44df968508bae171[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu May 8 14:01:53 2014 +0400
+
+    Добавил уведомления
+    
+    Удалил часть лишних сущностей
+
+[33mcommit 2a76af0b83effc47422b87a2ed3ff7b6ecd1757b[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu May 8 11:46:47 2014 +0400
+
+    Добавил Модель и связанные с ней сущности
+
+[33mcommit 319b4958977e9dfea458ed39e1e40c58a7851bd0[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu May 8 14:01:53 2014 +0400
+
+    Добавил уведомления
+    
+    Удалил часть лишних сущностей
+
+[33mcommit f16f2718dd56faa00e97568d06726dc33974c1f8[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu May 8 11:46:47 2014 +0400
+
+    Добавил Модель и связанные с ней сущности
+
+[33mcommit b249952d8f752ee52f23cde5271f4936a7ee667f[m
+Merge: 124abba df910fb
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Tue May 6 11:06:21 2014 -0700
+
+    Merge pull request #2 from alborozd/master
+    
+    Test
+
+[33mcommit df910fbe62ceef2607cbbffc120d1fd82fec2efe[m
+Author: Alexander Borozdyuhin <alborozd@gmail.com>
+Date:   Tue May 6 22:01:47 2014 +0400
+
+    Test
+
+[33mcommit 124abba0d7c6973a6e56f692ea1211f94f91cd6c[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Mon May 5 09:49:14 2014 +0400
+
+    Добавил подписки для уведомлений
+
+[33mcommit 1c7d7375f21e576823f9491121dc465b0577f0d5[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Fri May 2 01:02:09 2014 +0400
+
+    Добавил проверку на значение + помечаю "проблемные OID"
+
+[33mcommit dd9a0eedb6645d5d6ef99529988f3e30acd5c25d[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Wed Apr 30 00:23:51 2014 +0400
+
+    Добавил репо для исторических значений
+
+[33mcommit 5e92faf008eeab39461450ea27bd2382857d4fe6[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Tue Apr 29 09:52:33 2014 +0400
+
+    Добавил метод проверки изменения значения в зависимости от типа
+
+[33mcommit 3508ae507fbe68033f95cc90a507fa025ff63c13[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Sun Apr 27 23:22:10 2014 +0400
+
+    Добавил заготовки для Кэша + тест на его работу
+
+[33mcommit f9a86f9626da1529ea6029fb663bdc04fed06758[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Fri Apr 25 00:31:51 2014 +0400
+
+    Добавил тест на асинхронный запрос
+
+[33mcommit d1363acd1b76d3460b69abd37df81bd1fa563ca2[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Fri Apr 25 00:13:30 2014 +0400
+
+    Первая рабочая версия
+    
+    Типа рабочая. Добавил тест с симулятором SNMP
+
+[33mcommit 0da2821ae08fc0b8358d670b564242daf4eb5a94[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu Apr 24 23:28:40 2014 +0400
+
+    Добавил полезные зависимости
+
+[33mcommit eba97195bb3b8457ef4c72fd0c5d49089f08510e[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu Apr 24 18:22:43 2014 +0400
+
+    Добавил поддержку sharpsnmplib
+    
+    SNMP binaries and documentation are available at
+    http://sharpsnmplib.codeplex.com
+    SNMP source code is available at http://github.com/lextm/sharpsnmplib
+
+[33mcommit d066e04d3a64d1034cf58e195411034bd714147b[m
+Author: Dau-Nugmanov <Dau-Nugmanov@mail.ru>
+Date:   Thu Apr 24 18:02:32 2014 +0400
+
+    Заготовка для сканера
