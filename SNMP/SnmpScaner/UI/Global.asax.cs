@@ -32,20 +32,7 @@ namespace UI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            ObjectFactory.Initialize(x =>
-            {
-                x.For<ICustomersRepo>().Use<CustomersRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IDevicesRepo>().Use<DevicesRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IDeviceItemsRepo>().Use<DeviceItemsRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IDeviceModelsRepo>().Use<DeviceModelsRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IDevicesItemsRepo>().Use<DevicesItemsRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IDeviceTypesRepo>().Use<DeviceTypesRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IEmailNotificationsRepo>().Use<EmailNotificationsRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IMakersRepository>().Use<MakersRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IPhoneNotificationsRepo>().Use<PhoneNotificationsRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IPhoneNumbersRepo>().Use<PhoneNumbersRepository>().Ctor<SnmpDbContext>("context");
-                x.For<IUsersRepo>().Use<UsersRepository>().Ctor<SnmpDbContext>("context");
-            });
+			DalInit.Init();
             ///////
 
             WarningsStorage.AddWarning(new WarningModel

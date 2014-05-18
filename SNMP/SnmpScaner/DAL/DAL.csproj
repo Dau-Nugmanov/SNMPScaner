@@ -32,11 +32,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime.Debug">
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime.JavaExtensions">
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.JavaExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr4.StringTemplate.Visualizer">
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr4.StringTemplate.Visualizer.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSnmpLib, Version=7.6.10407.14, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSnmpLib.Engine">
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSnmpLib.Mib">
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.Mib.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -58,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="ConfigRepo.cs" />
     <Compile Include="CustomersRepository.cs" />
     <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="DeviceItemsRepository.cs" />
@@ -96,6 +131,7 @@
     <Compile Include="Interfaces\IPhoneNumbersRepo.cs" />
     <Compile Include="Interfaces\IUsersRepo.cs" />
     <Compile Include="MakersRepository.cs" />
+    <Compile Include="DalInit.cs" />
     <Compile Include="NotificationsRepository.cs" />
     <Compile Include="PhoneNotificationsRepository.cs" />
     <Compile Include="PhoneNumbersRepository.cs" />
@@ -107,9 +143,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
+      <Project>{4ba58447-45f4-43a1-b66a-4cee0cb88697}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
