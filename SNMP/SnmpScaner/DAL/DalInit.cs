@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DAL.EfModels;
 using DAL.Interfaces;
+using DAL.Repos;
 using DomainModel;
 using DomainModel.Interfaces;
+using Lextm.SharpSnmpLib;
 using StructureMap;
 
 namespace DAL
@@ -38,6 +39,7 @@ namespace DAL
 				x.For<IPhoneNumbersRepo>().Use<PhoneNumbersRepository>().Ctor<SnmpDbContext>("context");
 				x.For<IUsersRepo>().Use<UsersRepository>().Ctor<SnmpDbContext>("context");
 				x.For<IConfigRepo>().Use<ConfigRepo>();
+				x.For<IHistoryRepo>().Use<HistoryRepo>();
 			});
 		}
 
@@ -45,8 +47,8 @@ namespace DAL
 		{
 			Mapper.CreateMap<DevicesItems, DeviceItem>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDeviceItemEntity))
-				.ForMember(dest => dest.Oid, opt => opt.MapFrom(src => new Oid(src.DeviceItemEntity.Oid)))
-				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => src.DeltaT));
+				.ForMember(dest => dest.Oid, opt => opt.MapFrom(src => new ObjectIdentifier(src.DeviceItemEntity.Oid)))
+				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => Convert.ToInt64(src.DeltaT)));
 
 			Mapper.CreateMap<DeviceEntity, Device>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDeviceEntity))

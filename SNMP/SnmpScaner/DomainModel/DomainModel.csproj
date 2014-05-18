@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
-    <Compile Include="DaInterfaces\IBaseRepository.cs" />
+    <Compile Include="DalInterfaces\IBaseRepository.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceItem.cs" />
     <Compile Include="EfModels\Customer.cs" />
@@ -96,19 +96,19 @@
     <Compile Include="EfModels\PhoneNotification.cs" />
     <Compile Include="EfModels\PhoneNumber.cs" />
     <Compile Include="EfModels\User.cs" />
-    <Compile Include="DaInterfaces\ICustomersRepo.cs" />
-    <Compile Include="DaInterfaces\IDeviceItemsRepo.cs" />
-    <Compile Include="DaInterfaces\IDeviceModelsRepo.cs" />
-    <Compile Include="DaInterfaces\IDevicesItemsRepo.cs" />
-    <Compile Include="DaInterfaces\IDevicesRepo.cs" />
-    <Compile Include="DaInterfaces\IDeviceTypesRepo.cs" />
-    <Compile Include="DaInterfaces\IEmailNotificationsRepo.cs" />
-    <Compile Include="DaInterfaces\IEmailsRepo.cs" />
-    <Compile Include="DaInterfaces\IMakersRepository.cs" />
-    <Compile Include="DaInterfaces\INotificationsRepo.cs" />
-    <Compile Include="DaInterfaces\IPhoneNotificationsRepo.cs" />
-    <Compile Include="DaInterfaces\IPhoneNumbersRepo.cs" />
-    <Compile Include="DaInterfaces\IUsersRepo.cs" />
+    <Compile Include="DalInterfaces\ICustomersRepo.cs" />
+    <Compile Include="DalInterfaces\IDeviceItemsRepo.cs" />
+    <Compile Include="DalInterfaces\IDeviceModelsRepo.cs" />
+    <Compile Include="DalInterfaces\IDevicesItemsRepo.cs" />
+    <Compile Include="DalInterfaces\IDevicesRepo.cs" />
+    <Compile Include="DalInterfaces\IDeviceTypesRepo.cs" />
+    <Compile Include="DalInterfaces\IEmailNotificationsRepo.cs" />
+    <Compile Include="DalInterfaces\IEmailsRepo.cs" />
+    <Compile Include="DalInterfaces\IMakersRepository.cs" />
+    <Compile Include="DalInterfaces\INotificationsRepo.cs" />
+    <Compile Include="DalInterfaces\IPhoneNotificationsRepo.cs" />
+    <Compile Include="DalInterfaces\IPhoneNumbersRepo.cs" />
+    <Compile Include="DalInterfaces\IUsersRepo.cs" />
     <Compile Include="Interfaces\IConfigRepo.cs" />
     <Compile Include="Interfaces\IHistoryRepo.cs" />
     <Compile Include="Interfaces\INotificationExecutor.cs" />

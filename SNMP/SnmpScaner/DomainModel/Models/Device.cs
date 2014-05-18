@@ -17,7 +17,13 @@ namespace DomainModel
 		public IPAddress Ip { get; set; }
 		public VersionCode VersionCode { get; set; }
 		public int Port { get; set; }
-		public int Timeout { get; set; }
+		
+		private int _timeout = 6000;
+		public int Timeout
+		{
+			get { return _timeout; }
+			set { _timeout = value; }
+		}
 
 		private List<DeviceItem> _items = new List<DeviceItem>();
 		public List<DeviceItem> Items
