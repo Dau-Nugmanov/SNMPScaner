@@ -61,8 +61,6 @@ namespace DAL
             {
                 if (!newItems.Select(t => t.IdDeviceItemEntity).Contains(oldItem.IdDeviceItemEntity))
                 {
-                    //emailNotisRepo.RemoveItemNotifications(oldItem.IdDeviceItemEntity);
-                    //phoneNotisRepo.RemoveByItemId(oldItem.IdDeviceItemEntity);
                     itemsRepo.RemoveById(oldItem.IdDeviceItemEntity);
                 }
             }

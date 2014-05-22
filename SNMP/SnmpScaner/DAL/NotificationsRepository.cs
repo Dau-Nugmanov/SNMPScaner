@@ -19,7 +19,7 @@ namespace DAL
 
         public Notification GetByDeviceIdAndItemId(int idDevice, int idItem)
         {
-            return dbSet.FirstOrDefault(t => t.IdDeviceEntity == idDevice && t.IdDeviceItemEntity == idItem);
+            return dbSet.FirstOrDefault(t => t.DevicesItems.IdDeviceEntity == idDevice && t.DevicesItems.IdDeviceItemEntity == idItem);
         }
 
         public void Edit(Notification notification)

@@ -26,7 +26,7 @@ namespace UI.Controllers
             return View(devParamsRepo.GetByDeviceId(idDevice));
         }
 
-        public ActionResult Notification(int idDevice, int idItem)
+        public ActionResult Notification(int idDevice, int idItem, int idDevicesItems)
         {
             var notifRepo = new NotificationsRepository(new SnmpDbContext());
             var notif = notifRepo.GetByDeviceIdAndItemId(idDevice, idItem);
@@ -34,6 +34,7 @@ namespace UI.Controllers
             {
                 TempData["IdDevice"] = idDevice;
                 TempData["IdItem"] = idItem;
+                TempData["IdDevicesItems"] = idDevicesItems;
                 return RedirectToAction("Add");
             }
             return RedirectToAction("Edit", new { id = notif.IdNotification });
@@ -104,7 +105,7 @@ namespace UI.Controllers
             var notifRepo = new NotificationsRepository(new SnmpDbContext());
             notifRepo.RemoveById(id);
             notifRepo.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Settings");
         }
     }
 }

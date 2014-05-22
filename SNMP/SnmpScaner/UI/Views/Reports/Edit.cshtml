@@ -1,0 +1,226 @@
+﻿@model UI.Models.ReportModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
+<link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/Scripts/jquery.simplemodal.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#btnAddParam').click(function () {
+                $('#basic-modal-content').modal({
+                    autoResize: true
+                });
+            })
+
+
+            var itemCnt = 0;
+            $('#btnParameterAdd').click(function () {
+                var paramName = $('#Name').val();
+                var promptsName = $('#PromptName').val();
+                var dataType = $('#DataType').val();
+
+                var dataTypeText = $('#DataType :selected').text();
+                var paramSelector = $('.device-parameters');
+
+                if (!paramName || !prompt || !dataType) {
+                    alert('Заполнены не все поля');
+                    return;
+                }
+                var cnt = $('div#param:last-child').attr("idCnt");
+                if (cnt != null && cnt != 'undefined') {
+                    itemCnt = cnt;
+                    itemCnt++;
+                }
+                
+                var notifEmailCnt = 0;
+                var notifNumberCnt = 0;
+                var html = '<div class="well" id="param" idCnt=' + itemCnt + '>'
+                           + '<p class="btn btn-link" onclick="removeParam(event);" idCnt=' + itemCnt + '>Удалить</p>'
+                        + '<div id="name"><b>Имя параметра: </b>'
+                            + '<input type="text" name="Parameters[' + itemCnt + '].Name" value="' + paramName + '" />'
+                        + '</div>'
+                        + '<div id="promptName"><b>Отображаемое имя: </b> '
+                            + '<input type="text" name="Parameters[' + itemCnt + '].PromptName" value="' + promptsName + '" />'
+                        + '</div>'
+                        + '<div id="dataType"><b>Тип данных</b> ' + dataTypeText
+                            + '<input type="hidden" name="Parameters[' + itemCnt + '].IdReportParameterDataType" value="' + dataType + '" />'
+                        + '</div>'
+                        + '<div id="report">'
+                            + '<input type="hidden" name="Parameters[' + itemCnt + '].IdReport" value="@Model.IdReport" />'
+                        + '</div>'
+                    + '</div>';
+                //alert(html);
+                paramSelector.append(html);
+                itemCnt++;
+                $('#basic-modal-content').modal('close');
+            })
+
+        })
+
+        function removeParam(e) {
+            var cntParam = $(e.currentTarget).attr('idCnt');
+            $("#param[idCnt='" + cntParam + "']").remove();
+            updateParamIndexes();
+        }
+
+        function updateParamIndexes() {
+            var index = 0;
+            var regexPattern = /\[[0-9]{1,}\]/gi;
+
+            $('.device-parameters #param').each(function () {
+                //var selectorParamValues = $(this)
+                //    .children('div#paramValues');
+
+                $(this).attr('idCnt', index);
+
+                var selectorName = $(this)
+                    .children('div#name')
+                    .children('input[type="text"]');
+                var replacedName = $(selectorName).attr('name').replace(regexPattern, '[' + index + ']');
+                $(selectorName).attr('name', replacedName);
+
+                var selectorPromptName = $(this)
+                    .children('div#promptName')
+                    .children('input[type="text"]');
+                var replacedPromptName = $(selectorPromptName).attr('name').replace(regexPattern, '[' + index + ']');
+                $(selectorPromptName).attr('name', replacedPromptName);
+
+                var selectorDataType = $(this)
+                    .children('div#dataType')
+                    .children('input[type="hidden"]');
+                var replacedDataType = $(selectorDataType).attr('name').replace(regexPattern, '[' + index + ']');
+                $(selectorDataType).attr('name', replacedDataType);
+
+                var selectorReport = $(this)
+                    .children('div#report')
+                    .children('input[type="hidden"]');
+                var replacedReport = $(selectorReport).attr('name').replace(regexPattern, '[' + index + ']');
+                $(selectorReport).attr('name', replacedReport);
+
+                index++;
+            })
+        }
+    </script>
+}
+
+<h2>Редактирование отчета</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend></legend>
+        @if (ViewData["message_error"] != null)
+        {
+            <div class="alert alert-error field-validation-error">
+                <p>@ViewData["message_error"]</p>
+            </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-success">
+                <p>@ViewData["message"]</p>
+            </div>
+
+        }
+        <div class="well device-well">
+            <div class="editor-label">
+                <div class="editor-label">
+                    @Html.HiddenFor(model => model.IdReport)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ReportName)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ReportName)
+                    @Html.ValidationMessageFor(model => model.ReportName)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ReportPath)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ReportPath)
+                    @Html.ValidationMessageFor(model => model.ReportPath)
+                </div>
+
+                <p style="margin-top: 10px">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </p>
+            </div>
+        </div>
+        <div class="well device-parameters">
+            <input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр" />
+            @if (Model.Parameters != null)
+            {
+                int index = 0;
+                foreach (var item in Model.Parameters)
+                {
+                <div class="well" id="param" idCnt="@index">
+                    <p class="btn btn-link" onclick="removeParam(event);" idCnt="@index">Удалить</p>
+                    <div id="name">
+                        <b>Имя параметра: </b>
+                        <input type="text" name="Parameters[@index].Name" value="@item.Name" />
+                    </div>
+                    <div id="promptName">
+                        <b>Отображаемое имя: </b>
+                        <input type="text" name="Parameters[@index].PromptName" value="@item.PromptName" />
+                    </div>
+                    <div id="dataType">
+                        <b>Тип данных</b> @item.ReportParameterDataTypeName
+                        <input type="hidden" name="Parameters[@index].IdReportParameterDataType" value="@item.IdReportParameterDataType"/>
+                    </div>
+                    <div id="report">
+                        <input type="hidden" name="Parameters[@index].IdReport" value="@item.IdReport" />
+                    </div>
+                </div>   
+                    index++;
+                }
+            }
+        </div>
+        <div id="basic-modal-content">
+            <h3>Добавление параметра</h3>
+            <hr />
+            <div>
+                <div style="float: left; width: 30%; border-color: green; height: 140px;">
+                    <div class="editor-label">
+                        Имя параметра
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("Name")
+                    </div>
+
+                    <div class="editor-label">
+                        Отображаемое имя
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("PromptName")
+                    </div>
+                    <div class="editor-label">
+                        Тип данных
+                    </div>
+                    <div>
+                        @Html.DropDownList("DataType", (ViewData["dataTypes"] as SelectList))
+                    </div>
+                </div>
+                <div class="notif-wrap">
+                </div>
+                <div class="notif-wrap">
+                </div>
+                <p>
+                    <input style="margin-top: 50px;" type="button" value="Добавить" class="btn btn-primary" id="btnParameterAdd" />
+                </p>
+            </div>
+
+            <div style="margin-top: 10px;">
+            </div>
+        </div>
+    </fieldset>
+}

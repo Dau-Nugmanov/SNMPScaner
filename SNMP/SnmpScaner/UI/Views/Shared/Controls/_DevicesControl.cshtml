@@ -1,0 +1,61 @@
+﻿@model UI.Models.ReportParameterModel
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#modalDevices').dialog({
+            autoOpen: false,
+            height: 345,
+            width: 330,
+            show: { effect: "toggle", duration: 800 },
+            buttons: {
+                "Применить": function () {
+                    $('#devicesChoose').html('');
+                    $('#devicesChoose').removeClass("alert-info").addClass("alert-success");
+                    $("input#customerChk:checked").each(function () {
+                        var id = $(this).attr('idNot');
+                        var name = $(this).attr('nameNot');
+                        var descr = $(this).attr('descr');
+                        $('#devicesChoose').append('<input type="hidden" name="@Model.Name" value="' + id + '" />');
+
+                        $('#devicesChoose').append('<div>Выбрано устройство: ' + name + '</div>');
+
+                    });
+                    //$(this).dialog('close');
+                }
+            },
+            zIndex: 100000
+        });
+    })
+
+    function chooseDevice(e) {
+        $('#modalDevices').html('');
+        $.ajax({
+            url: "/Devices/GetAllCheck",
+            type: "GET",
+            success: function (data) {
+                $('#modalDevices').html(data);
+            }
+        })
+        $('#modalDevices').dialog('open');
+    }
+
+</script>
+
+
+
+<div class="well">
+    <div>
+        @Model.PromptName
+    </div>
+    <div id="devicesChoose" class="alert alert-info">
+        ничего не выбрано
+    </div>
+    <input type="button" class="btn btn-primary btn-small" onclick="chooseDevice(event);" value="Выбрать устройство" id="btnDeviceChoose" />
+</div>
+
+<div id="modalDevices" title="Выбор устройства">
+
+</div>

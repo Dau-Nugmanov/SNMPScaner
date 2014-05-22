@@ -1,0 +1,59 @@
+﻿@model UI.Models.ReportParameterModel
+
+<script>
+
+    $(document).ready(function () {
+        $('#modalParameters').dialog({
+            autoOpen: false,
+            height: 345,
+            width: 330,
+            show: { effect: "toggle", duration: 800 },
+            buttons: {
+                "Применить": function () {
+                    $('#parameterChoose').html('');
+                    $('#parameterChoose').removeClass("alert-info").addClass("alert-success");
+                    $("input#parameterChk:checked").each(function () {
+                        var id = $(this).attr('idNot');
+                        var name = $(this).attr('nameNot');
+                        var descr = $(this).attr('descr');
+                        $('#parameterChoose').append('<input type="hidden" name="@Model.Name" value="' + id + '" />');
+
+                        $('#parameterChoose').append('<div>Выбран параметр: ' + name + '</div>');
+
+                    });
+                    //$(this).dialog('close');
+                }
+            },
+            zIndex: 100000
+        });
+    })
+
+    function chooseParameter(e) {
+        $('#modalParameters').html('');
+        $.ajax({
+            url: "/Devices/GetAllCheckParameters",
+            type: "GET",
+            success: function (data) {
+                $('#modalParameters').html(data);
+            }
+        })
+        $('#modalParameters').dialog('open');
+    }
+
+</script>
+
+
+
+<div class="well">
+    <div>
+        @Model.PromptName
+    </div>
+    <div id="parameterChoose" class="alert alert-info">
+        ничего не выбрано
+    </div>
+    <input type="button" class="btn btn-primary btn-small" onclick="chooseParameter(event);" value="Выбрать параметр" id="btnParameterChoose" />
+</div>
+
+<div id="modalParameters" title="Выбор параметра">
+
+</div>

@@ -13,15 +13,13 @@ namespace DAL.EfModels
         [Key]
         public long IdNotification { get; set; }
 
-        public long IdDeviceEntity { get; set; }
-
-        public long IdDeviceItemEntity { get; set; }
-
         public long TimeDelta { get; set; }
 
         public long ValueDelta { get; set; }
 
-        [ForeignKey("IdDeviceEntity,IdDeviceItemEntity")]
+        public long IdDevicesItems { get; set; }
+
+        [ForeignKey("IdDevicesItems")]
         public DevicesItems DevicesItems { get; set; }
 
         public virtual ICollection<EmailNotification> EmailNotifications { get; set; }

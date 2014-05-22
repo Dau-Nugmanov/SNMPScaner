@@ -108,11 +108,71 @@ namespace UI
                 {
                     DeviceTypeName = "Router"
                 };
+            
                 context.Users.Add(pamella);
                 context.SaveChanges();
                 context.DeviceTypes.Add(deviceType);
                 context.DeviceTypes.Add(deviceType1);
                 context.DeviceTypes.Add(deviceType2);
+                context.SaveChanges();
+
+                //datatypes
+                context.ReportParametersDataTypes.Add
+                  (
+                      new ReportParameterDataType
+                      {
+                          DataTypeName = "Числовой"
+                      }
+                  );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Строковый"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Параметр устройства"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Устройство"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Дата"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Заказчик"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Производитель оборудования"
+                        }
+                    );
+                context.ReportParametersDataTypes.Add
+                    (
+                        new ReportParameterDataType
+                        {
+                            DataTypeName = "Модель устройства"
+                        }
+                    );
                 context.SaveChanges();
             }
         }

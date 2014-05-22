@@ -1,0 +1,16 @@
+﻿@model UI.Models.ReportParameterModel
+
+<script src="~/Scripts/Bootstrap/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/Bootstrap/bootstrap-datepicker-locales/bootstrap-local-ru.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+     
+        $('.datepicker').datepicker({ language: "ru-RU" });
+
+    })
+</script>
+<div class="well">
+    @Model.PromptName : <input type="text" name="@Model.Name" class="datepicker"/>
+</div>

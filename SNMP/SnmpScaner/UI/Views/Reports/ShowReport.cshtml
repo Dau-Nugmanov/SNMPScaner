@@ -1,0 +1,56 @@
+﻿@model UI.Models.ReportModel
+
+@{
+    ViewBag.Title = "ShowReport";
+}
+
+<h2>@Model.ReportName</h2>
+
+@using (Html.BeginForm("ShowReport", "Reports", FormMethod.Post))
+{
+    @Html.HiddenFor(t => t.IdReport)
+    @Html.HiddenFor(t => t.ReportName)
+    @Html.HiddenFor(t => t.ReportPath)
+
+    if (Model.Parameters != null)
+    {
+    
+        foreach (var item in Model.Parameters)
+        {
+            int idDataType = item.IdReportParameterDataType;
+            switch (idDataType)
+            {
+                case (int)DAL.Enums.ReportParametersDataTypes.Customer:
+                    Html.RenderPartial("~/Views/Shared/Controls/_CustomersControl.cshtml", item);
+                    break;
+                case (int)DAL.Enums.ReportParametersDataTypes.Date:
+                    Html.RenderPartial("~/Views/Shared/Controls/_DateControl.cshtml", item);
+                    break;
+                case (int)DAL.Enums.ReportParametersDataTypes.Device:
+                    Html.RenderPartial("~/Views/Shared/Controls/_DevicesControl.cshtml", item);
+                    break;
+                case (int)DAL.Enums.ReportParametersDataTypes.DeviceModel:
+                    Html.RenderPartial("~/Views/Shared/Controls/_DeviceModelsControl.cshtml", item);
+                    break;    
+                case (int)DAL.Enums.ReportParametersDataTypes.Maker:
+                    Html.RenderPartial("~/Views/Shared/Controls/_MakersControl.cshtml", item);
+                    break;    
+                case (int)DAL.Enums.ReportParametersDataTypes.Numeric:
+                    Html.RenderPartial("~/Views/Shared/Controls/_NumericControl.cshtml", item);
+                    break;    
+                case (int)DAL.Enums.ReportParametersDataTypes.Parameter:
+                    Html.RenderPartial("~/Views/Shared/Controls/_ParametersControl.cshtml", item);
+                    break;    
+                case (int)DAL.Enums.ReportParametersDataTypes.String:
+                    Html.RenderPartial("~/Views/Shared/Controls/_SymbolsControl.cshtml", item);
+                    break;   
+                default: 
+                    @: <p class="alert alert-error">Неизвестный тип контрола</p>
+                    break;
+            }    
+        }  
+    }
+    <div>
+        <input type="submit" value="Сформировать" class="btn btn-primary" />
+    </div>
+}
