@@ -34,7 +34,7 @@
             </td>
             <td>
                 @Html.ActionLink("Редактировать", "Edit", new { id=item.IdDeviceModel }) |
-                @Html.ActionLink("Удалить", "Remove", new { id=item.IdDeviceModel })
+                @Html.ActionLink("Удалить", "Remove", new { id = item.IdDeviceModel }, new { onclick = "return confirm('При удалении модели будут удалены все параметры и все устройства данной модели');" })
             </td>
         </tr>
     }

@@ -18,6 +18,70 @@ namespace DAL
             _context = context;
         }
 
+        public override void RemoveById(object id)
+        {
+            RemoveDevicesByModel((int)id);
+            RemoveItemsByModel((int)id);
+            var entity = dbSet.Find(id);
+            if (entity == null)
+                throw new InvalidOperationException("Не найдена сущность с id " + id);
+            dbSet.Remove(entity);
+        }
+
+        private void RemoveDevicesItems(long idDevice)
+        {
+            var devItemsRepo = new DevicesItemsRepository(_context);
+            devItemsRepo
+                .GetAll()
+                .Where(t => t.IdDeviceEntity == idDevice)
+                .ToList()
+                .ForEach(t =>
+                {
+                    RemoveItemHistory(t.IdDevicesItems);
+                    devItemsRepo.RemoveById(t.IdDevicesItems);
+                });
+        }
+
+        private void RemoveItemHistory(long idDevicesItems)
+        {
+            var itemsHistory = new DeviceItemsHistoryRepository(_context);
+            itemsHistory
+                .GetAll()
+                .Where(t => t.IdDevicesItems == idDevicesItems)
+                .ToList()
+                .ForEach(t =>
+                {
+                    itemsHistory.RemoveById(t.IdItemHistory);
+                });
+        }
+
+        private void RemoveItemsByModel(int idModel)
+        {
+            var itemsRepo = new DeviceItemsRepository(_context);
+            itemsRepo
+                .GetAll()
+                .Where(t => t.IdModel == idModel)
+                .ToList()
+                .ForEach(t =>
+                {
+                    itemsRepo.RemoveById(t.IdDeviceItemEntity);
+                });
+        }
+
+        private void RemoveDevicesByModel(int idModel)
+        {
+            var devRepo = new DevicesRepository(_context);
+            devRepo
+                .GetAll()
+                .Where(t => t.IdModel == idModel)
+                .ToList()
+                .ForEach(t =>
+                {
+                    RemoveDevicesItems(t.IdDeviceEntity);
+                    devRepo.RemoveById(t.IdDeviceEntity);
+                });
+        }
+
         public void Edit(DeviceModel entity)
         {
             if (entity == null)
