@@ -18,7 +18,7 @@
             <b>OID: </b> @item.DeviceItemEntity.Oid
         </div>
         <div>
-            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevice = item.IdDeviceEntity, idItem = item.IdDeviceItemEntity }, new { @class = "btn btn-link" })
+            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevicesItems = item.IdDeviceEntity }, new { @class = "btn btn-link" })
         </div>
     </div>
 }

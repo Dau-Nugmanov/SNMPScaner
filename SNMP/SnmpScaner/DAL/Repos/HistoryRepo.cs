@@ -9,18 +9,14 @@ namespace DAL.Repos
 	{
 		public void Save(long id, ISnmpData value, DateTime timestamp)
 		{
-			//var context = new SnmpDbContext();
-			//var repo = new DevicesItemsRepository(context);
-			//var deviceItem = repo.GetById(id);
-
-			//var historyItem =  context.ParametersHistory.Add(new DeviceItemHistory
-			//{
-			//	IdDeviceEntity = deviceItem.IdDeviceEntity,
-			//	IdDeviceItemEntity = deviceItem.IdDeviceItemEntity,
-			//	Timestamp = timestamp,
-			//	Value = value.ToString()
-			//});
-			//context.SaveChanges();
+			var context = new SnmpDbContext();
+			var historyItem = context.ParametersHistory.Add(new DeviceItemHistory
+			{
+				IdDevicesItems = id,
+				Timestamp = timestamp,
+				Value = value.ToString()
+			});
+			context.SaveChanges();
 		}
 	}
 }

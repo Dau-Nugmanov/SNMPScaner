@@ -55,6 +55,12 @@ namespace DAL
 				.ForMember(dest => dest.Ip, opt => opt.MapFrom(src => IPAddress.Parse(src.Ip)))
 				.ForMember(dest => dest.Port, opt => opt.MapFrom(src => src.Port))
 				.ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.DevicesItems));
+
+			Mapper.CreateMap<EfModels.Notification, SubscriptionItem>()
+				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdNotification))
+				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => src.TimeDelta))
+				.ForMember(dest => dest.ValueDelta, opt => opt.MapFrom(src => src.ValueDelta));
+
 		}
 	}
 }

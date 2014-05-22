@@ -19,12 +19,14 @@ namespace DAL.EfModels
 
         public DateTime Timestamp { get; set; }
 
-        public long IdDeviceEntity { get; set; }
+		//public long IdDeviceEntity { get; set; }
 
-        public long IdDeviceItemEntity { get; set; }
-        //public int IdDevicesItems { get; set; }
+		//public long IdDeviceItemEntity { get; set; }
 
-        [ForeignKey("IdDeviceEntity,IdDeviceItemEntity")]
+		public long IdDevicesItems { get; set; }
+
+        //[ForeignKey("IdDeviceEntity,IdDeviceItemEntity")]
+		[ForeignKey("IdDevicesItems")]
         public DevicesItems DevicesItems { get; set; }
 
 

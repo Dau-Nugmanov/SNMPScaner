@@ -10,11 +10,13 @@ namespace DAL.EfModels
 {
     public class DevicesItems
     {
-        //[Key, Column(Order = 0)]
+		[Key]
+	    public long IdDevicesItems { get; set; }
+	    //[Key, Column(Order = 0)]
         //public int IdDevicesItems { get; set; }
-        [Key, Column(Order = 1)]
+        //[Key, Column(Order = 1)]
         public long IdDeviceEntity { get; set; }
-        [Key, Column(Order = 2)]
+        //[Key, Column(Order = 2)]
         public long IdDeviceItemEntity { get; set; }
 
         public int DeltaT { get; set; }

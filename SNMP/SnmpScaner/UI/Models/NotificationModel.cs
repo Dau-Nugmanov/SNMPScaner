@@ -10,8 +10,7 @@ namespace UI.Models
     public class NotificationModel : IModelEntity<Notification>
     {
         public long IdNotification { get; set; }
-        public long IdDevice { get; set; }
-        public long IdItem { get; set; }
+		public long IdDevicesItems { get; set; }
         
         [Range(1, int.MaxValue, ErrorMessage="Только целое число")]
         [Required(ErrorMessage="*")]
@@ -49,8 +48,7 @@ namespace UI.Models
             return new Notification
             {
                 EmailNotifications = emails,
-                IdDeviceEntity = IdDevice,
-                IdDeviceItemEntity = IdItem,
+				IdDevicesItems = IdDevicesItems,
                 IdNotification = IdNotification,
                 PhoneNotifications = phones,
                 TimeDelta = DeltaTime,
@@ -81,8 +79,7 @@ namespace UI.Models
                 DeltaTime = entity.TimeDelta,
                 DeltaValue = entity.ValueDelta,
                 EmailNotifications = emails.ToArray(),
-                IdDevice = entity.IdDeviceEntity,
-                IdItem = entity.IdDeviceItemEntity,
+				IdDevicesItems = entity.IdDevicesItems,
                 IdNotification = entity.IdNotification,
                 PhoneNotifications = phones.ToArray()
             };

@@ -82,13 +82,9 @@
         }
         <div class="well">
             <div class="editor-label">
-                @Html.Hidden("IdDevice", TempData["IdDevice"])
+                @Html.Hidden("IdDevicesItems", TempData["IdDevicesItems"])
             </div>
-
-            <div class="editor-label">
-                @Html.Hidden("IdItem", TempData["IdItem"])
-            </div>
-
+            
             <div class="editor-label">
                 @Html.LabelFor(model => model.DeltaTime)
             </div>

@@ -17,9 +17,9 @@ namespace DAL
             _context = context;
         }
 
-        public Notification GetByDeviceIdAndItemId(int idDevice, int idItem)
+		public Notification GetByDeviceIdAndItemId(long idDevicesItems)
         {
-            return dbSet.FirstOrDefault(t => t.IdDeviceEntity == idDevice && t.IdDeviceItemEntity == idItem);
+			return dbSet.FirstOrDefault(t => t.IdDevicesItems == idDevicesItems);
         }
 
         public void Edit(Notification notification)
@@ -125,5 +125,5 @@ namespace DAL
                 });
             
         }
-    }
+	}
 }

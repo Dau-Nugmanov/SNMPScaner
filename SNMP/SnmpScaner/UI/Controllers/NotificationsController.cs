@@ -26,14 +26,13 @@ namespace UI.Controllers
             return View(devParamsRepo.GetByDeviceId(idDevice));
         }
 
-        public ActionResult Notification(int idDevice, int idItem)
+		public ActionResult Notification(long idDevicesItems)
         {
             var notifRepo = new NotificationsRepository(new SnmpDbContext());
-            var notif = notifRepo.GetByDeviceIdAndItemId(idDevice, idItem);
+			var notif = notifRepo.GetByDeviceIdAndItemId(idDevicesItems);
             if (notif == null)
             {
-                TempData["IdDevice"] = idDevice;
-                TempData["IdItem"] = idItem;
+				TempData["IdDevicesItems"] = idDevicesItems;
                 return RedirectToAction("Add");
             }
             return RedirectToAction("Edit", new { id = notif.IdNotification });

@@ -9,8 +9,7 @@ namespace DAL.Interfaces
 {
     public interface INotificationsRepo
     {
-		Notification GetByDeviceIdAndItemId(long idDevicesItems);
+        Notification GetByDeviceIdAndItemId(int idDevice, int idItem);
         void Edit(Notification notification);
-	    Notification GetById(object id);
     }
 }
