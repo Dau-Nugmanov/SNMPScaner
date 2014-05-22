@@ -11,7 +11,6 @@ namespace UI.Models
     {
         public long IdNotification { get; set; }
 		public long IdDevicesItems { get; set; }
-        
         [Range(1, int.MaxValue, ErrorMessage="Только целое число")]
         [Required(ErrorMessage="*")]
         public long DeltaTime { get; set; }

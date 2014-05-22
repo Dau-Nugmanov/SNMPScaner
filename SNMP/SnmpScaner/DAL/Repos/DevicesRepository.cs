@@ -84,9 +84,9 @@ namespace DAL
             var itemsRepo = new DevicesItemsRepository(_context);
             foreach (var item in oldItems)
             {
-                if (!newItems.Any(t => t.IdDeviceEntity == item.IdDeviceEntity && t.IdDeviceItemEntity == item.IdDeviceItemEntity))
+                if (!newItems.Any(t => t.IdDevicesItems == item.IdDevicesItems))
                 {
-                    itemsRepo.RemoveById(new IdsWrap { IdDevice = item.IdDeviceEntity, IdItem = item.IdDeviceItemEntity });
+                    itemsRepo.RemoveById(item.IdDevicesItems);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace DAL
                 bool isExists = false;
                 foreach (var oldItem in oldItems)
                 {
-                    if (oldItem.IdDeviceEntity == item.IdDeviceEntity && oldItem.IdDeviceItemEntity == item.IdDeviceItemEntity)
+                    if (oldItem.IdDevicesItems == item.IdDevicesItems)
                     {
                         isExists = true;
                     }
@@ -110,6 +110,5 @@ namespace DAL
                 }
             }
         }
-
     }
 }

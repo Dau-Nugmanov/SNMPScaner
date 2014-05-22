@@ -129,5 +129,17 @@ namespace UI.Controllers
                 return RedirectToAction("Index", "Settings");
             }
         }
+
+        public ActionResult GetAllCheck()
+        {
+            var devRepo = new DevicesRepository(new SnmpDbContext());
+            return View(devRepo.GetAll().ToList());
+        }
+
+        public ActionResult GetAllCheckParameters()
+        {
+            var paramsRepo = new DevicesItemsRepository(new SnmpDbContext());
+            return View(paramsRepo.GetAll().ToList());
+        }
     }
 }

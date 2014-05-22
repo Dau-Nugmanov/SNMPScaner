@@ -67,5 +67,11 @@ namespace UI.Controllers
             ViewData["message"] = "Данные успешно обновлены";
             return View(maker);
         }
+
+        public ActionResult GetAllCheck()
+        {
+            var makers = new MakersRepository(new SnmpDbContext());
+            return View(makers.GetAll().ToList());
+        }
     }
 }

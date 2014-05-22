@@ -31,6 +31,9 @@ namespace DAL
         public DbSet<PhoneNotification> PhoneNotifications { get; set; }
         public DbSet<EmailNotification> EmailNotifications { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<ReportParameter> ReportParameters { get; set; }
+        public DbSet<ReportParameterDataType> ReportParametersDataTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

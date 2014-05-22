@@ -39,20 +39,16 @@ namespace DAL
 
         public override void RemoveById(object id)
         {
-            var wrap = id as IdsWrap;
-            if (wrap == null)
-                throw new ArgumentNullException("id");
-            var entity = dbSet.FirstOrDefault(t => t.IdDeviceItemEntity == wrap.IdItem && t.IdDeviceEntity == wrap.IdDevice);
+            var entity = dbSet.FirstOrDefault(t => t.IdDevicesItems == (long)id);
             if (entity == null)
                 throw new InvalidOperationException("Нет такой сущности!");
             dbSet.Remove(entity);
         }
 
-    }
-
-    public class IdsWrap
-    {
-        public long IdDevice { get; set; }
-        public long IdItem { get; set; }
+        public override IEnumerable<DevicesItems> GetAll()
+        {
+            return dbSet
+                .Include(t => t.DeviceItemEntity);
+        }
     }
 }

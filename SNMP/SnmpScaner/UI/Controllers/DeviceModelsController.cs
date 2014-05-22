@@ -104,5 +104,11 @@ namespace UI.Controllers
             var itemsRepo = new DeviceItemsRepository(new SnmpDbContext());
             return View(itemsRepo.GetItemsByModelId(idModel).ToList());
         }
+
+        public ActionResult GetAllCheck()
+        {
+            var modelsRepo = new DeviceModelsRepository(new SnmpDbContext());
+            return View(modelsRepo.GetAll().ToList());
+        }
     }
 }

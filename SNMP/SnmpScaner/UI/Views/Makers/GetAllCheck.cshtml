@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DAL.EfModels.Maker>
+
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    $('input[type="checkbox"]').click(function () {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    })
+</script>
+
+<table class="table table-hover">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.CheckBox("makerChk", new { idNot = item.IdMaker, nameNot = item.MakerName })
+
+            </td>
+            <td>
+                @item.MakerName
+            </td>
+
+        </tr>
+    }
+
+</table>

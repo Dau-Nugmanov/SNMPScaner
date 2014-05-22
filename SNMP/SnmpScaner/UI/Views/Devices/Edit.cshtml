@@ -4,74 +4,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+@*<script src="~/Scripts/jquery-1.7.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/My/DdlsAjaxFill.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(function () {
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
 
-        fillDepartmentsDdl();
+@section Scripts{
+    <script src="~/Scripts/My/DdlsAjaxFill.js"></script>
+    <script type="text/javascript">
 
-        
-        $('#btnAddParam').click(function () {
+        $(document).ready(function () {
 
-            var itemCnt = 0;
-            var idModel = $('#IdModel').val();
-            if (idModel == null || idModel == 'undefined') {
-                alert('Выберите модель устройства');
-                return;
-            }
-            var cnt = $('div#param:last-child').attr("idCnt");
-            if (cnt != null && cnt != 'undefined') {
-                itemCnt = cnt;
-                itemCnt++;
-            }
-            $('#parametersList').dialog({
-                autoOpen: false,
-                height: 500,
-                width: 400,
-                show: { effect: "toggle", duration: 800 },
-                zIndex: 10000000,
-                buttons: {
-                    "Добавить": function () {
-                        $('#paramCheck:checked').each(function () {
+            fillDepartmentsDdl();
 
-                            var idParam = $(this).attr('idParam');
-                            var paramName = $(this).attr('paramName');
-                            var paramOid = $(this).attr('paramOid');
 
-                            var isExists = false;
+            $('#btnAddParam').click(function () {
 
-                            $('input#idItem').each(function () {
-                                if ($(this).val() == idParam) {
-                                    isExists = true;
+                var itemCnt = 0;
+                var idModel = $('#IdModel').val();
+                if (idModel == null || idModel == 'undefined') {
+                    alert('Выберите модель устройства');
+                    return;
+                }
+                var cnt = $('div#param:last-child').attr("idCnt");
+                if (cnt != null && cnt != 'undefined') {
+                    itemCnt = cnt;
+                    itemCnt++;
+                }
+                $('#parametersList').dialog({
+                    autoOpen: false,
+                    height: 500,
+                    width: 400,
+                    show: { effect: "toggle", duration: 800 },
+                    zIndex: 10000000,
+                    buttons: {
+                        "Добавить": function () {
+                            $('#paramCheck:checked').each(function () {
+
+                                var idParam = $(this).attr('idParam');
+                                var paramName = $(this).attr('paramName');
+                                var paramOid = $(this).attr('paramOid');
+
+                                var isExists = false;
+
+                                $('input#idItem').each(function () {
+                                    if ($(this).val() == idParam) {
+                                        isExists = true;
+                                    }
+                                })
+
+                                if (isExists) {
+                                    alert('Этот параметр уже добавлен к устройству');
+                                    return;
                                 }
-                            })
+                                var html = '<div class="well" id="param" idCnt="' + itemCnt + '">'
+                                     + '<div style="float: right;">'
+                                        + '<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt + '" onclick="removeParam(event);">Удалить параметр</span>'
+                                    + '</div>'
+                                    + '<div id="paramValues">'
 
-                            if (isExists) {
-                                alert('Этот параметр уже добавлен к устройству');
-                                return;
-                            }
-                            var html = '<div class="well" id="param" idCnt="' + itemCnt + '">'
-                                 + '<div style="float: right;">'
-                                    + '<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt +'" onclick="removeParam(event);">Удалить параметр</span>'
-                                +'</div>'
-                                + '<div id="paramValues">'
-                                            
-                                          + '<div id="divParamName"><b>Название параметра: </b>' + paramName 
-                                          + '</div>'
-                             
-                                          + '<div id="divParamOid"><b>OID: </b>' + paramOid 
-                                          + '</div>'
+                                              + '<div id="divParamName"><b>Название параметра: </b>' + paramName
+                                              + '</div>'
 
-                                          + '<div id="delta">'
-                                                + '<p>Частота опроса: </p>'
-                                                + '<input type="text" id="DeltaT" name="Items[' + itemCnt + '].DeltaT" value=""/>'
-                                                + '<input type="hidden" id="idItem" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
-                                                + '<input type="hidden" id="idDevice" name="Items[' + itemCnt + '].IdDevice" value="@Model.IdDevice" />'
+                                              + '<div id="divParamOid"><b>OID: </b>' + paramOid
+                                              + '</div>'
+
+                                              + '<div id="delta">'
+                                                    + '<p>Частота опроса: </p>'
+                                                    + '<input type="text" id="DeltaT" name="Items[' + itemCnt + '].DeltaT" value=""/>'
+                                                    + '<input type="hidden" id="idItem" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
+                                                    + '<input type="hidden" id="idDevice" name="Items[' + itemCnt + '].IdDevice" value="@Model.IdDevice" />'
                                           + '</div>'
                                  + '</div>'
                             + '</div>'
@@ -133,14 +136,20 @@
             var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
             $(selectorParamName).attr('name', replaceAttrName);
 
+            var selectorParamName = $(selectorParamValues)
+            .children('div#delta')
+            .children('input#devicesItems');
+            var nameAttrName = $(selectorParamName).attr('name');
+            var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
+            $(selectorParamName).attr('name', replaceAttrName);
 
             index++;
         })
     }
 
 
-</script>
-
+    </script>
+}
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -258,37 +267,38 @@
         </div>
         <div class="well device-parameters">
             <input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр к устройству" />
-                @if (Model.Items != null)
-                {
-                    int cnt = 0;
-                    <div id="parameters_list">
-                        @foreach (var item in Model.Items)
-                        {
-                            <div class="well" id="param" idCnt="@cnt">
-                                <div style="float: right;">
-                                    <span class="btn-small btn-link" id="spanDeleteParam" idCnt="@cnt" onclick="removeParam(event);">Удалить параметр</span>
+            @if (Model.Items != null)
+            {
+                int cnt = 0;
+                <div id="parameters_list">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="well" id="param" idCnt="@cnt">
+                            <div style="float: right;">
+                                <span class="btn-small btn-link" id="spanDeleteParam" idCnt="@cnt" onclick="removeParam(event);">Удалить параметр</span>
+                            </div>
+                            <div id="paramValues">
+                                <div id="divParamName">
+                                    <b>Название параметра: </b>@item.Name
                                 </div>
-                                <div id="paramValues">
-                                    <div id="divParamName">
-                                        <b>Название параметра: </b>@item.Name
-                                     </div>
-                                    <div id="divParamOid">
-                                        <b>OID: </b>@item.Oid
-                                    </div>
-                                    <div id="delta">
-                                        <b>Частота опроса:</b>
-                                        <input type="text" id="DeltaT" name="Items[@cnt].DeltaT" value="@item.DeltaT" />
-                                        <input type="hidden" id="idItem" name="Items[@cnt].Id" value="@item.Id" />
-                                        <input type="hidden" id="idDevice" name="Items[@cnt].IdDevice" value="@item.IdDevice" />
-                                    </div>
+                                <div id="divParamOid">
+                                    <b>OID: </b>@item.Oid
+                                </div>
+                                <div id="delta">
+                                    <b>Частота опроса:</b>
+                                    <input type="text" id="DeltaT" name="Items[@cnt].DeltaT" value="@item.DeltaT" />
+                                    <input type="hidden" id="idItem" name="Items[@cnt].Id" value="@item.Id" />
+                                    <input type="hidden" id="idDevice" name="Items[@cnt].IdDevice" value="@item.IdDevice" />
+                                    <input type="hidden" id="devicesItems" name="Items[@cnt].IdDevicesItems" value="@item.IdDevicesItems" />
                                 </div>
                             </div>
-                            {
-                                cnt++;
-                            }
+                        </div>
+                        {
+                            cnt++;
                         }
-                    </div>
-                }
+                    }
+                </div>
+            }
         </div>
         <div id="parametersList" title="Выберите параметры для устройства"></div>
     </fieldset>

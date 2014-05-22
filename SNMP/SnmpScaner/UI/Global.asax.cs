@@ -73,10 +73,6 @@ namespace UI
                 //TimeStamp = DateTime.Now.AddDays(-5),
                 Value = "Value!"
             });
-            
-            
-			
-            
         }
 
 	    private void InitTestSettings()

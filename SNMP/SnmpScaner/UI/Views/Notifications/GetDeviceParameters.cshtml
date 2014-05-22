@@ -18,7 +18,11 @@
             <b>OID: </b> @item.DeviceItemEntity.Oid
         </div>
         <div>
+<<<<<<< HEAD
             @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevicesItems = item.IdDeviceEntity }, new { @class = "btn btn-link" })
+=======
+            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevice = item.IdDeviceEntity, idItem = item.IdDeviceItemEntity, idDevicesItems = item.IdDevicesItems }, new { @class = "btn btn-link" })
+>>>>>>> 317b224f455910a134e506b2e06ced6b91d07c38
         </div>
     </div>
 }

@@ -56,7 +56,7 @@ namespace UI.Models
         {
             List<DevicesItems> devicesItems = new List<DevicesItems>();
             if (Items != null)
-                devicesItems.AddRange(Items.Select(t => new DevicesItems { IdDeviceEntity = IdDevice, IdDeviceItemEntity = t.Id, DeltaT = t.DeltaT }));
+                devicesItems.AddRange(Items.Select(t => new DevicesItems { IdDeviceEntity = IdDevice, IdDeviceItemEntity = t.Id, DeltaT = t.DeltaT, IdDevicesItems = t.IdDevicesItems }));
 
             return new DAL.EfModels.DeviceEntity
             {
@@ -85,7 +85,8 @@ namespace UI.Models
                         , IdDevice = t.IdDeviceEntity
                         , DeltaT = t.DeltaT
                         , Name = t.DeviceItemEntity.Name
-                        , Oid = t.DeviceItemEntity.Oid }));
+                        , Oid = t.DeviceItemEntity.Oid
+                        , IdDevicesItems = t.IdDevicesItems}));
             }
             return new DeviceModel
             {
@@ -106,6 +107,8 @@ namespace UI.Models
 
     public class ItemDeviceConcrete
     {
+        public long IdDevicesItems { get; set; }
+
         public long Id { get; set; }
 
         public long IdDevice { get; set; }
