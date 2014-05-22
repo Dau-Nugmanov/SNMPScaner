@@ -60,6 +60,7 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="CustomersRepository.cs" />
     <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="DeviceItemsHistoryRepository.cs" />
     <Compile Include="DeviceItemsRepository.cs" />
     <Compile Include="DeviceModelsRepository.cs" />
     <Compile Include="DevicesItemsRepository.cs" />
