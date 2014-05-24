@@ -108,7 +108,12 @@
     <Compile Include="Repos\NotificationsRepository.cs" />
     <Compile Include="Repos\PhoneNotificationsRepository.cs" />
     <Compile Include="Repos\PhoneNumbersRepository.cs" />
+    <Compile Include="Repos\DeviceItemsHistoryRepository.cs" />
+    <Compile Include="Enums\ReportParametersDataTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\ReportParametersDataTypesRepository.cs" />
+    <Compile Include="Repos\ReportParametersRepository.cs" />
+    <Compile Include="Repos\ReportsRepository.cs" />
     <Compile Include="SnmpDbContext.cs" />
     <Compile Include="Repos\UsersRepository.cs" />
   </ItemGroup>

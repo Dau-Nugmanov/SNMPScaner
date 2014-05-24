@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DAL.EfModels.DevicesItems>
+
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $('input[type="checkbox"]').click(function () {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    })
+</script>
+
+<table class="table table-hover">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.CheckBox("parameterChk", new { idNot = item.IdDevicesItems, nameNot = item.DeviceItemEntity.Name })
+
+            </td>
+            <td>
+                @item.DeviceItemEntity.Name
+            </td>
+
+        </tr>
+    }
+
+</table>

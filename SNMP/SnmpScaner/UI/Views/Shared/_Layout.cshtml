@@ -93,14 +93,13 @@
             <nav>
                 <ul class="navigate centered">
                     @Html.ActionMenuItem("Мониторинг", "Index", "MainPanel", "icon monitor")
-                    @Html.ActionMenuItem("Устройства", "Index", "Test", "icon device")
-                    @Html.ActionMenuItem("Отчет", "Index", "Report", "icon report")
+                    @Html.ActionMenuItem("Отчеты", "Index", "Reports", "icon report")
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         @Html.ActionMenuItem("Параметры", "Index", "Settings", null)
                     }
-                    @Html.ActionMenuItem("Мои данные", "Edit", "Account", null)
-                    @Html.ActionMenuItem("Оповещения", "Index", "Notifications", null)
+                    @*@Html.ActionMenuItem("Мои данные", "Edit", "Account", null)*@
+                    @*@Html.ActionMenuItem("Оповещения", "Index", "Notifications", null)*@
                 </ul>
 
             </nav>
@@ -115,7 +114,7 @@
                 {
                     //style="color:#FF1515;"
                     <div>
-                        Пользователь: @User.Identity.Name <span  id="warningsMess"><a href="#">Оповещения</a></span> @Html.ActionLink("Выход", "SignOut", "Home")
+                        Пользователь: @Html.ActionLink(User.Identity.Name, "Edit", "Account") <span  id="warningsMess"><a href="#">Оповещения</a></span> @Html.ActionLink("Выход", "SignOut", "Home")
                     </div>
                 }
             </div>

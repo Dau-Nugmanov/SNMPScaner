@@ -16,6 +16,12 @@ namespace UI.Controllers
             return View(customersRepo.GetAll().ToList());
         }
 
+        public ActionResult GetAllCheck()
+        {
+            var customersRepo = new CustomersRepository(new SnmpDbContext());
+            return View(customersRepo.GetAll().ToList());
+        }
+
         public ActionResult Add()
         {
             return View();

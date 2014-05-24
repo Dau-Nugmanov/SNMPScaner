@@ -103,7 +103,7 @@ namespace UI.Controllers
             var notifRepo = new NotificationsRepository(new SnmpDbContext());
             notifRepo.RemoveById(id);
             notifRepo.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Settings");
         }
     }
 }
