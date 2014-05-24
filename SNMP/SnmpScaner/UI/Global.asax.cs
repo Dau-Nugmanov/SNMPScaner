@@ -43,7 +43,76 @@ namespace UI
 			InitTestSettings();
 
 	        _server = new SnmpScanServer();
+            
+           
 
+            
+        }
+
+        private void InitReportParametersDataTypes(SnmpDbContext context)
+        {
+            //datatypes
+            context.ReportParametersDataTypes.Add
+              (
+                  new ReportParameterDataType
+                  {
+                      DataTypeName = "Числовой"
+                  }
+              );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Строковый"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Параметр устройства"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Устройство"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Дата"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Заказчик"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Производитель оборудования"
+                    }
+                );
+            context.ReportParametersDataTypes.Add
+                (
+                    new ReportParameterDataType
+                    {
+                        DataTypeName = "Модель устройства"
+                    }
+                );
+            context.SaveChanges();
+        }
+
+        private void InitWarningsModels()
+        {
             WarningsStorage.AddWarning(new WarningModel
             {
                 DeviceName = "device1",
@@ -77,6 +146,7 @@ namespace UI
 
 	    private void InitTestSettings()
 	    {
+            InitWarningsModels();
 			SnmpDbContext context = new SnmpDbContext();
 			if (!context.Database.Exists())
 			{
@@ -200,7 +270,8 @@ namespace UI
 				//{
 				//	DeviceTypeName = "Router"
 				//};
-				
+                
+                InitReportParametersDataTypes(context);
 				context.SaveChanges();
 				//
 				//context.DeviceTypes.Add(deviceType1);
