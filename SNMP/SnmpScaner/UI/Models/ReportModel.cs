@@ -28,7 +28,7 @@ namespace UI.Models
         public Report ToEfEntity()
         {
             List<ReportParameter> reportParams = new List<ReportParameter>();
-            if(Parameters.Any())
+            if(Parameters != null && Parameters.Any())
                 reportParams
                     .AddRange
                     (

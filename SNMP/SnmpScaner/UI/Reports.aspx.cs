@@ -6,11 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using UI.Helpers;
 
 namespace WebApplication
 {
     public partial class Reports : System.Web.UI.Page
     {
+        private string _reportName = "report";
         protected void Page_Load(object sender, EventArgs e)
         {
             DAL.EfModels.Report report = null;
@@ -23,7 +25,7 @@ namespace WebApplication
             if (Session["report"] == null)
                 throw new InvalidOperationException("Отчет не задан");
             report = (DAL.EfModels.Report)Session["report"];
-
+            _reportName = report.ReportName;
             List<Microsoft.Reporting.WebForms.ReportParameter> parameters = new List<Microsoft.Reporting.WebForms.ReportParameter>();
 
             foreach (var item in reportParameters.Keys)
@@ -34,65 +36,55 @@ namespace WebApplication
                 parameters.Add(p);
             }
 
-            ReportViewer1.ServerReport.ReportServerUrl = new Uri("http://alborozd/ReportServer_SQL12");
-            ReportViewer1.ServerReport.ReportPath = "/DiplomReports/" + report.ReportPath;//"/DiplomReports/BestReport";
+            ReportViewer1.ServerReport.ReportServerUrl = new Uri(AppSettingsHelper.GetReportingServerUrl);
+            ReportViewer1.ServerReport.ReportPath = AppSettingsHelper.GetReportsPath + "/" + report.ReportPath;//"/DiplomReports/BestReport";
             
-            //Microsoft.Reporting.WebForms.ReportParameter parameter = new ReportParameter();
-            //parameter.Name = "IdServer";
-            //parameter.Values.Add("1");
-
             ReportViewer1.ServerReport.SetParameters(parameters);
             ReportViewer1.ServerReport.Refresh();
             ReportViewer1.Visible = true;
-
-            //var notificationsRepository = new NotificationsRepository(new DAO.DeployAppEntities());
-
-            //if (!IsPostBack)
-            //{
-            //    chklstUsers.DataSource = notificationsRepository.GetAll().Select(t => new { email = t.Email, name = t.Name });
-            //    chklstUsers.DataBind();
-            //}
         }
 
         public byte[] Export(ReportViewer viewer, string exportType)//, string reportsTitle)
         {
-            //try
-            //{
                 Warning[] warnings = null;
                 string[] streamIds = null;
                 string mimeType = string.Empty;
                 string encoding = string.Empty;
                 string extension = string.Empty;
                 string filetype = string.Empty;
-                // just gets the Report title... make your own method
-                //ReportViewer needs a specific type (not always the same as the extension)
-
                 filetype = exportType == "PDF" ? "PDF" : exportType;
                 byte[] bytes = viewer.ServerReport.Render(filetype, null, // deviceinfo not needed for csv
                 out mimeType, out encoding, out extension, out streamIds, out warnings);
-                //System.Web.HttpContext.Current.Response.Buffer = true;
-                //System.Web.HttpContext.Current.Response.Clear();
-                //System.Web.HttpContext.Current.Response.ContentType = mimeType;
-                //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + reportsTitle + "." + exportType);
-                //System.Web.HttpContext.Current.Response.BinaryWrite(bytes);
-                
-                //FileStream fs = new FileStream(Server.MapPath("~/GeneratedFiles/" + reportsTitle + "." + exportType), FileMode.OpenOrCreate);
-                return bytes;
-                //fs.Write(bytes, 0, bytes.Length);
-                //fs.Close();
-
-                // System.Web.HttpContext.Current.Response.Flush();
-                // System.Web.HttpContext.Current.Response.End();
-            //}
-            //catch (Exception ex)
-            //{
-            //}
-            //return true;
-            
+                return bytes; 
         }
 
-       
-     
+        protected void btn_export_Click(object sender, EventArgs e)
+        {
+            string fileName = _reportName;
+            switch (DropDownList1.SelectedValue)
+            {
+                case "PDF":
+                    fileName += ".pdf";
+                    break;
+                case "Excel":
+                    fileName += ".xls";
+                    break;
+                case "Word":
+                    fileName += ".doc";
+                    break;
+            }
 
+            Page.Response.Clear();
+            Page.Response.ClearContent();
+            Page.Response.ClearHeaders();
+            Page.Response.HeaderEncoding = System.Text.Encoding.Default;
+            Page.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+            Page.Response.ContentType = "application/octet-stream";
+            Page.Response.ContentEncoding = System.Text.Encoding.GetEncoding("windows-1251");
+            byte[] buf = Export(ReportViewer1, DropDownList1.SelectedValue);
+            Page.Response.AddHeader("Content-Length", buf.Length.ToString());
+            Page.Response.BinaryWrite(buf);
+            Page.Response.End();
+        }
     }
 }

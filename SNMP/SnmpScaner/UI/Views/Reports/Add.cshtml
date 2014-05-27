@@ -41,10 +41,10 @@
                 var html = '<div class="well" id="param" idCnt=' + itemCnt + '>'
                            + '<p class="btn btn-link" onclick="removeParam(event);" idCnt='+itemCnt+'>Удалить</p>'
                         + '<div id="name"><b>Имя параметра: </b>'
-                            + '<input type="text" name=Parameters[' + itemCnt + '].Name value=' + paramName + ' />'
+                            + '<input type="text" name=Parameters[' + itemCnt + '].Name value="' + paramName + '" />'
                         + '</div>'
                         + '<div id="promptName"><b>Отображаемое имя: </b> '
-                            + '<input type="text" name=Parameters[' + itemCnt + '].PromptName value=' + promptsName + ' />'
+                            + '<input type="text" name=Parameters[' + itemCnt + '].PromptName value="' + promptsName + '" />'
                         + '</div>'
                         + '<div id="dataType"><b>Тип данных</b> ' + dataTypeText
                             + '<input type="hidden" name=Parameters[' + itemCnt + '].IdReportParameterDataType value=' + dataType + ' />'

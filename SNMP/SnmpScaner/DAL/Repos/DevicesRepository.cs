@@ -86,9 +86,23 @@ namespace DAL
             {
                 if (!newItems.Any(t => t.IdDevicesItems == item.IdDevicesItems))
                 {
+                    RemoveItemsHistoryByItemId(item.IdDevicesItems);
                     itemsRepo.RemoveById(item.IdDevicesItems);
                 }
             }
+        }
+
+        private void RemoveItemsHistoryByItemId(long id)
+        {
+            var itemsHistory = new DeviceItemsHistoryRepository(_context);
+            itemsHistory
+                .GetAll()
+                .Where(t => t.IdDevicesItems == id)
+                .ToList()
+                .ForEach(t =>
+                {
+                    itemsHistory.RemoveById(t.IdItemHistory);
+                });
         }
 
         private void UpdatePrametersValues(IEnumerable<DevicesItems> oldItems, IEnumerable<DevicesItems> newItems)
