@@ -15,14 +15,14 @@
         </RSWEB:ReportViewer>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-<%--        <div>
+        <div>
             <asp:Button ID="btn_export" runat="server" OnClick="btn_export_Click" Text="Экспортировать в" />
             <asp:DropDownList ID="DropDownList1" runat="server">
                 <asp:ListItem>PDF</asp:ListItem>
                 <asp:ListItem>Excel</asp:ListItem>
                 <asp:ListItem>Word</asp:ListItem>
             </asp:DropDownList>
-        </div>--%>
+        </div>
         <hr />
 <%--        <div>
             <p>Отправить пользователям в формате</p>

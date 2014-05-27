@@ -604,7 +604,9 @@ WHERE IdDeviceEntity = @IdDeviceEntity</CommandText>
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!TimeStamp.Value</Value>
-                                <Style />
+                                <Style>
+                                  <Format>d MMM yyyy 'г.' H:mm:ss</Format>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>

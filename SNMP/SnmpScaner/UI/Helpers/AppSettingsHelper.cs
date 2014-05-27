@@ -36,5 +36,21 @@ namespace UI.Helpers
                 return maxWarningCount;
             }
         }
+
+        public static string GetReportingServerUrl
+        {
+            get
+            {
+                return new AppSettingsReader().GetValue("reportServerUrl", typeof(string)).ToString();
+            }
+        }
+
+        public static string GetReportsPath
+        {
+            get
+            {
+                return new AppSettingsReader().GetValue("reportPath", typeof(string)).ToString();
+            }
+        }
     }
 }

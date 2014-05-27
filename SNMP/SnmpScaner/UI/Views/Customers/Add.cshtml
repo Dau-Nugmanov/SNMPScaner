@@ -39,6 +39,40 @@
                 @Html.ValidationMessageFor(model => model.CustomerName)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.ManagerName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.ManagerName)
+                @Html.ValidationMessageFor(m => m.ManagerName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.ManagerEmail)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.ManagerEmail)
+                @Html.ValidationMessageFor(m => m.ManagerEmail)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.ManagerPhone)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.ManagerPhone)
+                @Html.ValidationMessageFor(m => m.ManagerPhone)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Comment)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Comment)
+                @Html.ValidationMessageFor(m => m.Comment)
+            </div>
+
+
+
             <p style="margin-top: 10px;">
                 <input type="submit" value="Добавить" class="btn btn-primary" />
             </p>
