@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using DAL.Repos;
 using UI.Models;
 
 namespace UI.Controllers

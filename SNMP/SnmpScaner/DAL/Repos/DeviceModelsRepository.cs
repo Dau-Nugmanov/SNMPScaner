@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
-using DAL.Repos;
+using System.Linq;
 using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 
-namespace DAL
+namespace DAL.Repos
 {
     public class DeviceModelsRepository : BaseRepository<DeviceModel>, IDeviceModelsRepo
     {
