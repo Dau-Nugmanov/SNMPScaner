@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Repos;
+﻿using System.Linq;
 using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 
-namespace DAL
+namespace DAL.Repos
 {
     public class PhoneNumbersRepository : BaseRepository<PhoneNumber>, IPhoneNumbersRepo
     {

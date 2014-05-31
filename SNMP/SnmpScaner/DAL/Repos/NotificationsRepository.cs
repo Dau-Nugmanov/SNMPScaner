@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Repos;
 using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 
-namespace DAL
+namespace DAL.Repos
 {
     public class NotificationsRepository : BaseRepository<Notification>, INotificationsRepo
     {

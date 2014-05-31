@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Repos;
-using DomainModel.EfModels;
+﻿using DomainModel.EfModels;
 
-namespace DAL
+namespace DAL.Repos
 {
     public class ReportParametersDataTypesRepository : BaseRepository<ReportParameterDataType>
     {
