@@ -6,11 +6,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class DeviceTypeModel : IModelEntity<DAL.EfModels.DeviceType>
+    public class DeviceTypeModel : IModelEntity<DeviceType>
     {
         public int IdDeviceType { get; set; }
 
@@ -19,7 +19,7 @@ namespace UI.Models
         [DisplayName("Название типа устройств")]
         public string DeviceTypeName { get; set; }
 
-        public DAL.EfModels.DeviceType ToEfEntity()
+        public DeviceType ToEfEntity()
         {
             return new DeviceType
             {
@@ -28,7 +28,7 @@ namespace UI.Models
             };
         }
 
-        public static DeviceTypeModel ToModelEntity(DAL.EfModels.DeviceType entity)
+        public static DeviceTypeModel ToModelEntity(DeviceType entity)
         {
             return new DeviceTypeModel
             {

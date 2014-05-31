@@ -1,6 +1,6 @@
 ﻿using DAL;
-using DAL.EfModels;
 using DomainModel;
+using DomainModel.EfModels;
 using StructureMap;
 using System;
 using System.Collections.Generic;

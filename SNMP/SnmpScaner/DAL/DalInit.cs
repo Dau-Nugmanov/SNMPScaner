@@ -5,13 +5,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DAL.EfModels;
-using DAL.Interfaces;
 using DAL.Repos;
 using DomainModel;
+using DomainModel.DalInterfaces;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
+using DomainModel.Models;
 using Lextm.SharpSnmpLib;
 using StructureMap;
+using Notification = DomainModel.EfModels.Notification;
 
 namespace DAL
 {
@@ -56,7 +58,7 @@ namespace DAL
 				.ForMember(dest => dest.Port, opt => opt.MapFrom(src => src.Port))
 				.ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.DevicesItems));
 
-			Mapper.CreateMap<EfModels.Notification, SubscriptionItem>()
+			Mapper.CreateMap<Notification, SubscriptionItem>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdNotification))
 				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => src.TimeDelta))
 				.ForMember(dest => dest.ValueDelta, opt => opt.MapFrom(src => src.ValueDelta));

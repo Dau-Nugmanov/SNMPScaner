@@ -1,11 +1,12 @@
-﻿using DAL.EfModels;
-using DAL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using DAL.Repos;
+using DomainModel.DalInterfaces;
+using DomainModel.EfModels;
 
 namespace DAL
 {

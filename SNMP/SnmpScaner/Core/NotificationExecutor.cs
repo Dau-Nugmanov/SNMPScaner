@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using DAL.EfModels;
-using DAL.Interfaces;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
-using StructureMap;
-using Notification = DomainModel.Notification;
+using Notification = DomainModel.Models.Notification;
 
 namespace Core
 {
@@ -44,12 +40,12 @@ namespace Core
 			//	});
 		}
 
-		private void EmailNotify(IEnumerable<DAL.EfModels.EmailEntity> email, Notification notification)
+		private void EmailNotify(IEnumerable<EmailEntity> email, Notification notification)
 		{
 			
 		}
 
-		private void PhoneNotify(IEnumerable<DAL.EfModels.PhoneNumber> email, Notification notification)
+		private void PhoneNotify(IEnumerable<PhoneNumber> email, Notification notification)
 		{
 
 		}

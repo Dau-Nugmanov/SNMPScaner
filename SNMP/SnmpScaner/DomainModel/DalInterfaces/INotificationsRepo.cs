@@ -1,16 +1,9 @@
-﻿using DAL.EfModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.Interfaces
+﻿namespace DomainModel.DalInterfaces
 {
     public interface INotificationsRepo
     {
-		Notification GetByDeviceIdAndItemId(long idDevicesItems);
-        void Edit(Notification notification);
-	    Notification GetById(object id);
+		EfModels.Notification GetByDeviceIdAndItemId(long idDevicesItems);
+        void Edit(EfModels.Notification notification);
+	    EfModels.Notification GetById(object id);
     }
 }

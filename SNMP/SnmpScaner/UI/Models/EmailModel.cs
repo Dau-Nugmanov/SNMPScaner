@@ -1,10 +1,10 @@
-﻿using DAL.EfModels;
-using DomainModel;
+﻿using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {

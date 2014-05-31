@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DAL.EfModels;
 using DomainModel;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
+using DomainModel.Models;
 
-namespace DAL
+namespace DAL.Repos
 {
 	public class ConfigRepo : IConfigRepo
 	{

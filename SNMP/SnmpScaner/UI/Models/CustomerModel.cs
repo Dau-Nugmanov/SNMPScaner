@@ -6,11 +6,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class CustomerModel : IModelEntity<DAL.EfModels.Customer>
+    public class CustomerModel : IModelEntity<Customer>
     {
         public int IdCustomer { get; set; }
 
@@ -37,9 +37,9 @@ namespace UI.Models
         [DisplayName("Комментарий")]
         public string Comment { get; set; }
 
-        public DAL.EfModels.Customer ToEfEntity()
+        public Customer ToEfEntity()
         {
-            return new DAL.EfModels.Customer
+            return new Customer
             {
                 CustomerName = CustomerName,
                 IdCustomer = IdCustomer,
@@ -50,7 +50,7 @@ namespace UI.Models
             };
         }
 
-        public static CustomerModel ToModelEntity(DAL.EfModels.Customer customer)
+        public static CustomerModel ToModelEntity(Customer customer)
         {
             return new CustomerModel
             {

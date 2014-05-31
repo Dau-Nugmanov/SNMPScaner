@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using DomainModel.Interfaces;
+using DomainModel.Models;
 using StructureMap;
 
 namespace DomainModel

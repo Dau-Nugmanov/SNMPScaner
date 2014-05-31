@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class UserModel : IModelEntity<DAL.EfModels.User>
+    public class UserModel : IModelEntity<User>
     {
         public int IdUser { get; set; }
 
@@ -37,7 +37,7 @@ namespace UI.Models
 
         public PhoneNumberModel[] PhoneNumbers { get; set; }
 
-        public DAL.EfModels.User ToEfEntity()
+        public User ToEfEntity()
         {
             List<EmailEntity> emails = new List<EmailEntity>();
             List<PhoneNumber> numbers = new List<PhoneNumber>();
@@ -66,7 +66,7 @@ namespace UI.Models
             };
         }
 
-        public static UserModel ToModelEntity(DAL.EfModels.User user)
+        public static UserModel ToModelEntity(User user)
         {
             List<EmailModel> emails = new List<EmailModel>();
             List<PhoneNumberModel> phoneNumbers = new List<PhoneNumberModel>();

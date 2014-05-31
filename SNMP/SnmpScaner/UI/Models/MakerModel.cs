@@ -5,11 +5,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class MakerModel : IModelEntity<DAL.EfModels.Maker>
+    public class MakerModel : IModelEntity<Maker>
     {
         public int IdMaker { get; set; }
 
@@ -18,16 +18,16 @@ namespace UI.Models
         [DisplayName("Наименование производителя")]
         public string MakerName { get; set; }
 
-        public DAL.EfModels.Maker ToEfEntity()
+        public Maker ToEfEntity()
         {
-            return new DAL.EfModels.Maker
+            return new Maker
             {
                 IdMaker = IdMaker,
                 MakerName = MakerName
             };
         }
 
-        public static MakerModel ToModel(DAL.EfModels.Maker maker)
+        public static MakerModel ToModel(Maker maker)
         {
             return new MakerModel
             {
