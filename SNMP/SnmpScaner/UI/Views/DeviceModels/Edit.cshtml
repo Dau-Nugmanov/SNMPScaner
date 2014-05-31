@@ -6,9 +6,9 @@
 
 @section Scripts {
 
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
     <script src="~/Scripts/jquery.simplemodal.js"></script>
-    <script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+    @*<script src="~/Scripts/jquery-ui-1.8.20.js"></script>*@
     <link href="~/Content/DialogWindow/demo.css" rel="stylesheet" />
     <link href="~/Content/DialogWindow/basic.css" rel="stylesheet" />
     <link href="~/Content/themes/jquery-ui.css" rel="stylesheet" />
@@ -77,20 +77,22 @@
                 itemCnt++;
                 var notifEmailCnt = 0;
                 var notifNumberCnt = 0;
-                var html = '<div class="well" id="param" idCnt="' + itemCnt + '">'
+                var html = '<div class="wellllt" id="param" idCnt="' + itemCnt + '">'
                       + '<div style="float: right;">'
-                           + '<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt + '" onclick="removeParam(event);">Удалить параметр</span>'
+                           + '<span class="btn-small btn-link" id="spanDeleteParam" idCnt="' + itemCnt + '" onclick="removeParam(event);"></span>'
                         + '</div>'
                         + '<div id="paramValues">'
-                            + '<div id="divParamName"><b>Название параметра: </b>'
+                            + '<div id="divParamName" class="Dev_Zagalovok_2"><p>Название параметра:</p> '
                                 + '<input type="text" id="paramName" name=Items[' + itemCnt + '].Name value=' + paramName + ' />'
                             + '</div>'
-                            + '<div id="divParamOid"><b>OID: </b>'
+                            + '<div id="divParamOid" class="Dev_Zagalovok_2"><p>OID:</p> '
                                 + '<input type="text" id="paramOid" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
                             + '</div>'
                             + '<div id="divParamIds">'
                                 + '<input type="hidden" id="idModel" name="Items[' + itemCnt + '].IdModel" value="@Model.IdDeviceModel" />'
                          + '</div>'
+                    + '</div>'
+                    + '<div class="polossa">'
                     + '</div>'
             + '</div>';
                 //alert(html);
@@ -225,12 +227,534 @@
             }
     </script>
 }
+
+
+<style>
+    .welll {
+        width: 101%;
+    }
+
+        .welll div {
+            width: 90%;
+            font-family: Corbel;
+            font-size: 14px;
+            color: #221f1e;
+            text-align: left;
+            margin-left: 4px;
+            height: 22px;
+            overflow: hidden;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+            .welll div p {
+                float: left;
+                margin-right: 5px;
+                width: 144px;
+                text-align: center;
+            }
+
+
+    hr {
+        /* margin-top: 20px; */
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .Devices_Add_Zag {
+        height: 30px;
+        margin: 0px 0px 10px 0px;
+        font-size: 18PX;
+        /* padding-left: 200PX; */
+        /* border-radius: 2PX 2PX 2PX 1PX; */
+        min-width: 739.1px;
+        font-weight: 700;
+        font-family: -webkit-body;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+        font-style: normal;
+        padding-top: 2PX;
+        position: relative;
+        border-top: 1px solid #8A8988;
+        border-bottom: 1px solid #8A8988;
+        background: #edecec;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #edecec 1%, #c5c5c5 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#edecec), color-stop(100%,#c5c5c5));
+        background: -webkit-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: -o-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: -ms-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: linear-gradient(to bottom, #edecec 1%,#c5c5c5 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edecec', endColorstr='#c5c5c5',GradientType=0 );
+        color: #525353;
+        box-shadow: 0px 2px 4px #838383;
+    }
+
+    .Add_Kn2 {
+        height: 18px;
+        /* padding: 19px; */
+        /* margin-bottom: 25px; */
+        background-color: #f5f5f5;
+        /* border: 1px solid #e3e3e3; */
+        /* border-radius: 4px; */
+        /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05); */
+        /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05); */
+        font-size: 10PX;
+        color: #1AA0E1;
+        /* padding: 2PX; */
+        /* padding-top: 0PX; */
+        text-align: -webkit-auto;
+        line-height: normal;
+        margin-left: 30PX;
+        margin-top: 1PX;
+        float: left;
+        border: none;
+        position: absolute;
+        top: 2px;
+        left: 3px;
+    }
+
+    form {
+        height:492px;
+        display: run-in;
+        /* padding: 19px; */
+        /* margin-bottom: 20px; */
+        background-color: #f5f5f5;
+        border-left: 1px solid #525353;
+        border-bottom: 1px solid #525353;
+        border-right: 1px solid #525353;
+    }
+
+    .Devices_Add_Div {
+        padding-left: 12px;
+        background-color: #F5F5F5;
+        position: relative;
+        min-height: 192px;
+        width: 38%;
+        float: left;
+        /* border-right: 1px solid #A7A6A5; */
+        height: 90%;
+        margin-right: 5px;
+        min-height: 190px;
+        margin-top: 10PX;
+    }
+
+    #ModelName, #IdDeviceType, #IdMaker {
+        width: 56%;
+        /* border-radius: 4px; */
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        height: 20px;
+        margin-bottom: 5px;
+        line-height: normal;
+    }
+
+    #paramOid, #paramName {
+        width: 44%;
+        border-radius: 4px;
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 2s ease-in-out;
+        -moz-transition: all 2s ease-in-out;
+        -o-transition: all 2s ease-in-out;
+        height: 20px;
+        line-height: normal;
+    }
+
+
+
+    .Contener {
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: #F5F5F5;
+    }
+
+    .ZagH3 {
+        color: #fff;
+    }
+
+    .Add_Kn_2 {
+        /* display: inline-block; */
+        padding: 2px 4px;
+        /* margin-right: 3px; */
+        /* margin-top: 0px; */
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-left: 21px;
+        float: left;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        position: absolute;
+        bottom: 10PX;
+        right: 16px;
+    }
+    div#paramValues {
+        width: 93%;
+        border-radius: 4px;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 2s ease-in-out;
+        -moz-transition: all 2s ease-in-out;
+        -o-transition: all 2s ease-in-out;
+        height: 20px;
+        line-height: normal;
+    }
+
+    #spanDeleteParam {
+        background: url('/Content/images/icons/delete.png') center no-repeat;
+        width: 14px;
+        height: 14px;
+        overflow: hidden;
+        float: right;
+        margin-top: 15px;
+    }
+
+    .NewH {
+        width: 76.9%;
+        border-radius: 0px;
+        border: none;
+        font-size: 16px;
+        background-color: #F5F5F5;
+        height: 26px;
+        font-weight: 700;
+        font-family: Arial,Calibri,Tahoma;
+        text-align: center;
+        letter-spacing: 1px;
+        font-style: italic;
+        padding-top: 2PX;
+        position: relative;
+        float: right;
+        border-bottom: 1px solid #A7A6A5;
+    }
+
+    .DeviceModels_Add_Kn {
+        padding: 2px 4px;
+        /* margin-right: 3px; */
+        /* margin-top: 0px; */
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-left: 21px;
+        float: left;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        position: absolute;
+        top: 157px;
+        left: 115px;
+    }
+
+    .editor-field {
+        margin: 0px;
+    }
+
+    #simplemodal-container h3 {
+        color: #00AFF0;
+        text-align: center;
+    }
+
+    #enableTxts {
+        margin-top: 10px;
+    }
+
+    .Dev_Zagalovok {
+        font-family: Corbel;
+        font-size: 14px;
+        color: #5A5A58;
+        text-align: left;
+        margin-bottom: 2px;
+        height: 21px;
+        font-style: normal;
+        text-shadow: 0px 0px 2px #fff;
+        /* align-content: flex-start; */
+        /* text-align: start; */
+        float: left;
+        width: 150PX;
+        text-align: center;
+    }
+
+    .Dev-Zagalovok {
+        font-family: Corbel;
+        font-size: 15px;
+        color: #00AFF0;
+        text-align: left;
+        /* margin-bottom: 2px; */
+        height: 21px;
+        font-style: normal;
+        font-weight: 500;
+        width: 147px;
+        float: left;
+        margin-bottom: 5px;
+    }
+
+
+    .alert {
+        margin-bottom: 0px;
+        padding: 6px;
+    }
+
+        .alert p {
+            text-align: center;
+            font-size: 14px;
+        }
+
+    .validation-summary-errors {
+        font-weight: bold;
+        color: #ff0000;
+        height: 0px;
+        width: 1px;
+        overflow: hidden;
+    }
+
+  
+ .Dev_Zagalovok_2    {
+        width: 100%;
+        font-family: Corbel;
+        font-size: 14px;
+        color: #221f1e;
+        text-align: left;
+        margin-left: 4px;
+        height: 22px;
+        overflow: hidden;
+        font-style: italic;
+        margin-bottom: 2px;
+        padding: 0px;
+    }
+
+
+    .Dev_Zagalovok_2 > p {
+        width: 170px;
+        margin-left: 0px;
+        float: left;
+        text-align:center;
+        margin-top:2px;
+    }
+
+    .device-parameters {
+        width: 40%;
+        float: right;
+        border-radius: 0px;
+        /* margin-top: 2px; */
+        background-color: #F5F5F5;
+        /* padding-left: 10px; */
+        min-height: 20px;
+        /* background-color: #f5f5f5; */
+        /* border: 1px solid #e3e3e3; */
+        -webkit-box-shadow: inset 0 1px 1px #F5F5F5;
+        box-shadow: inset 0 1px 1px #F5F5F5;
+        border-left: none;
+        /* border-right: 1px solid #fff; */
+        position: relative;
+        margin-right: 150px;
+    }
+
+    .description {
+        float: right;
+        /* border: 1px solid #000; */
+        width: 36.456%;
+        min-height: 191px;
+        margin-top: -100px;
+        /* margin-left: -17px; */
+        border-left: 1px solid #D8D7D6;
+    }
+
+    .polossa {
+        position:absolute;
+        top:50px;
+        width: 98.5%;
+        height: 2px;
+        border-top: 1px solid #D8D7D6;
+        border-bottom: 1px solid #fff;
+    }
+
+    .Add_Kn_3 {
+        overflow: hidden;
+        width: 19px;
+        height: 20px;
+        position: absolute;
+        top: 3px;
+        left: 24px;
+        background: url('/Content/images/icons/0010.png') center no-repeat;
+        border: none;
+        /* box-shadow: 0px 0px 3px #fff; */
+        margin-right: 20px;
+    }
+
+    .polossa_2 {
+        width: 94%;
+        background: #A7A6A5;
+        height: 2px;
+        position: absolute;
+        top: 188px;
+        left: 5px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #A7A6A5;
+    }
+
+    #ParameterName, #OID {
+        width: 300px;
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 2s ease-in-out;
+        -moz-transition: all 2s ease-in-out;
+        -o-transition: all 2s ease-in-out;
+        height: 20px;
+        line-height: normal;
+        margin-bottom: 5px;
+    }
+    .ImagesAddNotif {
+        position: absolute;
+        top: 5px;
+        right: 65px;
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        background: url('/Content/images/icons/OPOV.png') center no-repeat;
+        border:none;
+    }
+
+    .Add_Kn_Ok {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        right: 35px;
+        top: 5px;
+        background: url('/Content/images/icons/images.png') center no-repeat;
+        border: none;
+    }
+
+    .Add_Kn {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        background: url('/Content/images/icons/images2.png') center no-repeat;
+        border: none;
+    }
+    .editor-label {
+        float: left;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        margin-right: 5px;
+    }
+    .first {
+        width: 100%;
+        overflow: hidden;
+        height: 25px;
+        margin-bottom: 10px;
+
+    }
+    .second div {
+        margin-left:25px;
+        margin-right:20px;
+    }
+    #btnParameterAdd {
+        position: absolute;
+        top: 280px;
+        right: 22px;
+    }
+    #parameters_list {
+        width: 45%;
+        float: right;
+        border-radius: 0px;
+        /* margin-top: 2px; */
+        background-color: #F5F5F5;
+        /* padding-left: 10px; */
+        min-height: 250px;
+        /* background-color: #f5f5f5; */
+        /* border: 1px solid #e3e3e3; */
+        -webkit-box-shadow: inset 0 1px 1px #F5F5F5;
+        box-shadow: inset 0 1px 1px #F5F5F5;
+        /* border-left: none; 
+        border: 1px solid #000;*/
+        position: relative;
+        margin-right: 150px;
+    }
+    .wellllt {
+        width: 79%;
+        float: right;
+        height: 55px;
+        border-radius: 0px;
+        /* margin-top: 2px; */
+        background-color: #F5F5F5;
+        /* padding-left: 10px; */
+        min-height: 20px;
+        /* background-color: #f5f5f5; */
+        /* border: 1px solid #e3e3e3; */
+        -webkit-box-shadow: inset 0 1px 1px #F5F5F5;
+        box-shadow: inset 0 1px 1px #F5F5F5;
+        border-left: none;
+        /* border-right: 1px solid #fff; */
+        position: relative;
+        margin-right: 45px;
+    }
+
+</style>
+
+
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Редактирование модели</legend>
+        <legend class="Devices_Add_Zag">Редактирование моделей устройств
+            <input type="submit" value="" class="Add_Kn_Ok" />        
+            <input type="button" id="btnAddParam" class="ImagesAddNotif" value="" />
+        </legend>
         @if (ViewData["message_error"] != null)
         {
             <div class="alert alert-error field-validation-error">
@@ -245,13 +769,13 @@
 
         }
 
-        <div class="device-wrap">
-            <div class="well device-well">
+        <div class="Devices_Add_Div">
+            @*<div class="device-well">*@
                 <div class="editor-label">
                     @Html.HiddenFor(model => model.IdDeviceModel)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.ModelName)
                 </div>
                 <div class="editor-field">
@@ -259,27 +783,27 @@
                     @Html.ValidationMessageFor(model => model.ModelName)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Тип устройства
                 </div>
                 <div class="editor-field">
                     @Html.DropDownList("IdDeviceType", (ViewData["types"] as SelectList))
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Производитель
                 </div>
                 <div class="editor-field">
                     @Html.DropDownList("IdMaker", (ViewData["makers"] as SelectList))
                 </div>
 
-                <p>
+@*                <p>
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
-                </p>
-            </div>
+                </p>*@
+            @*</div>*@
         </div>
-        <div class="well device-parameters">
-            <input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр" />
+     @*   <div class="device-parameters">*@
+            @*<input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр" />*@
             @if (Model.Items != null)
             {
                 int cnt = 0;
@@ -287,17 +811,17 @@
                 <div id="parameters_list">
                     @foreach (var item in Model.Items)
                     {
-                        <div class="well" id="param" idCnt="@cnt">
-                            <div style="float: right;">
-                                <span class="btn-small btn-link" id="spanDeleteParam" idCnt="@cnt" onclick="removeParam(event);">Удалить параметр</span>
+                        <div class="wellllt" id="param" idCnt="@cnt">
+                            <div>
+                                <div class="btn-small btn-link" id="spanDeleteParam" idCnt="@cnt" onclick="removeParam(event);"></div>
                             </div>
                             <div id="paramValues">
-                                <div id="divParamName">
-                                    <b>Название параметра: </b>
+                                <div id="divParamName" class="Dev_Zagalovok_2">
+                                    <p>Название параметра: </p>
                                     <input type="text" id="paramName" name="Items[@cnt].Name" value="@item.Name" />
                                 </div>
-                                <div id="divParamOid">
-                                    <b>OID: </b>
+                                <div id="divParamOid" class="Dev_Zagalovok_2">
+                                    <p>OID: </p>
                                     <input type="text" id="paramOid" name="Items[@cnt].Oid_s" value="@item.Oid_s" />
                                 </div>
                                 <div id="divParamIds">
@@ -305,6 +829,7 @@
                                     <input type="hidden" id="idMaker" name="Items[@cnt].IdItem" value="@item.IdItem" />
                                 </div>
                             </div>
+                            <div class="polossa"></div>
                         </div>
                         {
                             cnt++;
@@ -312,33 +837,30 @@
                     }
                 </div>
             }
-        </div>
+        @*</div>*@
 
         <div id="basic-modal-content">
-            <h3>Добавление параметра</h3>
+            <h3><b>Создание параметра</b></h3>
             <hr />
             <div>
-                <div style="float: left; width: 30%; border-color: green; height: 140px;">
-                    <div class="editor-label">
-                        Название параметра
+                <div style="float: left; width: 100%; border-color: green; height: 140px;">
+                    <div class="first">
+                        <span class="editor-label">
+                            Название параметра
+                        </span>
+                        <span class="editor-field">
+                            @Html.TextBox("ParameterName")
+                        </span>
                     </div>
-                    <div class="editor-field">
-                        @Html.TextBox("ParameterName")
+                    <div class="first second">
+                        <div class="editor-label">
+                            OID параметра
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBox("OID")
+                        </div>
                     </div>
-
-                    <div class="editor-label">
-                        OID параметра
-                    </div>
-                    <div class="editor-field">
-                        @Html.TextBox("OID")
-                    </div>
-
                 </div>
-                <div class="notif-wrap">
-                </div>
-                <div class="notif-wrap">
-                </div>
-
             </div>
 
             <div>
@@ -351,10 +873,3 @@
         </div>
     </fieldset>
 }
-<<<<<<< HEAD
-
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")*@
-}
-=======
->>>>>>> 317b224f455910a134e506b2e06ced6b91d07c38

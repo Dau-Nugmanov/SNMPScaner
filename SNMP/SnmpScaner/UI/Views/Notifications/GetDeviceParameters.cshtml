@@ -4,13 +4,57 @@
 @{
     Layout = null;
 }
+<style>
+    .kontener {
+        width: 100%;
+        overflow: hidden;
+        height: 14%;
+        background: #FAFAFE;
+        padding-left: 10px;
+        border-bottom: 1px solid #EEE9E9;
+        margin-bottom: 1px;
+    }
+    .kontener div{
+        font-size: 12px;
+    }
+        .kontener div a {
+            color: #F51616;
+            padding: 0px;
+        }
+    .MainPanel_Index_Zag {
+        font-size: 20px;
+        background-color: rgb(227,225,223);
+        height: 30px;
+        margin: 0PX;
+        font-size: 18PX;
+        border-radius: 4PX 4PX 0PX 0PX;
+        font-weight: 700;
+        font-family: Arial,Calibri,Tahoma;
+        text-align: center;
+        letter-spacing: 1px;
+        font-style: normal;
+    }
 
-<h3>Список параметров для устройства @Model.FirstOrDefault().DeviceEntity.Name
+    .Main_Index_Zag {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 0px;
+        height: 24px;
+        /* background: #EDE9E9; */
+        margin-bottom: 0px;
+        border-bottom: 2px solid #808080;
+        color: #007ACC;
+    }
+</style>
+
+
+<h3 class="Main_Index_Zag">
+    Параметры @Model.FirstOrDefault().DeviceEntity.Name
 </h3>
 
 @foreach (var item in Model)
 {
-    <div class="well">
+    <div class="kontener">
         <div>
             <b>Название: </b> @item.DeviceItemEntity.Name
         </div>
@@ -18,11 +62,7 @@
             <b>OID: </b> @item.DeviceItemEntity.Oid
         </div>
         <div>
-<<<<<<< HEAD
-            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevicesItems = item.IdDeviceEntity }, new { @class = "btn btn-link" })
-=======
-            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new { idDevice = item.IdDeviceEntity, idItem = item.IdDeviceItemEntity, idDevicesItems = item.IdDevicesItems }, new { @class = "btn btn-link" })
->>>>>>> 317b224f455910a134e506b2e06ced6b91d07c38
+            @Html.ActionLink("Редактировать оповещения", "Notification", "Notifications", new {idDevicesItems = item.IdDeviceItemEntity }, new { @class = "btn btn-link" })
         </div>
     </div>
 }

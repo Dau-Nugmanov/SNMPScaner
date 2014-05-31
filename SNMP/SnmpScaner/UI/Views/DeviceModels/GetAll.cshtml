@@ -3,10 +3,12 @@
 @{
     Layout = null;
 }
-<h2>Список моделей</h2>
-    <p>
-        @Html.ActionLink("Добавить новую модель", "Add")
+<h2 class="MainPanel_Index_Zag">
+    Список моделей
+    <p class="Sett_Ind_kn">
+        @Html.ActionLink("Новая модель", "Add")
     </p>
+</h2>
     <table class="table table-hover">
         <tr>
             <th>
@@ -34,7 +36,7 @@
             </td>
             <td>
                 @Html.ActionLink("Редактировать", "Edit", new { id=item.IdDeviceModel }) |
-                @Html.ActionLink("Удалить", "Remove", new { id = item.IdDeviceModel }, new { onclick = "return confirm('При удалении модели будут удалены все параметры и все устройства данной модели');" })
+                @Html.ActionLink("Удалить", "Remove", new { id=item.IdDeviceModel })
             </td>
         </tr>
     }
