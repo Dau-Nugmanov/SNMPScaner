@@ -42,6 +42,8 @@ namespace DAL
 				x.For<IUsersRepo>().Use<UsersRepository>().Ctor<SnmpDbContext>("context");
 				x.For<IConfigRepo>().Use<ConfigRepo>();
 				x.For<IHistoryRepo>().Use<HistoryRepo>();
+				x.For<INotificationsRepo>().Use<NotificationsRepository>();
+				
 			});
 		}
 
