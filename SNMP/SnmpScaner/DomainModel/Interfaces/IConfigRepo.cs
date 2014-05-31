@@ -1,4 +1,6 @@
 ﻿
+using DomainModel.Models;
+
 namespace DomainModel.Interfaces
 {
 	public interface IConfigRepo

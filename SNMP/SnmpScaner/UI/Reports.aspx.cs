@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using UI.Helpers;
+using Report = DomainModel.EfModels.Report;
 
 namespace WebApplication
 {
@@ -15,7 +16,7 @@ namespace WebApplication
         private string _reportName = "report";
         protected void Page_Load(object sender, EventArgs e)
         {
-            DAL.EfModels.Report report = null;
+            Report report = null;
             Dictionary<string, object> reportParameters = null;
 
             if (Session["parameters"] == null)
@@ -24,7 +25,7 @@ namespace WebApplication
 
             if (Session["report"] == null)
                 throw new InvalidOperationException("Отчет не задан");
-            report = (DAL.EfModels.Report)Session["report"];
+            report = (Report)Session["report"];
             _reportName = report.ReportName;
             List<Microsoft.Reporting.WebForms.ReportParameter> parameters = new List<Microsoft.Reporting.WebForms.ReportParameter>();
 

@@ -2,8 +2,7 @@
 using System.Net;
 using Core;
 using DAL;
-using DAL.EfModels;
-using DAL.Interfaces;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
 using StructureMap;
 using System;
@@ -18,7 +17,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using UI.Code;
 using UI.Models;
-using DeviceModel = DAL.EfModels.DeviceModel;
+using DeviceModel = DomainModel.EfModels.DeviceModel;
 
 namespace UI
 {

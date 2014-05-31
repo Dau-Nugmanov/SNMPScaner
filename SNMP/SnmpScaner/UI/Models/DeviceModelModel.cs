@@ -6,11 +6,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class DeviceModelModel : IModelEntity<DAL.EfModels.DeviceModel>
+    public class DeviceModelModel : IModelEntity<DomainModel.EfModels.DeviceModel>
     {
         public int IdDeviceModel { get; set; }
 
@@ -25,12 +25,12 @@ namespace UI.Models
 
         public ItemModel[] Items { get; set; }
 
-        public DAL.EfModels.DeviceModel ToEfEntity()
+        public DomainModel.EfModels.DeviceModel ToEfEntity()
         {
             List<DeviceItemEntity> items = new List<DeviceItemEntity>();
             if(Items != null && Items.Any())
                 items.AddRange(Items.ToList().Select(t => t.ToEfEntity()));
-            return new DAL.EfModels.DeviceModel
+            return new DomainModel.EfModels.DeviceModel
             {
                 IdDeviceModel = IdDeviceModel,
                 IdDeviceType = IdDeviceType,
@@ -40,7 +40,7 @@ namespace UI.Models
             };
         }
 
-        public static DeviceModelModel ToModelEntity(DAL.EfModels.DeviceModel model)
+        public static DeviceModelModel ToModelEntity(DomainModel.EfModels.DeviceModel model)
         {
             List<ItemModel> items = new List<ItemModel>();
             if(model.Items != null && model.Items.Any())

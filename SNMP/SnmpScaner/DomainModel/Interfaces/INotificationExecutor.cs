@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DomainModel.Models;
 
 namespace DomainModel.Interfaces
 {

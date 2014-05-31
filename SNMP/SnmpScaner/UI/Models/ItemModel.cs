@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using DAL.EfModels;
+using DomainModel.EfModels;
 
 namespace UI.Models
 {
-    public class ItemModel : IModelEntity<DAL.EfModels.DeviceItemEntity>
+    public class ItemModel : IModelEntity<DeviceItemEntity>
     {
         public long IdItem { get; set; }
 
@@ -25,7 +25,7 @@ namespace UI.Models
         public string[] EmailNotifications { get; set; }
         public string[] PhoneNumbersNotifications { get; set; }
 
-        public DAL.EfModels.DeviceItemEntity ToEfEntity()
+        public DeviceItemEntity ToEfEntity()
         {
             List<EmailNotification> emailNotifs = new List<EmailNotification>();
             List<PhoneNotification> phoneNotis = new List<PhoneNotification>();
@@ -44,7 +44,7 @@ namespace UI.Models
             };
         }
 
-        public static ItemModel ToModelEntity(DAL.EfModels.DeviceItemEntity item)
+        public static ItemModel ToModelEntity(DeviceItemEntity item)
         {
             //List<string> emails = new List<string>();
             //List<string> phones = new List<string>();

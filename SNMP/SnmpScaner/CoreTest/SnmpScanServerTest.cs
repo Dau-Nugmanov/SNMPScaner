@@ -7,6 +7,7 @@ using System.Threading;
 using Core;
 using DomainModel;
 using DomainModel.Interfaces;
+using DomainModel.Models;
 using Lextm.SharpSnmpLib;
 using Moq;
 using NUnit.Framework;

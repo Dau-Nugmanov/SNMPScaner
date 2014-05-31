@@ -1,5 +1,4 @@
 ﻿using DAL;
-using DAL.Interfaces;
 using StructureMap;
 using System;
 using System.Collections.Generic;

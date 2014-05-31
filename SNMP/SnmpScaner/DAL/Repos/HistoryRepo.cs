@@ -1,5 +1,5 @@
 ﻿using System;
-using DAL.EfModels;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
 using Lextm.SharpSnmpLib;
 

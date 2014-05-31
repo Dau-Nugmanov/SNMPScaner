@@ -5,7 +5,7 @@ using System.Net;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
 
-namespace DomainModel
+namespace DomainModel.Models
 {
 	public class Device
 	{

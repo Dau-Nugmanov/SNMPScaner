@@ -4,7 +4,7 @@ using DomainModel.Interfaces;
 using Lextm.SharpSnmpLib;
 using StructureMap;
 
-namespace DomainModel
+namespace DomainModel.Models
 {
 	public class DeviceItem
 	{

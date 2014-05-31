@@ -1,7 +1,7 @@
 ﻿using System;
 using Lextm.SharpSnmpLib;
 
-namespace DomainModel
+namespace DomainModel.Models
 {
 	public class SubscriptionItem
 	{
