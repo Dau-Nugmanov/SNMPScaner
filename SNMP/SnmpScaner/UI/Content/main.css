@@ -1,9 +1,13 @@
-﻿  .ui-tabs-vertical { border-radius: 0; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 23%; overflow: hidden; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+﻿  .ui-tabs-vertical { border-radius: 0;background-color: white;min-height:500px;}
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 21%; overflow: hidden; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 99.3%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
   .ui-tabs-vertical .ui-tabs-nav li a { display:block; width: 100%; padding: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 4px; float: right; width: 75%;}
+  .ui-tabs-vertical .ui-tabs-panel { padding: 2px;float: right;width: 78%;border: 2px solid #B6B4B4;height: 100%;/* margin-top: -3px; */
+									border-top-color: 1px solid #9c9c9c;border-radius: 8px;/* -webkit-border-radius: 5px; */-moz-border-radius: 5px;
+									-khtml-border-radius: 5px;-o-border-radius: 5px;/* box-shadow: 0px 2px 5px rgba(0,0,0,0.3); */
+									box-shadow: insert 0px 2px 5px #C8DAEE;-webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.5);-moz-box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
+									min-height:492px;}
 
 body {
 	min-width: 1024px;
@@ -123,11 +127,12 @@ header nav .navigate li:hover {
 }
 
 header nav .navigate li.selected {
-	border-radius: 20px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
 	color: #fff;
 	background: #62686b;
+	
 }
 
 header nav .navigate li.icon a:before {
@@ -190,8 +195,7 @@ header nav .navigate li.icon.report a:hover:before {
 }
 
 .contentWrap .content {
-	
-
+	min-height:492px;
 	background-color: #fff;
 	padding: 2px;
 }

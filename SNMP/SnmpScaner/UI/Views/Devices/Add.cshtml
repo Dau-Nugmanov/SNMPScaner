@@ -146,13 +146,489 @@
 
     </script>
 }
-<h2>Добавление нового устройства</h2>
+
+
+<style>
+
+    .Add_Kn_Param {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        right: 63px;
+        top: 5px;
+        background: url('/Content/images/icons/12.png') center no-repeat;
+        border: none;
+    }
+
+    .Add_Kn_Ok {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        right: 35px;
+        top: 5px;
+        background: url('/Content/images/icons/images.png') center no-repeat;
+        border: none;
+    }
+
+    .Add_Kn {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        background: url('/Content/images/icons/images2.png') center no-repeat;
+        border: none;
+    }
+    
+    .welll {
+        width: 101%;
+    }
+
+        .welll div {
+            width: 90%;
+            font-family: Corbel;
+            font-size: 14px;
+            color: #221f1e;
+            text-align: left;
+            margin-left: 4px;
+            height: 22px;
+            overflow: hidden;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+            .welll div p {
+                float: left;
+                margin-right: 5px;
+                width: 144px;
+                text-align: center;
+            }
+
+    #paramValues {
+        width: 101%;
+    }
+
+    hr {
+        /* margin-top: 20px; */
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+    #Red {
+        color:red;
+    }
+     .Devices_Add_Zag {
+        height: 30px;
+        margin: 0PX;
+        font-size: 18PX;
+        /* padding-left: 200PX; */
+        /* border-radius: 2PX 2PX 2PX 1PX; */
+        min-width: 739.1px;
+        font-weight: 700;
+        font-family: -webkit-body;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+        font-style: normal;
+        padding-top: 2PX;
+        position: relative;
+        border-top: 1px solid #8A8988;
+        border-bottom: 1px solid #8A8988;
+        background: #edecec;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #edecec 1%, #c5c5c5 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#edecec), color-stop(100%,#c5c5c5));
+        background: -webkit-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: -o-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: -ms-linear-gradient(top, #edecec 1%,#c5c5c5 100%);
+        background: linear-gradient(to bottom, #edecec 1%,#c5c5c5 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edecec', endColorstr='#c5c5c5',GradientType=0 );
+        color: #525353;
+        box-shadow: 0px 2px 4px #838383;
+    }
+
+    .Add_Kn2 {
+        height: 18px;
+        /* padding: 19px; */
+        /* margin-bottom: 25px; */
+        background-color: #f5f5f5;
+        /* border: 1px solid #e3e3e3; */
+        /* border-radius: 4px; */
+        /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05); */
+        /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05); */
+        font-size: 10PX;
+        color: #1AA0E1;
+        /* padding: 2PX; */
+        /* padding-top: 0PX; */
+        text-align: -webkit-auto;
+        line-height: normal;
+        margin-left: 30PX;
+        margin-top: 1PX;
+        float: left;
+        border: none;
+        position: absolute;
+        top: 2px;
+        left: 3px;
+    }
+
+    form {
+        height: 492px;
+        display: run-in;
+        /* padding: 19px; */
+        /* margin-bottom: 20px; */
+        background-color: #f5f5f5;
+        border-left: 1px solid #525353;
+        border-bottom: 1px solid #525353;
+        border-right: 1px solid #525353;
+    }
+
+    .Devices_Add_Div {
+        padding-left: 12px;
+        background-color: #F5F5F5;
+        position: relative;
+        min-height: 192px;
+        width: 41%;
+        float: left;
+        /* border-right: 1px solid #A7A6A5; */
+        height: 90%;
+        margin-right: 5px;
+        min-height: 190px;
+        margin-top: 10PX;
+    }
+
+    #Name, #Ip_s, #Port, #Login, #Password, #IdCustomer, #Description, #Makers, #IdModel {
+        width: 56%;
+        /* border-radius: 4px; */
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        height: 20px;
+        margin-bottom: 5px;
+        line-height: normal;
+    }
+
+    div#concreteValues input{
+        width: 56%;
+        /* border-radius: 4px; */
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        height: 16px;
+        margin-bottom: 5px;
+        line-height: normal;
+       margin-left:3px;
+    }
+    
+    
+     #paramOid, #paramName {
+        width: 57%;
+        border-radius: 4px;
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 2s ease-in-out;
+        -moz-transition: all 2s ease-in-out;
+        -o-transition: all 2s ease-in-out;
+        height: 20px;
+        line-height: normal;
+    }
+
+
+
+    .Contener {
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: #F5F5F5;
+        padding-left: 50px;
+        border-bottom: 1px solid #CAC6C6;
+        padding-bottom: 5px;
+        overflow:hidden;
+    }
+    .Contener div{
+        font-size:11px;
+        height:16px;        
+    
+    }
+    div#concreteValues p {
+    float:left;
+    }
+    .ZagH3 {
+        color: #fff;
+    }
+
+    .Add_Kn_2 {
+        /* display: inline-block; */
+        padding: 2px 4px;
+        /* margin-right: 3px; */
+        /* margin-top: 0px; */
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-left: 21px;
+        float: left;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        position: absolute;
+        bottom: 10PX;
+        right: 16px;
+    }
+
+    #spanDeleteParam {
+        background: url('/Content/images/icons/delete.png') center no-repeat;
+        width: 14px;
+        height: 14px;
+        overflow: hidden;
+        float: right;
+        margin-top: 15px;
+    }
+
+    .NewH {
+        width: 76.9%;
+        border-radius: 0px;
+        border: none;
+        font-size: 16px;
+        background-color: #F5F5F5;
+        height: 26px;
+        font-weight: 700;
+        font-family: Arial,Calibri,Tahoma;
+        text-align: center;
+        letter-spacing: 1px;
+        font-style: italic;
+        padding-top: 2PX;
+        position: relative;
+        float: right;
+        border-bottom: 1px solid #A7A6A5;
+    }
+
+    .DeviceModels_Add_Kn {
+        padding: 2px 4px;
+        /* margin-right: 3px; */
+        /* margin-top: 0px; */
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-left: 21px;
+        float: left;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        position: absolute;
+        top: 157px;
+        left: 115px;
+    }
+
+    .editor-field {
+        margin: 0px;
+    }
+
+    #simplemodal-container h3 {
+        color: #00AFF0;
+        text-align: center;
+    }
+
+    #enableTxts {
+        margin-top: 10px;
+    }
+
+    .Dev_Zagalovok {
+        font-family: Corbel;
+        font-size: 14px;
+        color: #5A5A58;
+        text-align: left;
+        margin-bottom: 2px;
+        height: 21px;
+        font-style: normal;
+        text-shadow: 0px 0px 2px #fff;
+        /* align-content: flex-start; */
+        /* text-align: start; */
+        float: left;
+        width: 150PX;
+        text-align: center;
+    }
+
+    .Dev-Zagalovok {
+        font-family: Corbel;
+        font-size: 15px;
+        color: #00AFF0;
+        text-align: left;
+        /* margin-bottom: 2px; */
+        height: 21px;
+        font-style: normal;
+        font-weight: 500;
+        width: 147px;
+        float: left;
+        margin-bottom: 5px;
+    }
+
+
+    .alert {
+        margin-bottom: 0px;
+        padding: 6px;
+    }
+
+        .alert p {
+            text-align: center;
+            font-size: 14px;
+        }
+
+    .validation-summary-errors {
+        font-weight: bold;
+        color: #ff0000;
+        height: 0px;
+        width: 1px;
+        overflow: hidden;
+    }
+
+    .Dev_Zagalovok_2 {
+        width: 90%;
+        font-family: Corbel;
+        font-size: 14px;
+        color: #221f1e;
+        text-align: left;
+        margin-left: 4px;
+        height: 22px;
+        overflow: hidden;
+        font-style: italic;
+        margin-bottom: 2px;
+    }
+
+        .Dev_Zagalovok_2 > p {
+            float: left;
+            margin-right: 5px;
+            width: 144px;
+            text-align: center;
+        }
+
+    .device-parameters, .wellllt {
+        width: 40%;
+        /* float: right; */
+        border-radius: 0px;
+        /* margin-top: 2px; */
+        background-color: #F5F5F5;
+        /* padding-left: 10px; */
+        min-height: 20px;
+        /* background-color: #f5f5f5; */
+        /* border: 1px solid #e3e3e3; */
+        -webkit-box-shadow: inset 0 1px 1px #F5F5F5;
+        box-shadow: inset 0 1px 1px #F5F5F5;
+        border-left: none;
+        /* border-right: 1px solid #fff; */
+        position: relative;
+        margin-left: 40px;
+    }
+
+    .description {
+        float: right;
+        /* border: 1px solid #000; */
+        width: 36.456%;
+        min-height: 191px;
+        margin-top: -100px;
+        /* margin-left: -17px; */
+        border-left: 1px solid #D8D7D6;
+    }
+
+    .polossa {
+        width: 98.5%;
+        height: 2px;
+        border-top: 1px solid #D8D7D6;
+        border-bottom: 1px solid #fff;
+    }
+
+    
+
+    .polossa_2 {
+        width: 94%;
+        background: #A7A6A5;
+        height: 2px;
+        position: absolute;
+        top: 188px;
+        left: 5px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #A7A6A5;
+    }
+
+    #ParameterName, #OID {
+        width: 50%;
+        border: 1px solid #a7a6a5;
+        font-size: 10px;
+        padding-left: 2px;
+        font-family: Arial;
+        color: #000;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: all 1s ease-in-out;
+        -webkit-transition: all 2s ease-in-out;
+        -moz-transition: all 2s ease-in-out;
+        -o-transition: all 2s ease-in-out;
+        height: 20px;
+        line-height: normal;
+        margin-bottom: 5px;
+    }
+    .Dev_Zagal {
+        margin-left: 150px;
+        color: #ff0000;
+        width: 150px;
+        margin-top: -8px;
+    }
+    .Dev_Zagal_2 {
+        margin-left: 150px;
+        color: #ff0000;
+        width: 66px;
+        margin-top: 0px;
+    }
+</style>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend></legend>
+        <legend class="Devices_Add_Zag">
+            <input type="submit" class="Add_Kn_Ok" value="" />
+            <input type="button" id="btnAddParam" class="Add_Kn_Param" value="" />
+            <a href="/Settings/Index" class="Add_Kn"></a>
+            Добавление нового устройства
+        </legend>
         @if (ViewData["message_error"] != null)
         {
             <div class="alert alert-error field-validation-error">
@@ -166,8 +642,8 @@
             </div>
 
         }
-        <div class="device-wrap">
-            <div class="well device-well">
+        <div class="Devices_Add_Div">
+           @* <div class="well device-well">*@
 
                 <div class="editor-label">
                     @*@Html.HiddenFor(model => model.IdDevice)*@
@@ -177,7 +653,7 @@
             @Html.ValidationMessageFor(model => model.IdDevice)
         </div>*@
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.Name)
                 </div>
                 <div class="editor-field">
@@ -185,7 +661,7 @@
                     @Html.ValidationMessageFor(model => model.Name)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.Ip_s)
                 </div>
                 <div class="editor-field">
@@ -193,7 +669,7 @@
                     @Html.ValidationMessageFor(model => model.Ip_s)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.Port)
                 </div>
                 <div class="editor-field">
@@ -201,17 +677,13 @@
                     @Html.ValidationMessageFor(model => model.Port)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.Login)
                 </div>
                 <div class="editor-field">
                     @if (ViewData["defaultLogin"] != null)
                     {
-@*@Html.EditorFor(model => model.Login, new {Value = ViewData["defaultLogin"], @readonly = true})
-                        *@
-                        <input type="text" id="Login" name="Login" value="@ViewData["defaultLogin"]" readonly="true"/>
-                        
-                        
+                        <input type="text" id="Login" name="Login" value="@ViewData["defaultLogin"]" readonly="true"/>  
                     }
                     else
                     {
@@ -220,35 +692,31 @@
                     @Html.ValidationMessageFor(model => model.Login)
                 </div>
 
-                <div class="editor-label">
+             <div class="Dev_Zagalovok">
                     @Html.LabelFor(model => model.Password)
                 </div>
                 <div class="editor-field">
                     @if (ViewData["defaultPassword"] != null)
                     {
-@*@Html.EditorFor(model => model.Password, new {@Value = ViewData["defaultPassword"], @readonly = true})
-                         *@
-                    
                         <input type="password" id="Password" name="Password" value="@ViewData["defaultPassword"]" readonly="true" />
                     }
                     else
                     {
                         @Html.EditorFor(model => model.Password)
                     }
-
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
-                <div>
+                <div class="dev_zagalovok Dev_Zagal">
                     @Html.CheckBox("enableTxts", false) Ввести руками
                 </div>
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Заказчик
                 </div>
                 <div>
                     @Html.DropDownList("IdCustomer", (ViewData["customers"] as SelectList))
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Описание
                 </div>
                 <div>
@@ -256,33 +724,33 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Производитель
                 </div>
                 <div class="editor-field">
                     @Html.DropDownList("Makers", (SelectList)ViewData["makers"], new { onChange = "fillDepartmentsDdl();" })
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     Модель
                 </div>
                 <div>
                     <select id="IdModel" name="IdModel" class="selectpickerDeps"></select>
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     @Html.CheckBox("IsActive") Активно
                 </div>
 
-                <div class="editor-label">
+                <div class="Dev_Zagalovok">
                     <input type="submit" value="Добавить" class="btn btn-primary" />
                     @Html.ActionLink("Назад", "Index", "Settings", null, new { @class = "btn btn-primary" })
                 </div>
             </div>
-            <div class="well device-parameters">
-                <input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр к устройству" />
+            <div class="device-parameters">
+                @*<input type="button" id="btnAddParam" class="btn btn-link" value="Добавить параметр к устройству" />*@
             </div>
-        </div>
+        @*</div>*@
         <div id="parametersList" title="Выберите параметры для устройства"></div>
 
     </fieldset>

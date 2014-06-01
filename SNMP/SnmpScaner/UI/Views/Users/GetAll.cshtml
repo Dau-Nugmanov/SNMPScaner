@@ -6,11 +6,12 @@
     Layout = null;
 }
 
-<h2>Список пользователей</h2>
+<h2 class="MainPanel_Index_Zag">Список пользователей
+    <p class="Sett_Ind_kn">
+    @Html.ActionLink("Новый пользователь", "Add", "Users")
+    </p>
+ </h2>
 
-<p>
-    @Html.ActionLink("Добавить нового", "Add", "Users")
-</p>
 <table class="table table-hover">
     <tr>
         <th>

@@ -4,16 +4,20 @@
     Layout = null;
 }
 
-<h3>Список типов устройств</h3>
-    <p>
-        @Html.ActionLink("Добавить новый тип", "Add")
+<h3 class="MainPanel_Index_Zag">
+    Список типов устройств
+    <p class="Sett_Ind_kn">
+        @Html.ActionLink("Новый тип", "Add")
     </p>
+</h3>
     <table class="table table-hover">
         <tr>
             <th>
                 Название типа
             </th>
-            <th></th>
+            <th>
+                Действия 
+            </th>
         </tr>
     
     @foreach (var item in Model) {
