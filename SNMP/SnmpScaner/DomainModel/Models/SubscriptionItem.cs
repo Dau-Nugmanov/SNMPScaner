@@ -6,6 +6,8 @@ namespace DomainModel.Models
 	public class SubscriptionItem
 	{
 		public long Id { get; set; }
+
+		public string Name { get; set; }
 		/// <summary>
 		/// Частота обновления в секундах - показывает как часто надо обновлять значение
 		/// </summary>
@@ -38,11 +40,21 @@ namespace DomainModel.Models
 		private ISnmpData OldValue { get; set; }
 		private ISnmpData LastValue { get; set; }
 		
-		public SubscriptionItem(DeviceItem item)
+		internal SubscriptionItem()
+		{
+			
+		}
+
+		public void InitItem(DeviceItem item)
 		{
 			if (item == null) throw new ArgumentNullException("item");
 			Item = item;
 			LastValue = item.Value;
+		}
+
+		public SubscriptionItem(DeviceItem item)
+		{
+			InitItem(item);
 		}
 		
 		private DateTime _nextUpdateTime = DateTime.MinValue;
@@ -60,10 +72,10 @@ namespace DomainModel.Models
 			LastValue = Item.Value;
 
 			if(ItemHelper.TryCompare(Item.Value, HiValue, out compare) && compare >= 0)
-				return new Notification(Id, LastValue, OldValue, NotificationLevel.Hi);
+				return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Hi);
 			if (ItemHelper.TryCompare(Item.Value, LoValue, out compare) && compare <= 0)
-				return new Notification(Id, LastValue, OldValue, NotificationLevel.Lo);
-			return new Notification(Id, LastValue, OldValue, NotificationLevel.Undefined);
+				return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Lo);
+			return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Undefined);
 		}
 	}
 }

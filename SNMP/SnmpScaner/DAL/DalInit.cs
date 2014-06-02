@@ -63,8 +63,12 @@ namespace DAL
 			Mapper.CreateMap<Notification, SubscriptionItem>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdNotification))
 				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => src.TimeDelta))
-				.ForMember(dest => dest.ValueDelta, opt => opt.MapFrom(src => src.ValueDelta));
-
+				.ForMember(dest => dest.ValueDelta, opt => opt.MapFrom(src => ItemHelper.GetData(src.ValueDelta, src.DevicesItems.DeviceItemEntity.DataType)))
+				.ForMember(dest => dest.HiValue, opt => opt.MapFrom(src => ItemHelper.GetData(src.Hi, src.DevicesItems.DeviceItemEntity.DataType)))
+				.ForMember(dest => dest.LoValue, opt => opt.MapFrom(src => ItemHelper.GetData(src.Lo, src.DevicesItems.DeviceItemEntity.DataType)))
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DevicesItems.DeviceItemEntity.Name));
 		}
+
+
 	}
 }

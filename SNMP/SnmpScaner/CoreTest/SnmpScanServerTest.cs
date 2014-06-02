@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Core;
 using DomainModel;
+using DomainModel.DalInterfaces;
+using DomainModel.EfModels;
 using DomainModel.Interfaces;
 using DomainModel.Models;
 using Lextm.SharpSnmpLib;
 using Moq;
 using NUnit.Framework;
 using StructureMap;
+using Notification = DomainModel.Models.Notification;
 
 namespace CoreTest
 {
@@ -296,6 +300,39 @@ namespace CoreTest
 			Assert.AreEqual(notifyLo.Level, NotificationLevel.Lo);
 			Assert.AreEqual(notifyLo.NewValue, "0");
 			Assert.AreEqual(notifyLo.OldValue, "5");
+		}
+	}
+
+	[TestFixture]
+	public class EmailTest
+	{
+		[Test]
+		public void Test()
+		{
+			var noti = new DomainModel.EfModels.Notification
+			{
+				IdNotification = 1,
+				EmailNotifications = new List<EmailNotification>
+				{
+					new EmailNotification
+					{
+						EmailEntity = new EmailEntity
+						{
+							Email = "daunugmanov@gmail.com",
+						}
+					}
+				}
+			};
+
+			ObjectFactory.Configure(item => item.For<INotificationsRepo>().Add(Mock.Of<INotificationsRepo>(r => r.GetById(It.IsAny<object>()) == noti)));
+
+			var notifications = new List<Notification>
+			{
+				new Notification(1, "test", new Counter32(1), new Counter32(2), NotificationLevel.Hi)
+			};
+
+			var executor = new NotificationExecutor();
+			executor.Execute(notifications);
 		}
 	}
 }

@@ -19,7 +19,10 @@ namespace DomainModel.EfModels
 
         public int IdModel { get; set; }
 
-        [ForeignKey("IdModel")]
+		[Required]
+	    public DeviceItemEntityDataType DataType { get; set; }
+
+	    [ForeignKey("IdModel")]
         public DeviceModel Model { get; set; }
 
         //public virtual ICollection<DeviceItemHistory> ItemHistory { get; set; }

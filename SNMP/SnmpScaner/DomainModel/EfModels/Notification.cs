@@ -13,6 +13,10 @@ namespace DomainModel.EfModels
 
         public long ValueDelta { get; set; }
 
+		public long Lo { get; set; }
+
+		public long Hi { get; set; }
+
 		public long IdDevicesItems { get; set; }
 
         //[ForeignKey("IdDeviceEntity,IdDeviceItemEntity")]

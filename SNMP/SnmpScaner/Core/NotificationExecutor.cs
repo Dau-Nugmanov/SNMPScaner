@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 using DomainModel.Interfaces;
@@ -11,7 +15,6 @@ namespace Core
 {
 	public class NotificationExecutor : INotificationExecutor
 	{
-		private Dictionary<User, List<Notification>> _users = new Dictionary<User, List<Notification>>();
 		public void Execute(IEnumerable<Notification> notifications)
 		{
 			var notificationRepo = ObjectFactory.GetInstance<INotificationsRepo>();
@@ -20,36 +23,84 @@ namespace Core
 				.Select(n => new { EfNotification = notificationRepo.GetById(n.SubscriptionItemId), Notification = n })
 				.ToList();
 
-			var phones = notify.Select(n =>
-				new
-				{
-					Phones = n.
-						EfNotification
-						.PhoneNotifications
-						.Select(p => p.PhoneNumber)
-						.Distinct(new PhoneNumberComparer()),
-					n.Notification
-				});
-
-
-			var emails = notify.Select(n =>
-				new
-				{
-					Emails = n.
-						EfNotification
-						.EmailNotifications
-						.Select(p => p.EmailEntity)
-						.Distinct(new EmailEntityComparer()),
-					n.Notification
-				});
-		}
-
-		private void EmailNotify(IEnumerable<EmailEntity> email, Notification notification)
-		{
+			if(notify.Count <= 0)
+				return;
 			
+
+			//var phones = notify
+			//	.Where(n=>n.EfNotification.PhoneNotifications != null)
+			//	.Select(n =>
+			//	new
+			//	{
+			//		Phones = n.
+			//			EfNotification
+			//			.PhoneNotifications
+			//			.Select(p => p.PhoneNumber)
+			//			.Distinct(new PhoneNumberComparer()),
+			//		n.Notification
+			//	})
+			//	.ToList();
+			
+			//phones
+			//	.ForEach(p=> PhoneNotify(p.Phones, p.Notification));
+
+			var dict = new Dictionary<string, List<Notification>>();
+			foreach (var notification in notify.Where(n=>n.EfNotification != null 
+				&& n.EfNotification.EmailNotifications != null))
+			{
+				foreach (var email in notification.EfNotification.EmailNotifications)
+				{
+					if(!dict.ContainsKey(email.EmailEntity.Email))
+						dict.Add(email.EmailEntity.Email, new List<Notification>());
+					dict[email.EmailEntity.Email].Add(notification.Notification);
+				}
+			}
+			EmailNotify(dict);
 		}
 
-		private void PhoneNotify(IEnumerable<PhoneNumber> email, Notification notification)
+		private void EmailNotify(Dictionary<string, List<Notification>> emails)
+		{
+			foreach (var email in emails)
+			{
+				var fromAddress = new MailAddress("false.bill.gates@gmail.com", "From Name");
+				var toAddress = new MailAddress(email.Key, "To Name");
+				const string fromPassword = "GNdsNds3113";
+				const string subject = "Уведомление";
+				var body = GetNotifyMessage(email.Value);
+
+				var smtp = new SmtpClient
+				{
+					Host = "smtp.gmail.com",
+					Port = 587,
+					EnableSsl = true,
+					DeliveryMethod = SmtpDeliveryMethod.Network,
+					Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+					Timeout = 20000
+				};
+				using (var message = new MailMessage(fromAddress, toAddress)
+				{
+					Subject = subject,
+					Body = body
+				})
+				{
+					smtp.Send(message);
+				}
+			}
+		}
+
+		private string GetNotifyMessage(IEnumerable<Notification> notifications)
+		{
+			var builder = new StringBuilder();
+			foreach (var notification in notifications)
+			{
+				builder.AppendFormat("{0} - {1}	Старое значение:{2} Новое значение:{3}\r\n", notification.Level, notification.ItemName, 
+					notification.OldValue, notification.NewValue);
+			}
+
+			return builder.ToString();
+		}
+
+		private void PhoneNotify(IEnumerable<PhoneNumber> phones, Notification notification)
 		{
 
 		}

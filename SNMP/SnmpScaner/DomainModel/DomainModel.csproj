@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Cache.cs" />
     <Compile Include="DalInterfaces\IBaseRepository.cs" />
+    <Compile Include="EfModels\DeviceItemEntityDataType.cs" />
     <Compile Include="EfModels\Report.cs" />
     <Compile Include="EfModels\ReportParameter.cs" />
     <Compile Include="EfModels\ReportParameterDataType.cs" />

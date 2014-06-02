@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DomainModel.EfModels;
 using Lextm.SharpSnmpLib;
+using Yarn.Extensions;
 
 namespace DomainModel
 {
@@ -142,6 +144,26 @@ namespace DomainModel
 		{
 			result = left.ToUInt32().CompareTo(right.ToUInt32());
 			return true;
+		}
+
+
+		public static ISnmpData GetData(long value, DeviceItemEntityDataType dataType)
+		{
+			switch (dataType)
+			{
+				case DeviceItemEntityDataType.Counter32:
+					return new Counter32(value);
+				case DeviceItemEntityDataType.Counter64:
+					return new Counter64(Convert.ToUInt64(value));
+				case DeviceItemEntityDataType.Gauge32:
+					return new Gauge32(value);
+				case DeviceItemEntityDataType.Integer32:
+					return new Integer32(Convert.ToInt32(value));
+				case DeviceItemEntityDataType.TimeTicks:
+					return new TimeTicks(Convert.ToUInt32(value));
+				default:
+					return null;
+			}
 		}
 	}
 }
