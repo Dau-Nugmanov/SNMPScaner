@@ -36,7 +36,7 @@ namespace UI.Models
                 IdDeviceType = IdDeviceType,
                 IdMaker = IdMaker,
                 ModelName = ModelName,
-                Items = items
+                Items = items,
             };
         }
 

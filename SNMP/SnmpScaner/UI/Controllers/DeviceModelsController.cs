@@ -34,7 +34,10 @@ namespace UI.Controllers
             var devTypesSelect = new SelectList(deviceTypesRepo.GetAll().ToList(), "IdDeviceType", "DeviceTypeName");
             ViewData["types"] = devTypesSelect;
 
-            var dataTypes = Enum.GetValues(typeof(DeviceItemEntityDataType)).Cast<ItemDataType>();
+            var dataTypes = Enum.GetValues(typeof(DeviceItemEntityDataType))
+                .Cast<DeviceItemEntityDataType>()
+                .Select(t => new ItemDataType { IdDataType = (int)t, DataTypeName = t.ToString() })
+                .ToList();
             ViewData["parametersDataTypes"] = new SelectList(dataTypes, "IdDataType", "DataTypeName");
         }
 
@@ -84,6 +87,7 @@ namespace UI.Controllers
             if (model == null)
                 return HttpNotFound();
             SetDdlsSelectValues(model.IdMaker, model.IdDeviceType);
+            SetDdls();
             var m = DeviceModelModel.ToModelEntity(model);
             return View(m);
         }
@@ -96,6 +100,7 @@ namespace UI.Controllers
                 ViewData["error_message"] = "Данные не корректны";
                 return View(model);
             }
+            SetDdls();
             DeviceModelsRepository modelsRepo = new DeviceModelsRepository(new SnmpDbContext());
             modelsRepo.Edit(model.ToEfEntity());
             modelsRepo.SaveChanges();

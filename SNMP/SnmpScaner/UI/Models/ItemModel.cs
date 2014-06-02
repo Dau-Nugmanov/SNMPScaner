@@ -26,6 +26,7 @@ namespace UI.Models
         public string[] PhoneNumbersNotifications { get; set; }
 
         public int EnumDataType { get; set; }
+        public string EnumDataTypeName { get; set; }
 
         public DeviceItemEntity ToEfEntity()
         {
@@ -42,7 +43,8 @@ namespace UI.Models
                 Oid = Oid_s,
                 IdModel = IdModel,
                 EmailNotifications = emailNotifs,
-                PhoneNotifications = phoneNotis
+                PhoneNotifications = phoneNotis,
+                DataType = (DeviceItemEntityDataType)EnumDataType
             };
         }
 
@@ -61,7 +63,9 @@ namespace UI.Models
                 Name = item.Name,
                 Oid_s = item.Oid,
                 EmailNotifications = emails.ToArray(),
-                PhoneNumbersNotifications = phones.ToArray()
+                PhoneNumbersNotifications = phones.ToArray(),
+                EnumDataType = (int)item.DataType,
+                EnumDataTypeName = item.DataType.ToString()
             };
         }
     }
