@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using DAL.Repos;
 using UI.Helpers;
 using UI.Models;
+using DomainModel.EfModels;
 
 namespace UI.Controllers
 {
@@ -30,7 +31,7 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(DeviceModel device)
+        public ActionResult Add(UI.Models.DeviceModel device)
         {
             if (!ModelState.IsValid)
             {
@@ -63,12 +64,12 @@ namespace UI.Controllers
                 if (device == null)
                     return HttpNotFound();
                 SetDdlsSelectValues(device.IdCustomer, device.DeviceModel.IdMaker);
-                return View(DeviceModel.ToModelEntity(device));
+                return View(UI.Models.DeviceModel.ToModelEntity(device));
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(DeviceModel device, int Makers)
+        public ActionResult Edit(UI.Models.DeviceModel device, int Makers)
         {
             SetDdlsSelectValues(device.IdCustomer, Makers);
             if (!ModelState.IsValid)
