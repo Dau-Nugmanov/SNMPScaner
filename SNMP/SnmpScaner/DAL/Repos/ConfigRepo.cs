@@ -20,21 +20,9 @@ namespace DAL.Repos
 
 		public SubscriptionItem[] GetAllSubscriptions(Cache cache)
 		{
-			var context = new SnmpDbContext();
-			var repo = new NotificationsRepository(context);
-			var emailsRepository = new EmailNotificationsRepository(context);
-			var phonesRepository = new PhoneNotificationsRepository(context);
-			var deviceItemRepo = new DevicesItemsRepository(context);
-			
+			var repo = new NotificationsRepository(new SnmpDbContext());
 			var notifications =  repo.GetAll().ToList();
-			notifications.ForEach(n =>
-			{
-				n.DevicesItems = deviceItemRepo.GetById(n.IdDevicesItems);
-				n.EmailNotifications = emailsRepository.GetAllByNotifId(n.IdNotification).ToList();
-				n.PhoneNotifications = phonesRepository.GetAllByNotifId(n.IdNotification).ToList();
-			});
 			
-
 			var mapped = Mapper.Map<IEnumerable<DomainModel.EfModels.Notification>, IEnumerable<SubscriptionItem>>(notifications).ToArray();
 			foreach (var subscriptionItem in mapped)
 			{
