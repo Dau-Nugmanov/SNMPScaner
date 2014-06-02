@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -185,5 +184,118 @@ namespace CoreTest
 			var values = server.GetAllValues();
 		} 
 	}
-}
 
+	[TestFixture]
+	public class ItemHelperCompareTest
+	{
+		[Test]
+		public void Equals()
+		{
+			int result;
+			ISnmpData left = new Counter32(10);
+			ISnmpData right = new Counter32(10);
+			Assert.IsTrue(ItemHelper.TryCompare(left, right, out result));
+			Assert.AreEqual(result, 0);
+		}
+		[Test]
+		public void Less()
+		{
+			int result;
+			ISnmpData left = new Counter32(5);
+			ISnmpData right = new Counter32(10);
+			Assert.IsTrue(ItemHelper.TryCompare(left, right, out result));
+			Assert.Less(result, 0);
+		}
+		[Test]
+		public void Greater()
+		{
+			int result;
+			ISnmpData left = new Counter32(10);
+			ISnmpData right = new Counter32(5);
+			Assert.IsTrue(ItemHelper.TryCompare(left, right, out result));
+			Assert.Greater(result, 0);
+		}
+		[Test]
+		public void DiffTypes()
+		{
+			int result;
+			ISnmpData left = new Counter32(10);
+			ISnmpData right = new Counter64(10);
+			Assert.IsFalse(ItemHelper.TryCompare(left, right, out result));
+		}
+		[Test]
+		public void NullTypeLeft()
+		{
+			int result;
+			ISnmpData right = new Counter64(10);
+			Assert.IsFalse(ItemHelper.TryCompare(null, right, out result));
+		}
+		[Test]
+		public void NullTypeRight()
+		{
+			int result;
+			ISnmpData left = new Counter32(10);
+			Assert.IsFalse(ItemHelper.TryCompare(left, null, out result));
+		}
+		[Test]
+		public void NullTypes()
+		{
+			int result;
+			Assert.IsFalse(ItemHelper.TryCompare(null, null, out result));
+		}
+	}
+
+	[TestFixture]
+	public class SubscriptionItemTest
+	{
+		[Test]
+		public void UpdateTest()
+		{
+			var deviceItem = new DeviceItem
+			{
+				Id = 1,
+				Oid = new ObjectIdentifier("0.1.2.3"),
+				Value = new Counter32(10),
+				Timestamp = DateTime.Now.AddSeconds(-1),
+				TimeDelta = 1,
+				ValueDelta = new Counter32(5)
+			};
+
+			var subscriptionItem = new SubscriptionItem(deviceItem)
+			{
+				Id = 2,
+				ValueDelta = new Counter32(5),
+				TimeDelta = 1,
+				HiValue = new Counter32(20),
+				LoValue = new Counter32(0)
+			};
+
+			deviceItem.Value = new Counter32(15);
+			var notify = subscriptionItem.Update();
+			Assert.AreEqual(notify.Level, NotificationLevel.Undefined);
+			Assert.AreEqual(notify.NewValue, "15");
+			Assert.AreEqual(notify.OldValue, "10");
+
+			Thread.Sleep(1000);
+			deviceItem.Value = new Counter32(20);
+			var notifyHi = subscriptionItem.Update();
+			Assert.AreEqual(notifyHi.Level, NotificationLevel.Hi);
+			Assert.AreEqual(notifyHi.NewValue, "20");
+			Assert.AreEqual(notifyHi.OldValue, "15");
+
+			Thread.Sleep(1000);
+			deviceItem.Value = new Counter32(5);
+			notify = subscriptionItem.Update();
+			Assert.AreEqual(notify.Level, NotificationLevel.Undefined);
+			Assert.AreEqual(notify.NewValue, "5");
+			Assert.AreEqual(notify.OldValue, "20");
+
+			Thread.Sleep(1000);
+			deviceItem.Value = new Counter32(0);
+			var notifyLo = subscriptionItem.Update();
+			Assert.AreEqual(notifyLo.Level, NotificationLevel.Lo);
+			Assert.AreEqual(notifyLo.NewValue, "0");
+			Assert.AreEqual(notifyLo.OldValue, "5");
+		}
+	}
+}

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 using DomainModel.Interfaces;
+using StructureMap;
 using Notification = DomainModel.Models.Notification;
 
 namespace Core
@@ -11,33 +14,34 @@ namespace Core
 		private Dictionary<User, List<Notification>> _users = new Dictionary<User, List<Notification>>();
 		public void Execute(IEnumerable<Notification> notifications)
 		{
-			//var notificationRepo = ObjectFactory.GetInstance<INotificationsRepo>();
-			
-			//var notify = notifications
-			//	.Select(n=>new { EfNotification = notificationRepo.GetById(n.SubscriptionItemId), Notification = n})
-			//	.ToList();
+			var notificationRepo = ObjectFactory.GetInstance<INotificationsRepo>();
 
-			//var phones = notify.Select(n => 
-			//	new 
-			//	{
-			//		Phones = n.
-			//			EfNotification
-			//			.PhoneNotifications
-			//			.Select(p => p.PhoneNumber)
-			//			.Distinct(new PhoneNumberComparer()), 
-			//		n.Notification});
+			var notify = notifications
+				.Select(n => new { EfNotification = notificationRepo.GetById(n.SubscriptionItemId), Notification = n })
+				.ToList();
+
+			var phones = notify.Select(n =>
+				new
+				{
+					Phones = n.
+						EfNotification
+						.PhoneNotifications
+						.Select(p => p.PhoneNumber)
+						.Distinct(new PhoneNumberComparer()),
+					n.Notification
+				});
 
 
-			//var emails = notify.Select(n =>
-			//	new
-			//	{
-			//		Emails = n.
-			//			EfNotification
-			//			.EmailNotifications
-			//			.Select(p => p.EmailEntity)
-			//			.Distinct(new EmailEntityComparer()),
-			//		n.Notification
-			//	});
+			var emails = notify.Select(n =>
+				new
+				{
+					Emails = n.
+						EfNotification
+						.EmailNotifications
+						.Select(p => p.EmailEntity)
+						.Distinct(new EmailEntityComparer()),
+					n.Notification
+				});
 		}
 
 		private void EmailNotify(IEnumerable<EmailEntity> email, Notification notification)

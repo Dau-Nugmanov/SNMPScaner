@@ -61,35 +61,87 @@ namespace DomainModel
 			if (newValue == null) return false;
 			if (value == null) return true;
 			if (diff == null) return true;
-			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) > diff.ToUInt32();
+			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) >= diff.ToUInt32();
 		}
 		private static bool NeedUpdate(Gauge32 value, Gauge32 newValue, Gauge32 diff)
 		{
 			if (newValue == null) return false;
 			if (value == null) return true;
 			if (diff == null) return true;
-			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) > diff.ToUInt32();
+			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) >= diff.ToUInt32();
 		}
 		private static bool NeedUpdate(Integer32 value, Integer32 newValue, Integer32 diff)
 		{
 			if (newValue == null) return false;
 			if (value == null) return true;
 			if (diff == null) return true;
-			return Math.Abs(newValue.ToInt32() - value.ToInt32()) > diff.ToInt32();
+			return Math.Abs(newValue.ToInt32() - value.ToInt32()) >= diff.ToInt32();
 		}
 		private static bool NeedUpdate(Counter64 value, Counter64 newValue, Counter64 diff)
 		{
 			if (newValue == null) return false;
 			if (value == null) return true;
 			if (diff == null) return true;
-			return Math.Abs((decimal)(newValue.ToUInt64() - value.ToUInt64())) > diff.ToUInt64();
+			return Math.Abs((decimal)(newValue.ToUInt64() - value.ToUInt64())) >= diff.ToUInt64();
 		}
 		private static bool NeedUpdate(TimeTicks value, TimeTicks newValue, TimeTicks diff)
 		{
 			if (newValue == null) return false;
 			if (value == null) return true;
 			if (diff == null) return true;
-			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) > diff.ToUInt32();
+			return Math.Abs(newValue.ToUInt32() - value.ToUInt32()) >= diff.ToUInt32();
+		}
+
+
+		public static bool TryCompare(ISnmpData left, ISnmpData right, out int result)
+		{
+			result = 0;
+			if (right == null || left == null) return false;
+			if (left.Equals(right)) return true;
+
+			if (left.TypeCode != right.TypeCode) return false;
+			if (!ValueTypes.Contains(left.TypeCode)) return false;
+
+			switch (left.TypeCode)
+			{
+				case SnmpType.Counter32:
+					return TryCompare(left as Counter32, right as Counter32, out result);
+				case SnmpType.Gauge32:
+					return TryCompare(left as Gauge32, right as Gauge32, out result);
+				case SnmpType.Integer32:
+					return TryCompare(left as Integer32, right as Integer32, out result);
+				case SnmpType.Counter64:											  
+					return TryCompare(left as Counter64, right as Counter64, out result);
+				case SnmpType.TimeTicks:											  
+					return TryCompare(left as TimeTicks, right as TimeTicks, out result);
+				default:
+					return false;
+			}
+		}
+		private static bool TryCompare(Counter32 left, Counter32 right, out int result)
+		{
+			result = left.ToUInt32().CompareTo(right.ToUInt32());
+			return true;
+		}
+		private static bool TryCompare(Gauge32 left, Gauge32 right, out int result)
+		{
+			result = left.ToUInt32().CompareTo(right.ToUInt32());
+			return true;
+		}
+		private static bool TryCompare(Integer32 left, Integer32 right, out int result)
+		{
+			result = left.ToInt32().CompareTo(right.ToInt32());
+			return true;
+		}
+		private static bool TryCompare(Counter64 left, Counter64 right, out int result)
+		{
+			result = left.ToUInt64().CompareTo(right.ToUInt64());
+			return true;
+		}
+		private static bool TryCompare(TimeTicks left, TimeTicks right, out int result)
+		{
+			result = left.ToUInt32().CompareTo(right.ToUInt32());
+			return true;
 		}
 	}
 }

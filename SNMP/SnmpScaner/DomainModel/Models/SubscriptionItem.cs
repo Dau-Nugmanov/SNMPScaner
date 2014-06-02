@@ -15,11 +15,23 @@ namespace DomainModel.Models
 		/// </summary>
 		public ISnmpData ValueDelta { get; set; }
 
+		/// <summary>
+		/// Максимальное значение. Если текуще значение больше, то генерируется уведомление с HiLevel. Будет работать только для числовых типов
+		/// </summary>
+		public ISnmpData HiValue { get; set; }
+
+		/// <summary>
+		/// Минимальное значение. Если текуще значение меньше, то генерируется уведомление с LoLevel. Будет работать только для числовых типов
+		/// </summary>
+		public ISnmpData LoValue { get; set; }
+
 		private bool WasChanged
 		{
 			get
 			{
-				return Item != null && Item.Value != null && ItemHelper.NeedUpdate(LastValue, Item.Value, ValueDelta);
+				return Item != null 
+					&& Item.Value != null
+					&& ItemHelper.NeedUpdate(LastValue, Item.Value, ValueDelta);
 			}
 		}
 		private DeviceItem Item { get; set; }
@@ -37,13 +49,21 @@ namespace DomainModel.Models
 
 		public Notification Update()
 		{
-			if (DateTime.Now <= _nextUpdateTime || !WasChanged) return Notification.Empty;
-			
+			int compare;
+			if (DateTime.Now <= _nextUpdateTime 
+				|| !WasChanged)
+				return Notification.Empty;
+				
 			_nextUpdateTime = DateTime.Now.AddSeconds(TimeDelta);
 			
 			OldValue = LastValue;
 			LastValue = Item.Value;
-			return new Notification(Id, LastValue, OldValue);
+
+			if(ItemHelper.TryCompare(Item.Value, HiValue, out compare) && compare >= 0)
+				return new Notification(Id, LastValue, OldValue, NotificationLevel.Hi);
+			if (ItemHelper.TryCompare(Item.Value, LoValue, out compare) && compare <= 0)
+				return new Notification(Id, LastValue, OldValue, NotificationLevel.Lo);
+			return new Notification(Id, LastValue, OldValue, NotificationLevel.Undefined);
 		}
 	}
 }
