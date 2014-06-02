@@ -43,7 +43,7 @@ namespace UI
 			ObjectFactory.Configure(i => i.For<INotificationExecutor>().Use<NotificationExecutor>());
 			InitTestSettings();
 
-            _server = new SnmpScanServer();
+            //_server = new SnmpScanServer();
 
             InitStartParameters();
             

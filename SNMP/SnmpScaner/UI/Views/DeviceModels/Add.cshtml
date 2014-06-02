@@ -71,6 +71,9 @@
                 var oid = $('#OID').val();
                 var paramSelector = $('.device-parameters');
 
+                var paramDataTypeName = $('ddlParameterType').text();
+                var paramDataTypeId = $('ddlParameterType').val();
+
                 if (!paramName || !oid) {
                     alert('Заполнены не все поля');
                     return;
@@ -83,6 +86,9 @@
                         + '</div>'
                         + '<div><p>OID: </p> '
                             + '<input type="text" name=Items[' + itemCnt + '].Oid_s value=' + oid + ' />'
+                        + '</div>'
+                        + '<div><p>Тип параметра: ' + paramDataTypeName + '</p> '
+                            + '<input type="hidden" name=Items[' + itemCnt + '].EnumDataType value=' + paramDataTypeId + ' />'
                         + '</div>'
                     + '</div>' + '<div class="polossa"></div>';
                 //alert(html);
@@ -609,6 +615,13 @@
                         </div>
                         <div class="editor-field">
                             @Html.TextBox("OID")
+                        </div>
+
+                        <div class="Dev-Zagalovok">
+                            Тип параметра
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("ddlParameterType", (ViewData["parametersDataTypes"] as SelectList))
                         </div>
                         <input type="button" value="Добавить" class="btn btn-primary" id="btnParameterAdd" />
                     </div>

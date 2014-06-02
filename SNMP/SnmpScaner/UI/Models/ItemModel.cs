@@ -24,6 +24,7 @@ namespace UI.Models
 
         public string[] EmailNotifications { get; set; }
         public string[] PhoneNumbersNotifications { get; set; }
+
         public int EnumDataType { get; set; }
 
         public DeviceItemEntity ToEfEntity()

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL.Repos;
 using UI.Models;
+using DomainModel.EfModels;
 
 namespace UI.Controllers
 {
@@ -32,6 +33,9 @@ namespace UI.Controllers
             var deviceTypesRepo = new DeviceTypesRepository(new SnmpDbContext());
             var devTypesSelect = new SelectList(deviceTypesRepo.GetAll().ToList(), "IdDeviceType", "DeviceTypeName");
             ViewData["types"] = devTypesSelect;
+
+            var dataTypes = Enum.GetValues(typeof(DeviceItemEntityDataType)).Cast<ItemDataType>();
+            ViewData["parametersDataTypes"] = new SelectList(dataTypes, "IdDataType", "DataTypeName");
         }
 
         [HttpPost]
