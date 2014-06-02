@@ -44,10 +44,18 @@ namespace UI
 			InitTestSettings();
 
             _server = new SnmpScanServer();
-            
-           
 
+            InitStartParameters();
             
+        }
+
+        private void InitStartParameters()
+        {
+            using (SnmpDbContext context = new SnmpDbContext())
+            {
+                InitReportParametersDataTypes(context);
+                context.SaveChanges();
+            }
         }
 
         private void InitReportParametersDataTypes(SnmpDbContext context)
@@ -109,7 +117,6 @@ namespace UI
                         DataTypeName = "Модель устройства"
                     }
                 );
-            context.SaveChanges();
         }
 
         private void InitWarningsModels()

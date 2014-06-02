@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace UI.Models
+{
+    public class ItemDataType
+    {
+        public int IdDataType { get; set; }
+        public string DataTypeName { get; set; }
+    }
+}

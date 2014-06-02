@@ -393,6 +393,7 @@
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmailNotificationModel.cs" />
     <Compile Include="Models\IModelEntity.cs" />
+    <Compile Include="Models\ItemDataType.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\MakerModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
