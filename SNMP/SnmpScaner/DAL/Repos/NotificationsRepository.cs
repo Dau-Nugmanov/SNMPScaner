@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using DomainModel.DalInterfaces;
 using DomainModel.EfModels;
 using System.Data.Entity;
@@ -15,6 +16,18 @@ namespace DAL.Repos
         {
             _context = context;
         }
+
+
+	    public override IEnumerable<Notification> GetAll()
+	    {
+			return dbSet
+				.Include(t => t.DevicesItems)
+				.Include(t => t.EmailNotifications)
+				.Include(t => t.EmailNotifications.Select(q => q.EmailEntity))
+				.Include(t => t.PhoneNotifications)
+				.Include(t => t.PhoneNotifications.Select(q => q.PhoneNumber));
+	    }
+
 
 		public Notification GetByDeviceIdAndItemId(long idDevicesItems)
         {

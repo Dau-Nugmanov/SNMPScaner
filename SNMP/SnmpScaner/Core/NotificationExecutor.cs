@@ -50,9 +50,9 @@ namespace Core
 			{
 				foreach (var email in notification.EfNotification.EmailNotifications)
 				{
-					if(!dict.ContainsKey(email.EmailEntity.Email))
-						dict.Add(email.EmailEntity.Email, new List<Notification>());
-					dict[email.EmailEntity.Email].Add(notification.Notification);
+					if(!dict.ContainsKey(email.IdEmailEntity))
+						dict.Add(email.IdEmailEntity, new List<Notification>());
+					dict[email.IdEmailEntity].Add(notification.Notification);
 				}
 			}
 			EmailNotify(dict);
@@ -62,9 +62,9 @@ namespace Core
 		{
 			foreach (var email in emails)
 			{
-				var fromAddress = new MailAddress("false.bill.gates@gmail.com", "From Name");
+				var fromAddress = new MailAddress("SNMPEmailTest@gmail.com", "From Name");
 				var toAddress = new MailAddress(email.Key, "To Name");
-				const string fromPassword = "GNdsNds3113";
+				const string fromPassword = "123SNMP321";
 				const string subject = "Уведомление";
 				var body = GetNotifyMessage(email.Value);
 
@@ -93,8 +93,8 @@ namespace Core
 			var builder = new StringBuilder();
 			foreach (var notification in notifications)
 			{
-				builder.AppendFormat("{0} - {1}	Старое значение:{2} Новое значение:{3}\r\n", notification.Level, notification.ItemName, 
-					notification.OldValue, notification.NewValue);
+				builder.AppendFormat("{0} - {1}	Старое значение:{2} Новое значение:{3}	({4})\r\n", notification.Level, notification.ItemName, 
+					notification.OldValue, notification.NewValue, notification.DataType);
 			}
 
 			return builder.ToString();

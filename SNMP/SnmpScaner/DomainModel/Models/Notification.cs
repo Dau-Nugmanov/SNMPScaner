@@ -10,13 +10,17 @@ namespace DomainModel.Models
 			ItemName = itemName;
 			NewValue = newValue == null ? null : newValue.ToString();
 			OldValue = oldValue == null ? null : oldValue.ToString();
+			DataType = newValue != null ? newValue.TypeCode.ToString() : "Unknown";
 			Level = level;
 		}
 		public long SubscriptionItemId { get; private set; }
 		public string ItemName { get; private set; }
+		public string DataType { get; private set; }
+
 
 		public string NewValue { get; private set; }
 		public string OldValue { get; private set; }
+
 
 		public NotificationLevel Level { get; private set; }
 
