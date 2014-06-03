@@ -51,6 +51,7 @@ namespace DAL
 		{
 			Mapper.CreateMap<DevicesItems, DeviceItem>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDeviceItemEntity))
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DeviceItemEntity.Name))
 				.ForMember(dest => dest.Oid, opt => opt.MapFrom(src => new ObjectIdentifier(src.DeviceItemEntity.Oid)))
 				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => Convert.ToInt64(src.DeltaT)));
 

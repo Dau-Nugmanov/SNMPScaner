@@ -9,6 +9,7 @@ namespace DomainModel.Models
 	public class DeviceItem
 	{
 		public long Id { get; set; }
+		public string Name { get; set; }
 		public ObjectIdentifier Oid { get; set; }
 		public DateTime Timestamp { get; set; }
 		public ISnmpData Value { get; set; }

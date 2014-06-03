@@ -30,6 +30,25 @@ namespace Core
 			return _cache.Devices.SelectMany(d => d.Items).ToArray();
 		}
 
+		public DeviceItem[] GetAllValues(long deviceId)
+		{
+			return _cache.Devices.Where(d=>d.Id == deviceId).SelectMany(d => d.Items).ToArray();
+		}
+
+		public Notification[] GetAllNotifications()
+		{
+			return _cache.Notifications.ToArray();
+		}
+
+		public Notification[] GetAllNotifications(long deviceId)
+		{
+			var device = _cache.Devices.FirstOrDefault(d => d.Id == deviceId);
+			if (device != null)
+				return device.Items.Join(_cache.Notifications, item => item.Id, n => n.ItemId, (d, n) => n).ToArray();
+			return new Notification[0];
+		}
+
+
 		/// <summary>
 		/// Нужно для теста. потом удалю
 		/// </summary>

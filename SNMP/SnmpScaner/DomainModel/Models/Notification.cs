@@ -4,9 +4,10 @@ namespace DomainModel.Models
 {
 	public class Notification
 	{
-		public Notification(long subscriptionItemId, string itemName, ISnmpData newValue, ISnmpData oldValue, NotificationLevel level)
+		public Notification(long subscriptionItemId, long itemId, string itemName, ISnmpData newValue, ISnmpData oldValue, NotificationLevel level)
 		{
 			SubscriptionItemId = subscriptionItemId;
+			ItemId = itemId;
 			ItemName = itemName;
 			NewValue = newValue == null ? null : newValue.ToString();
 			OldValue = oldValue == null ? null : oldValue.ToString();
@@ -14,6 +15,7 @@ namespace DomainModel.Models
 			Level = level;
 		}
 		public long SubscriptionItemId { get; private set; }
+		public long ItemId { get; private set; }
 		public string ItemName { get; private set; }
 		public string DataType { get; private set; }
 
@@ -24,7 +26,7 @@ namespace DomainModel.Models
 
 		public NotificationLevel Level { get; private set; }
 
-		private static readonly Notification _empty = new Notification(0 , "", null, null, NotificationLevel.Undefined);
+		private static readonly Notification _empty = new Notification(0 , 0, "", null, null, NotificationLevel.Undefined);
 		public static Notification Empty
 		{
 			get { return _empty; }
