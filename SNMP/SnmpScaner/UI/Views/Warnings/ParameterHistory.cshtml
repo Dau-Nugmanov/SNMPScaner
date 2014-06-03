@@ -1,0 +1,29 @@
+﻿@model DomainModel.EfModels.DevicesItems
+
+@{
+    ViewBag.Title = "ParameterHistory";
+}
+
+<h2>История изменения параметра</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            Значение
+        </th>
+        <th>
+            Время изменения
+        </th>
+    </tr>
+@foreach (var item in Model.ItemHistory.OrderByDescending(t => t.Timestamp))
+{
+    <tr>
+        <td>
+            @item.Value
+        </td>
+        <td>
+            @item.Timestamp
+        </td>
+    </tr>
+}
+</table>

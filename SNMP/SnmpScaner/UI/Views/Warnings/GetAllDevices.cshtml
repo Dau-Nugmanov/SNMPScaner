@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DomainModel.EfModels.DeviceEntity>
+
+@{
+    Layout = null;
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            Наименование
+        </th>
+        <th>
+            Порт
+        </th>
+        <th>
+            Заказчик
+        </th>
+        <th>
+            Модель
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) 
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Port)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceModel.ModelName)
+        </td>
+        <td>
+            @Html.ActionLink("Подробности", "DetailsDevice", new {  id = item.IdDeviceEntity })
+        </td>
+    </tr>
+}
+</table>

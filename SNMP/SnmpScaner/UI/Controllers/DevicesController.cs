@@ -9,9 +9,11 @@ using DAL.Repos;
 using UI.Helpers;
 using UI.Models;
 using DomainModel.EfModels;
+using StructureMap;
 
 namespace UI.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class DevicesController : Controller
     {
         public ActionResult GetAll()

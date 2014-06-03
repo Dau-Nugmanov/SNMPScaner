@@ -42,8 +42,6 @@ namespace UI.Models
                 Name = Name,
                 Oid = Oid_s,
                 IdModel = IdModel,
-				//EmailNotifications = emailNotifs,
-				//PhoneNotifications = phoneNotis,
                 DataType = (DeviceItemEntityDataType)EnumDataType
             };
         }
@@ -52,10 +50,6 @@ namespace UI.Models
         {
             List<string> emails = new List<string>();
             List<string> phones = new List<string>();
-			//if (item.PhoneNotifications != null)
-			//	phones.AddRange(item.PhoneNotifications.Select(t => t.IdPhoneEntity));
-			//if (item.EmailNotifications != null)
-			//	emails.AddRange(item.EmailNotifications.Select(t => t.IdEmailEntity));
             return new ItemModel
             {
                 IdItem = item.IdDeviceItemEntity,

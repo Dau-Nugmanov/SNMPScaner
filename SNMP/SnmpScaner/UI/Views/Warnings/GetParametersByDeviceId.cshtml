@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DomainModel.Models.DeviceItem>
+
+@{
+    Layout = null;
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            Название параметра
+        </th>
+        <th>
+            OID
+        </th>
+        <th>
+            Текущее значение
+        </th>
+        <th>
+            Время изменения
+        </th>
+        <th>
+            Действия
+        </th>
+    </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @item.Oid
+        </td>
+        <td>
+            @item.Value
+        </td>
+        <td>
+            @item.Timestamp
+        </td>
+        <td>
+            @Html.ActionLink("Просмотреть историю", "ParameterHistory", "Warnings", new { id = item.Id }, null)
+        </td>
+    </tr>
+}
+</table>

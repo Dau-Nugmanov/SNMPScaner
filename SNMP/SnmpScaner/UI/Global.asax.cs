@@ -29,7 +29,8 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
-	    public static SnmpScanServer ScanServer;
+	    public static SnmpScanServer SnmpServer;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -44,7 +45,7 @@ namespace UI
 			ObjectFactory.Configure(i => i.For<INotificationExecutor>().Use<NotificationExecutor>());
 			InitTestSettings();
 
-            ScanServer = new SnmpScanServer();
+            SnmpServer = new SnmpScanServer();
 
             InitStartParameters();
         }
@@ -194,8 +195,8 @@ namespace UI
 				var oids = new List<Tuple<string, string, DeviceItemEntityDataType>>
 				{
 #region OIDS
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.1",   "1",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.2",   "2",		DeviceItemEntityDataType.Integer32),
+                    //new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.1",   "1",		DeviceItemEntityDataType.Integer32),
+                    //new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.2",   "2",		DeviceItemEntityDataType.Integer32),
 					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.2.1",   "3",		DeviceItemEntityDataType.OctetString),
 					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.2.2",   "4",		DeviceItemEntityDataType.OctetString),
 					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.3.1",   "5",		DeviceItemEntityDataType.Integer32),
@@ -269,6 +270,7 @@ namespace UI
 					{
 						DeltaT = 60,
 						DeviceItemEntity = i,
+                        DeltaV = 10,
 						Notifications = GetNotification(user),
 					}).ToList()
 				});

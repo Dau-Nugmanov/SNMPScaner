@@ -628,6 +628,7 @@
     <Content Include="Content\images\icons\main\Monitor_hover.png" />
     <Content Include="Content\images\icons\main\Ustroist.png" />
     <Content Include="Content\images\icons\main\Ustroist_hover.png" />
+    <Content Include="Content\images\loader.gif" />
     <Content Include="Content\kendo.common.css" />
     <Content Include="Content\kendo.default.css" />
     <Content Include="Content\main.css" />
@@ -793,6 +794,10 @@
     <Content Include="Views\Shared\Controls\_ParametersControl.cshtml" />
     <Content Include="Views\Devices\GetAllCheckParameters.cshtml" />
     <Content Include="Views\Shared\Controls\_SymbolsControl.cshtml" />
+    <Content Include="Views\Warnings\GetAllDevices.cshtml" />
+    <Content Include="Views\Warnings\DetailsDevice.cshtml" />
+    <Content Include="Views\Warnings\GetParametersByDeviceId.cshtml" />
+    <Content Include="Views\Warnings\ParameterHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

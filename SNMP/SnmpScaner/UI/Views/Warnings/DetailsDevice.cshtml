@@ -1,0 +1,56 @@
+﻿@model DomainModel.EfModels.DeviceEntity
+
+@{
+    ViewBag.Title = "DetailsDevice";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Warnings/GetParametersByDeviceId",
+            type: "GET",
+            data: { id: '@(Model.IdDeviceEntity)' },
+            beforeSend: function () {
+                $('.mask').show();
+            },
+            success: function (data) {
+                $('.mask').hide();
+                $("#content").html('').html(data);
+            }
+        });
+
+    })
+
+</script>
+
+<h2>Информаия об устройстве</h2>
+
+<div class="well">
+    <div class="Dev-Zagalovok">
+        <b>Название: </b>@Model.Name
+    </div>
+    <div>
+        
+    </div>
+
+    <div class="Dev-Zagalovok">
+        <b>IP: </b>@Model.Ip
+    </div>
+
+    <div class="Dev-Zagalovok">
+        <b>Модель: </b> @Model.DeviceModel.ModelName
+    </div>
+
+    <div class="Dev-Zagalovok">
+        <b>Производитель: </b>@Model.DeviceModel.Maker.MakerName
+    </div>
+</div>
+<div class="items-info well">
+    <div class="mask">
+        <img src="~/Content/images/728.gif" class="img-loader"/>
+    </div>
+    <div id="content">
+    </div>
+</div>
