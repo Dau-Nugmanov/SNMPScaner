@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using DomainModel.EfModels;
+using System.ComponentModel;
 
 namespace UI.Models
 {
@@ -17,6 +18,14 @@ namespace UI.Models
 
         [Required(ErrorMessage="*")]
         public long DeltaValue { get; set; }
+
+        [Required(ErrorMessage="*")]
+        [Range(1, long.MaxValue, ErrorMessage = "Только целое число")]
+        public long Hi { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Range(1, long.MaxValue, ErrorMessage = "Только целое число")]
+        public long Low { get; set; }
 
         public EmailNotificationModel[] EmailNotifications { get; set; }
 
@@ -51,7 +60,9 @@ namespace UI.Models
                 IdNotification = IdNotification,
                 PhoneNotifications = phones,
                 TimeDelta = DeltaTime,
-                ValueDelta = DeltaValue
+                ValueDelta = DeltaValue,
+                Lo = Low,
+                Hi = Hi
             };
         }
 
@@ -80,7 +91,9 @@ namespace UI.Models
                 EmailNotifications = emails.ToArray(),
 				IdDevicesItems = entity.IdDevicesItems,
                 IdNotification = entity.IdNotification,
-                PhoneNotifications = phones.ToArray()
+                PhoneNotifications = phones.ToArray(),
+                Low = entity.Lo,
+                Hi = entity.Hi
             };
         }
     }

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL.Repos;
 using UI.Models;
+using DomainModel.EfModels;
 
 namespace UI.Controllers
 {
@@ -32,6 +33,12 @@ namespace UI.Controllers
             var deviceTypesRepo = new DeviceTypesRepository(new SnmpDbContext());
             var devTypesSelect = new SelectList(deviceTypesRepo.GetAll().ToList(), "IdDeviceType", "DeviceTypeName");
             ViewData["types"] = devTypesSelect;
+
+            var dataTypes = Enum.GetValues(typeof(DeviceItemEntityDataType))
+                .Cast<DeviceItemEntityDataType>()
+                .Select(t => new ItemDataType { IdDataType = (int)t, DataTypeName = t.ToString() })
+                .ToList();
+            ViewData["parametersDataTypes"] = new SelectList(dataTypes, "IdDataType", "DataTypeName");
         }
 
         [HttpPost]
@@ -80,6 +87,7 @@ namespace UI.Controllers
             if (model == null)
                 return HttpNotFound();
             SetDdlsSelectValues(model.IdMaker, model.IdDeviceType);
+            SetDdls();
             var m = DeviceModelModel.ToModelEntity(model);
             return View(m);
         }
@@ -92,6 +100,7 @@ namespace UI.Controllers
                 ViewData["error_message"] = "Данные не корректны";
                 return View(model);
             }
+            SetDdls();
             DeviceModelsRepository modelsRepo = new DeviceModelsRepository(new SnmpDbContext());
             modelsRepo.Edit(model.ToEfEntity());
             modelsRepo.SaveChanges();
