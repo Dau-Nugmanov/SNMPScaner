@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using Antlr.Runtime.JavaExtensions;
 using DomainModel;
 using DomainModel.Interfaces;
 using DomainModel.Models;
@@ -23,6 +24,30 @@ namespace Core
 			var repo = ObjectFactory.GetInstance<IConfigRepo>();
 			_cache.Devices.AddRange(repo.GetAllDevices());
 			_cache.Subscriptions.AddRange(repo.GetAllSubscriptions(_cache));
+		}
+
+		public void AddDevice(Device device)
+		{
+			if(_cache.Devices.All(d => d.Id != device.Id))
+				_cache.Devices.Add(device);
+		}
+
+		public void AddDeviceItem(long deviceId, DeviceItem item)
+		{
+			var device = _cache.Devices.FirstOrDefault(d => d.Id == deviceId);
+			if(device != null && device.Items.All(i=> i.Id != item.Id))
+				device.Items.Add(item);
+		}
+
+		public void RemoveDevice(long deviceId)
+		{
+			_cache.Devices.RemoveAll(d => d.Id == deviceId);
+		}
+
+		public void RemoveDeviceItem(long deviceId, long itemId)
+		{
+			var device = _cache.Devices.FirstOrDefault(d => d.Id == deviceId);
+			if (device != null) device.Items.RemoveAll(i => i.Id == itemId);
 		}
 
 		public DeviceItem[] GetAllValues()
