@@ -72,10 +72,10 @@ namespace DomainModel.Models
 			LastValue = Item.Value;
 
 			if(ItemHelper.TryCompare(Item.Value, HiValue, out compare) && compare >= 0)
-				return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Hi);
+				return new Notification(Id, Item.Id,  Name, LastValue, OldValue, NotificationLevel.Hi);
 			if (ItemHelper.TryCompare(Item.Value, LoValue, out compare) && compare <= 0)
-				return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Lo);
-			return new Notification(Id, Name, LastValue, OldValue, NotificationLevel.Undefined);
+				return new Notification(Id, Item.Id, Name, LastValue, OldValue, NotificationLevel.Lo);
+			return new Notification(Id, Item.Id, Name, LastValue, OldValue, NotificationLevel.Undefined);
 		}
 	}
 }

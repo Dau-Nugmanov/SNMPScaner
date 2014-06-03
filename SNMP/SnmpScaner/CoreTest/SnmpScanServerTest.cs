@@ -328,7 +328,7 @@ namespace CoreTest
 
 			var notifications = new List<Notification>
 			{
-				new Notification(1, "test", new Counter32(1), new Counter32(2), NotificationLevel.Hi)
+				new Notification(1, 1, "test", new Counter32(1), new Counter32(2), NotificationLevel.Hi)
 			};
 
 			var executor = new NotificationExecutor();

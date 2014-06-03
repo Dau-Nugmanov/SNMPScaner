@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using DomainModel.Interfaces;
@@ -12,6 +13,15 @@ namespace DomainModel
 	{
 		public const int MaxUpdateRate = 1000;
 
+		private readonly Dictionary<long, Notification> _notifications = new Dictionary<long, Notification>();
+		public ReadOnlyCollection<Notification> Notifications
+		{
+			get
+			{
+				return _notifications.Values.ToList().AsReadOnly();
+			}
+		}
+		
 		private List<Device> _devices = new List<Device>();
 		public List<Device> Devices
 		{
@@ -75,6 +85,13 @@ namespace DomainModel
 					.Select(s => s.Update())
 					.Where(n => !n.Equals(Notification.Empty))
 					.ToList();
+
+				res.ForEach(r =>
+				{
+					if(!_notifications.ContainsKey(r.SubscriptionItemId))
+						_notifications.Add(r.SubscriptionItemId, null);
+					_notifications[r.SubscriptionItemId] = r;
+				});
 				notificationExecutor.Execute(res);
 				
 				delay = Environment.TickCount - delay;

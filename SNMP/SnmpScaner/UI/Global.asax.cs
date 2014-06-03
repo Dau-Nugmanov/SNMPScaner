@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net;
+using System.Threading;
 using Core;
 using DAL;
 using DomainModel.EfModels;
@@ -28,7 +29,7 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
-	    private static SnmpScanServer _server;
+	    public static SnmpScanServer ScanServer;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -43,10 +44,9 @@ namespace UI
 			ObjectFactory.Configure(i => i.For<INotificationExecutor>().Use<NotificationExecutor>());
 			InitTestSettings();
 
-            _server = new SnmpScanServer();
+            ScanServer = new SnmpScanServer();
 
             InitStartParameters();
-            
         }
 
         private void InitStartParameters()
