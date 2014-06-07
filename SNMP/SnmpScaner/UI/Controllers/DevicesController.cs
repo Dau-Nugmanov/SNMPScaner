@@ -10,6 +10,11 @@ using UI.Helpers;
 using UI.Models;
 using DomainModel.EfModels;
 using StructureMap;
+using Yarn.Reflection;
+using DomainModel.Models;
+using AutoMapper;
+using System.Net;
+using Lextm.SharpSnmpLib;
 
 namespace UI.Controllers
 {
@@ -54,6 +59,30 @@ namespace UI.Controllers
             devRepo.SaveChanges();
             ViewData["message"] = "Новое устройство добавлено в систему";
             SetDdlsNotSelected();
+
+            //var newDev = devRepo.GetById(device.IdDevice);
+            //List<DeviceItem> items = new List<DeviceItem>();
+            //if (newDev.DevicesItems != null)
+            //{
+            //    items.AddRange(
+            //            device.Items
+            //            .Select(t => new DeviceItem { Id = t.IdDevicesItems,
+            //                Name = t.Name,
+            //                Oid = new ObjectIdentifier(t.Oid),
+            //                TimeDelta = t.DeltaT
+            //            })
+            //        );
+                    
+            //}
+            //var dev = new Device
+            //{
+            //    Id = newDev.IdDeviceEntity,
+            //    Ip = IPAddress.Parse(newDev.Ip),
+            //    Port = newDev.Port,
+            //    Items = items
+            //};
+
+            MvcApplication.SnmpServer.Refresh();
             return RedirectToAction("Index", "Settings");
         }
 
@@ -83,6 +112,7 @@ namespace UI.Controllers
             devRepo.Edit(device.ToEfEntity());
             devRepo.SaveChanges();
             ViewData["message"] = "Изменения успешно сохранены";
+            MvcApplication.SnmpServer.Refresh();
             return View(device);
         }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UI.Models.WarningModel>
+﻿@model IEnumerable<DomainModel.EfModels.DeviceEntity>
 
 @{
     ViewBag.Title = null;
@@ -26,16 +26,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceName)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceMaker)
+            @Html.DisplayFor(modelItem => item.DeviceModel.Maker.MakerName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceModel)
+            @Html.DisplayFor(modelItem => item.DeviceModel.ModelName)
         </td>
         <td>
-            @Html.ActionLink("Подробности", "Details", new {  id = item.IdDevice  })
+            @Html.ActionLink("Подробности", "DetailsDevice", new {  id = item.IdDeviceEntity  })
         </td>
     </tr>
 }

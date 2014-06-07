@@ -67,7 +67,7 @@
             })
         }
 
-        window.setInterval(function () { checkWarnings() }, intervalTime);
+        //window.setInterval(function () { checkWarnings() }, intervalTime);
 
         $(document).ready(function () {
 
@@ -105,9 +105,9 @@
             </nav>
             <div id="popupNotification">
             </div>
-            <div>
+           @* <div>
                 <input type="button" id="showPopupNotification" value="show notif" />
-            </div>
+            </div>*@
             <div class="sign-out">
 
                 @if (User.Identity.IsAuthenticated)

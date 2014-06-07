@@ -27,6 +27,8 @@ namespace UI.Controllers
 
         public ActionResult GetParametersByDeviceId(long id)
         {
+            var notifs = MvcApplication.SnmpServer.GetAllNotifications(id);
+            TempData["notifs"] = notifs;
             return View(MvcApplication.SnmpServer.GetAllValues(id));
         }
 
@@ -38,7 +40,8 @@ namespace UI.Controllers
         public ActionResult ParameterHistory(long id)
         {
             var paramsHistoryRepo = new DevicesItemsRepository(new SnmpDbContext());
-            return View(paramsHistoryRepo.GetByItemId(id));
+            var item = paramsHistoryRepo.GetByItemId(id);
+            return View(item);
         }
 
         [HttpPost]
@@ -59,7 +62,12 @@ namespace UI.Controllers
 
         public ActionResult GetAll()
         {
-            return View(WarningsStorage.GetWarnings());
+            var notifs = MvcApplication.SnmpServer.GetAllNotifications();
+            var devItemsRepo = new DevicesItemsRepository(new SnmpDbContext());
+            var devItems = devItemsRepo.GetAll().Where(t => notifs.Select(q => q.ItemId).Contains(t.IdDeviceItemEntity)).ToList();
+            var devsR = new DevicesRepository(new SnmpDbContext());
+            var d = devsR.GetAll().Where(t => devItems.Select(q => q.IdDeviceEntity).Contains(t.IdDeviceEntity)).ToList();
+            return View(d);
         }
 
         public ActionResult Details(int id)

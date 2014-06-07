@@ -49,11 +49,11 @@ namespace DAL
 
 		private static void InitMapping()
 		{
-			Mapper.CreateMap<DevicesItems, DeviceItem>()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDevicesItems))
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DeviceItemEntity.Name))
-				.ForMember(dest => dest.Oid, opt => opt.MapFrom(src => new ObjectIdentifier(src.DeviceItemEntity.Oid)))
-				.ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => Convert.ToInt64(src.DeltaT)));
+            Mapper.CreateMap<DevicesItems, DeviceItem>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDevicesItems))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DeviceItemEntity.Name))
+                .ForMember(dest => dest.Oid, opt => opt.MapFrom(src => new ObjectIdentifier(src.DeviceItemEntity.Oid)))
+                .ForMember(dest => dest.TimeDelta, opt => opt.MapFrom(src => Convert.ToInt64(src.DeltaT)));
 
 			Mapper.CreateMap<DeviceEntity, Device>()
 				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDeviceEntity))

@@ -19,7 +19,6 @@ namespace DAL.Repos
         public override void Add(DeviceEntity item)
         {
             base.Add(item);
-
         }
 
         public override IEnumerable<DeviceEntity> GetAll()

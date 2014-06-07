@@ -29,7 +29,7 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
-	    public static SnmpScanServer SnmpServer;
+        public static SnmpScanServer SnmpServer;
 
         protected void Application_Start()
         {
@@ -41,13 +41,18 @@ namespace UI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-			DalInit.Init();
-			ObjectFactory.Configure(i => i.For<INotificationExecutor>().Use<NotificationExecutor>());
-			InitTestSettings();
+            DalInit.Init();
+            ObjectFactory.Configure(i => i.For<INotificationExecutor>().Use<NotificationExecutor>());
+            InitTestSettings();
 
             SnmpServer = new SnmpScanServer();
 
             InitStartParameters();
+        }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
         }
 
         private void InitStartParameters()
@@ -153,46 +158,46 @@ namespace UI
             });
         }
 
-	    private void InitTestSettings()
-	    {
+        private void InitTestSettings()
+        {
             InitWarningsModels();
-			SnmpDbContext context = new SnmpDbContext();
-			if (!context.Database.Exists())
-			{
-				context.Database.Create();
-				var user = context.Users.Add(
-					new User
-					{
-						Name = "Pamella",
-						LastName = "Anderson",
-						IsAdmin = true,
-						FirstEntry = false,
-						Password = "123",
-						Login = "pam",
+            SnmpDbContext context = new SnmpDbContext();
+            if (!context.Database.Exists())
+            {
+                context.Database.Create();
+                var user = context.Users.Add(
+                    new User
+                    {
+                        Name = "Pamella",
+                        LastName = "Anderson",
+                        IsAdmin = true,
+                        FirstEntry = false,
+                        Password = "123",
+                        Login = "pam",
 
-					});
+                    });
 
-				user.PhoneNumbers = new List<PhoneNumber>
+                user.PhoneNumbers = new List<PhoneNumber>
 				{
 					new PhoneNumber {Number = "+7 123 456 7890"}
 				};
 
-				user.Emails = new List<EmailEntity>
+                user.Emails = new List<EmailEntity>
 				{
 					new EmailEntity {Email = "SNMPEmailTest@gmail.com"}
 				};
-				
-				var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Тип устройства" });
-				var maker = context.Makers.Add(new Maker {MakerName = "Изготовитель"});
-				var deviceModel = context.Models.Add(
-					new DeviceModel
-					{
-						DeviceType = deviceType, 
-						Maker = maker,
-						ModelName = "Модель устройства"
-					});
 
-				var oids = new List<Tuple<string, string, DeviceItemEntityDataType>>
+                var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Тип устройства" });
+                var maker = context.Makers.Add(new Maker { MakerName = "Изготовитель" });
+                var deviceModel = context.Models.Add(
+                    new DeviceModel
+                    {
+                        DeviceType = deviceType,
+                        Maker = maker,
+                        ModelName = "Модель устройства"
+                    });
+
+                var oids = new List<Tuple<string, string, DeviceItemEntityDataType>>
 				{
 #region OIDS
                     //new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.1",   "1",		DeviceItemEntityDataType.Integer32),
@@ -241,71 +246,71 @@ namespace UI
 					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.22.2",  "44",	DeviceItemEntityDataType.Unknown),
 #endregion
 				};
-			
-				var deviceItemEntities = context.Parameters.AddRange(
-					oids.Select(o => new DeviceItemEntity
-					{
-						Model = deviceModel,
-						Oid = o.Item1,
-						Name = o.Item2,
-						DataType = o.Item3,
-					}));
 
-				var customer = context.Customers.Add(new Customer {CustomerName = "Владелец"});
+                var deviceItemEntities = context.Parameters.AddRange(
+                    oids.Select(o => new DeviceItemEntity
+                    {
+                        Model = deviceModel,
+                        Oid = o.Item1,
+                        Name = o.Item2,
+                        DataType = o.Item3,
+                    }));
 
-				var deviceEntity = context.Devices.Add(new DeviceEntity
-				{
-					Name = "Конкретное устройство",
-					Customer = customer,
-					DeviceModel = deviceModel,
-					Ip = Dns.GetHostAddresses("demo.snmplabs.com")[0].ToString(),
-					Port = 161,
-					Login = "Login",
-					Password = "Password",
-					IsActive = true,
-					Description = "Описание",
-					DateCreate = DateTime.Now,
+                var customer = context.Customers.Add(new Customer { CustomerName = "Владелец" });
 
-					DevicesItems = deviceItemEntities.Select(i=> new DevicesItems
-					{
-						DeltaT = 60,
-						DeviceItemEntity = i,
+                var deviceEntity = context.Devices.Add(new DeviceEntity
+                {
+                    Name = "Конкретное устройство",
+                    Customer = customer,
+                    DeviceModel = deviceModel,
+                    Ip = Dns.GetHostAddresses("demo.snmplabs.com")[0].ToString(),
+                    Port = 161,
+                    Login = "Login",
+                    Password = "Password",
+                    IsActive = true,
+                    Description = "Описание",
+                    DateCreate = DateTime.Now,
+
+                    DevicesItems = deviceItemEntities.Select(i => new DevicesItems
+                    {
+                        DeltaT = 60,
+                        DeviceItemEntity = i,
                         DeltaV = 10,
-						Notifications = GetNotification(user),
-					}).ToList()
-				});
-
-				
+                        Notifications = GetNotification(user),
+                    }).ToList()
+                });
 
 
-				//var deviceType = new DeviceType()
-				//{
-				//	DeviceTypeName = "Printer"
-				//};
 
-				//var deviceType1 = new DeviceType()
-				//{
-				//	DeviceTypeName = "Server"
-				//};
 
-				//var deviceType2 = new DeviceType()
-				//{
-				//	DeviceTypeName = "Router"
-				//};
-                
+                //var deviceType = new DeviceType()
+                //{
+                //	DeviceTypeName = "Printer"
+                //};
+
+                //var deviceType1 = new DeviceType()
+                //{
+                //	DeviceTypeName = "Server"
+                //};
+
+                //var deviceType2 = new DeviceType()
+                //{
+                //	DeviceTypeName = "Router"
+                //};
+
                 InitReportParametersDataTypes(context);
-				context.SaveChanges();
-				//
-				//context.DeviceTypes.Add(deviceType1);
-				//context.DeviceTypes.Add(deviceType2);
-				//context.SaveChanges();
-			}
-	    }
+                context.SaveChanges();
+                //
+                //context.DeviceTypes.Add(deviceType1);
+                //context.DeviceTypes.Add(deviceType2);
+                //context.SaveChanges();
+            }
+        }
 
 
-	    private Notification[] GetNotification(User user)
-	    {
-		    return new[]{new Notification
+        private Notification[] GetNotification(User user)
+        {
+            return new[]{new Notification
 			{
 				EmailNotifications = user.Emails.Select(e=>new EmailNotification{ EmailEntity = e}).ToList(),
 				PhoneNotifications = user.PhoneNumbers.Select(p => new PhoneNotification { PhoneNumber = p }).ToList(),
@@ -314,9 +319,9 @@ namespace UI
 				Hi = 20,
 				Lo = 10,
 			}};
-	    }
+        }
 
-	    void Application_PostAuthenticateRequest()
+        void Application_PostAuthenticateRequest()
         {
             HttpCookie authCookie =
                 Context.Request.Cookies[FormsAuthentication.FormsCookieName];
