@@ -188,63 +188,63 @@ namespace UI
 					new EmailEntity {Email = "SNMPEmailTest@gmail.com"}
 				};
 
-                var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Тип устройства" });
-                var maker = context.Makers.Add(new Maker { MakerName = "Изготовитель" });
+                var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Принтер" });
+                var maker = context.Makers.Add(new Maker { MakerName = "Самсунг" });
                 var deviceModel = context.Models.Add(
                     new DeviceModel
                     {
                         DeviceType = deviceType,
                         Maker = maker,
-                        ModelName = "Модель устройства"
+                        ModelName = "LaserJet 1233"
                     });
 
                 var oids = new List<Tuple<string, string, DeviceItemEntityDataType>>
 				{
 #region OIDS
-                    //new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.1",   "1",		DeviceItemEntityDataType.Integer32),
-                    //new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.1.2",   "2",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.2.1",   "3",		DeviceItemEntityDataType.OctetString),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.2.2",   "4",		DeviceItemEntityDataType.OctetString),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.3.1",   "5",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.3.2",   "6",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.4.1",   "7",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.4.2",   "8",		DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.5.1",   "9",		DeviceItemEntityDataType.Gauge32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.5.2",   "0",		DeviceItemEntityDataType.Gauge32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.6.1",   "11",	DeviceItemEntityDataType.OctetString),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.6.2",   "12",	DeviceItemEntityDataType.OctetString),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.7.1",   "13",	DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.7.2",   "14",	DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.8.1",   "15",	DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.8.2",   "16",	DeviceItemEntityDataType.Integer32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.9.1",   "17",	DeviceItemEntityDataType.TimeTicks),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.9.2",   "18",	DeviceItemEntityDataType.TimeTicks),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.10.1",  "19",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.10.2",  "20",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.11.1",  "21",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.11.2",  "22",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.12.1",  "23",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.12.2",  "24",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.13.1",  "25",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.13.2",  "26",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.14.1",  "27",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.14.2",  "28",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.15.1",  "29",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.15.2",  "30",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.16.1",  "31",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.16.2",  "32",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.17.1",  "33",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.17.2",  "34",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.18.1",  "35",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.18.2",  "36",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.19.1",  "37",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.19.2",  "38",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.20.1",  "39",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.20.2",  "40",	DeviceItemEntityDataType.Counter32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.21.1",  "41",	DeviceItemEntityDataType.Gauge32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.21.2",  "42",	DeviceItemEntityDataType.Gauge32),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.22.1",  "43",	DeviceItemEntityDataType.Unknown),
-					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.2.2.1.22.2",  "44",	DeviceItemEntityDataType.Unknown),
+                    new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.1.0",   "DeviceName",		DeviceItemEntityDataType.OctetString),
+                    new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.2.0",   "Остаток тонера",		DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.3.0",   "Время работы",		DeviceItemEntityDataType.TimeTicks),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.4.0",   "Текущий статус",		DeviceItemEntityDataType.OctetString),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.5.0",   "Текущая страница",		DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.6.0",   "Осталось страниц",		DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.7.0",   "Текущее качество",		DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.8.0",   "IP адрес",		DeviceItemEntityDataType.OctetString),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.0",   "Доп IP",		DeviceItemEntityDataType.OctetString),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.1 ",   "Почта",		DeviceItemEntityDataType.OctetString),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.2 ",   "Пароль",	DeviceItemEntityDataType.OctetString),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.3 ",   "Test 12",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.4 ",   "Test 13",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.5 ",   "Test 14",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.6 ",   "Test 15",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.7 ",   "Test 16",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.8 ",   "Test 17",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.9 ",   "Test 18",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.10",  "Test 19",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.11",  "Test 20",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.12",  "Test 21",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.13",  "Test 22",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.14",  "Test 23",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.15",  "Test 24",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.16",  "Test 25",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.17",  "Test 26",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.18",  "Test 27",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.19",  "Test 28",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.20",  "Test 29",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.21",  "Test 30",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.22",  "Test 31",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.23",  "Test 32",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.24",  "Test 33",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.25",  "Test 34",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.26",  "Test 35",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.27",  "Test 36",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.28",  "Test 37",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.29",  "Test 38",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.30",  "Test 39",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.31",  "Test 40",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.32",  "Test 41",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.33",  "Test 42",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.34",  "Test 43",	DeviceItemEntityDataType.Integer32),
+					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.35",  "Test 44",	DeviceItemEntityDataType.Integer32),
 #endregion
 				};
 
@@ -257,15 +257,15 @@ namespace UI
                         DataType = o.Item3,
                     }));
 
-                var customer = context.Customers.Add(new Customer { CustomerName = "Владелец" });
+                var customer = context.Customers.Add(new Customer { CustomerName = "ГазНефтьАлмазБанк" });
 
                 var deviceEntity = context.Devices.Add(new DeviceEntity
                 {
-                    Name = "Конкретное устройство",
+                    Name = "Принтер в бухгалтерии",
                     Customer = customer,
                     DeviceModel = deviceModel,
-                    Ip = Dns.GetHostAddresses("demo.snmplabs.com")[0].ToString(),
-                    Port = 161,
+					Ip = "127.0.0.1",
+                    Port = 162,
                     Login = "Login",
                     Password = "Password",
                     IsActive = true,
@@ -281,30 +281,8 @@ namespace UI
                     }).ToList()
                 });
 
-
-
-
-                //var deviceType = new DeviceType()
-                //{
-                //	DeviceTypeName = "Printer"
-                //};
-
-                //var deviceType1 = new DeviceType()
-                //{
-                //	DeviceTypeName = "Server"
-                //};
-
-                //var deviceType2 = new DeviceType()
-                //{
-                //	DeviceTypeName = "Router"
-                //};
-
-                InitReportParametersDataTypes(context);
+				InitReportParametersDataTypes(context);
                 context.SaveChanges();
-                //
-                //context.DeviceTypes.Add(deviceType1);
-                //context.DeviceTypes.Add(deviceType2);
-                //context.SaveChanges();
             }
         }
 
