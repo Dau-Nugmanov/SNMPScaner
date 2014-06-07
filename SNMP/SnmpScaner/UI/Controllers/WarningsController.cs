@@ -27,8 +27,10 @@ namespace UI.Controllers
 
         public ActionResult GetParametersByDeviceId(long id)
         {
+
             var notifs = MvcApplication.SnmpServer.GetAllNotifications(id).Where(t => t.Level == DomainModel.Models.NotificationLevel.Hi
                 || t.Level == DomainModel.Models.NotificationLevel.Lo).ToList();
+
             TempData["notifs"] = notifs;
             return View(MvcApplication.SnmpServer.GetAllValues(id));
         }
@@ -67,6 +69,7 @@ namespace UI.Controllers
 
             if (!notifs.Any())
                 return View();
+
             var devItemsRepo = new DevicesItemsRepository(new SnmpDbContext());
             var devItems = devItemsRepo.GetAll().Where(t => notifs.Select(q => q.ItemId).Contains(t.IdDeviceItemEntity)).ToList();
             var devsR = new DevicesRepository(new SnmpDbContext());
