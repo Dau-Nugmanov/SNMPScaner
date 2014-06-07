@@ -16,6 +16,11 @@ namespace DAL.Repos
             _context = context;
         }
 
+        public override void Add(DeviceEntity item)
+        {
+            base.Add(item);
+        }
+
         public override IEnumerable<DeviceEntity> GetAll()
         {
             return dbSet

@@ -53,10 +53,14 @@
                                   //+ '<input type="hidden" name=Items[' + itemCnt + '].Oid_s value=' + paramOid + ' />'
                                   + '<div>'
                                   + '<div id="concreteValues">'
-                                        + '<p>Частота опроса: </p>'
+                                        + '<b>Частота опроса: </b>'
                                         + '<input type="text" name="Items[' + itemCnt + '].DeltaT" value=""/>'
                                         + '<input type="hidden" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
                                   + '<div>'
+                                  + '<div>'
+                                    + '<b>Изменение значения</b>'
+                                        + '<input type="text" name="Items[' + itemCnt + '].DeltaV" value=""/>'
+                                  + '</div>'
                                 + '</div>'
                                 itemCnt++;
                                 $('.device-parameters').append(html);

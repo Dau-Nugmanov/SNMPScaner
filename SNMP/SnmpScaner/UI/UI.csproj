@@ -42,6 +42,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime.Debug, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime.JavaExtensions, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr3.Runtime.JavaExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr4.StringTemplate.Visualizer, Version=4.0.6.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.Unofficial.3.4.1.0\lib\Antlr4.StringTemplate.Visualizer.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
@@ -50,8 +77,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="SharpSnmpLib, Version=7.6.10407.14, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSnmpLib.Engine, Version=7.6.10407.14, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSnmpLib.Mib, Version=7.6.10407.14, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lextm.SharpSnmpLib.8.0.0.0\lib\net40\SharpSnmpLib.Mib.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -160,10 +203,6 @@
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Yarn, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -628,6 +667,7 @@
     <Content Include="Content\images\icons\main\Monitor_hover.png" />
     <Content Include="Content\images\icons\main\Ustroist.png" />
     <Content Include="Content\images\icons\main\Ustroist_hover.png" />
+    <Content Include="Content\images\loader.gif" />
     <Content Include="Content\kendo.common.css" />
     <Content Include="Content\kendo.default.css" />
     <Content Include="Content\main.css" />
@@ -793,6 +833,10 @@
     <Content Include="Views\Shared\Controls\_ParametersControl.cshtml" />
     <Content Include="Views\Devices\GetAllCheckParameters.cshtml" />
     <Content Include="Views\Shared\Controls\_SymbolsControl.cshtml" />
+    <Content Include="Views\Warnings\GetAllDevices.cshtml" />
+    <Content Include="Views\Warnings\DetailsDevice.cshtml" />
+    <Content Include="Views\Warnings\GetParametersByDeviceId.cshtml" />
+    <Content Include="Views\Warnings\ParameterHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1065,6 +1109,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

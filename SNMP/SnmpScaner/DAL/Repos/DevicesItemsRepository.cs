@@ -27,6 +27,15 @@ namespace DAL.Repos
             _context.Entry(oldEntity).CurrentValues.SetValues(entity);
         }
 
+        public DevicesItems GetByItemId(long id)
+        {
+            return dbSet
+                .Include(t => t.ItemHistory)
+                .Include(t => t.DeviceItemEntity)
+                .Where(t => t.IdDeviceItemEntity == id)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<DevicesItems> GetByDeviceId(long id)
         {
             return dbSet

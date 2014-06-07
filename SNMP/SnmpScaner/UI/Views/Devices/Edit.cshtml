@@ -71,10 +71,14 @@
                                          + '</div>'
 
                                          + '<div id="delta">'
-                                               + '<p>Частота опроса: </p>'
+                                               + '<b>Частота опроса: </b>'
                                                + '<input type="text" id="DeltaT" name="Items[' + itemCnt + '].DeltaT" value=""/>'
                                                + '<input type="hidden" id="idItem" name="Items[' + itemCnt + '].Id" value="' + idParam + '" />'
                                                + '<input type="hidden" id="idDevice" name="Items[' + itemCnt + '].IdDevice" value="@Model.IdDevice" />'
+                                          + '</div>'
+                                          + '<div>'
+                                                + '<b>Величина изменения: </b>'
+                                                + '<input type="text" id="DeltaV" name="Items[' + itemCnt + '].DeltaV" value=""/>'
                                           + '</div>'
                                  + '</div>'
                             + '</div>';
@@ -119,6 +123,13 @@
             var selectorParamName = $(selectorParamValues)
                .children('div#delta')
                .children('input#DeltaT');
+            var nameAttrName = $(selectorParamName).attr('name');
+            var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
+            $(selectorParamName).attr('name', replaceAttrName);
+
+            var selectorParamName = $(selectorParamValues)
+              .children('div#deltaV')
+              .children('input#DeltaV');
             var nameAttrName = $(selectorParamName).attr('name');
             var replaceAttrName = nameAttrName.replace(regexPattern, '[' + index + ']');
             $(selectorParamName).attr('name', replaceAttrName);
@@ -288,6 +299,7 @@
         height: 100%;
         margin-right: 5px;
         min-height:585px;
+        overflow-y:auto;
     }
 
     #IdDevice, #Name, #Ip_s, #Port, #Login, #Password, #Description, #IdCustomer, #Makers, #IdModel {
@@ -574,6 +586,7 @@
         overflow: hidden;
         /* padding-top: 15PX; */
         /* border: 1PX SOLID #000; */
+        /*height:100px;*/
     }
     #parameters_list {
         overflow:hidden;
@@ -597,7 +610,7 @@
         /* border: 2px solid #000; */
         /* border-top: 1px solid #fff; */
         /* margin-top: -20px; */
-        height: 80px;
+        /*height: 80px;*/
         overflow: hidden;
         margin-left: 0px;
         padding-top: 3px;
@@ -741,6 +754,10 @@
                                     <input type="hidden" id="idItem" name="Items[@cnt].Id" value="@item.Id" />
                                     <input type="hidden" id="idDevice" name="Items[@cnt].IdDevice" value="@item.IdDevice" />
                                     <input type="hidden" id="devicesItems" name="Items[@cnt].IdDevicesItems" value="@item.IdDevicesItems" />
+                                </div>
+                                <div id="deltaV">
+                                     <b>Величина изменения:</b>
+                                    <input type="text" id="DeltaV" name="Items[@cnt].DeltaV" value="@item.DeltaV" />
                                 </div>
                             </div>
                         </div>

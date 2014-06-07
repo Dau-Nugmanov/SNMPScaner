@@ -56,7 +56,11 @@ namespace UI.Models
         {
             List<DevicesItems> devicesItems = new List<DevicesItems>();
             if (Items != null)
-                devicesItems.AddRange(Items.Select(t => new DevicesItems { IdDeviceEntity = IdDevice, IdDeviceItemEntity = t.Id, DeltaT = t.DeltaT, IdDevicesItems = t.IdDevicesItems }));
+                devicesItems.AddRange(Items.Select(t => new DevicesItems { IdDeviceEntity = IdDevice
+                    , IdDeviceItemEntity = t.Id
+                    , DeltaT = t.DeltaT
+                    , IdDevicesItems = t.IdDevicesItems
+                    , DeltaV = t.DeltaV }));
 
             return new DeviceEntity
             {
@@ -86,6 +90,7 @@ namespace UI.Models
                         , DeltaT = t.DeltaT
                         , Name = t.DeviceItemEntity.Name
                         , Oid = t.DeviceItemEntity.Oid
+                        , DeltaV = t.DeltaV
                         , IdDevicesItems = t.IdDevicesItems}));
             }
             return new DeviceModel
@@ -120,5 +125,8 @@ namespace UI.Models
         [Required(ErrorMessage="Требуется поле DeltaT")]
         [Range(1, int.MaxValue, ErrorMessage = "Значение должно быть целым числом")]
         public int DeltaT { get; set; }
+
+        [Required(ErrorMessage = "Требуется поле DeltaV")]
+        public long DeltaV { get; set; }
     }
 }

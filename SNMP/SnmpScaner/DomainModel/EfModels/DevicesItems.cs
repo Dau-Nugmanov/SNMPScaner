@@ -17,6 +17,8 @@ namespace DomainModel.EfModels
 
         public int DeltaT { get; set; }
 
+        public long DeltaV { get; set; }
+
         [ForeignKey("IdDeviceEntity")]
         public virtual DeviceEntity DeviceEntity { get; set; }
 

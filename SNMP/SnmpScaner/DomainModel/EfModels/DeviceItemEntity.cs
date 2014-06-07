@@ -25,11 +25,6 @@ namespace DomainModel.EfModels
 	    [ForeignKey("IdModel")]
         public DeviceModel Model { get; set; }
 
-		//public virtual ICollection<EmailNotification> EmailNotifications { get; set; }
-
-		//public virtual ICollection<PhoneNotification> PhoneNotifications { get; set; }
-
         public virtual ICollection<DevicesItems> DevicesItems { get; set; }
-        
     }
 }
