@@ -186,17 +186,13 @@ namespace UI
 				{
 					new EmailEntity {Email = "SNMPEmailTest@gmail.com"}
 				};
-
-
                 var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Принтер" });
                 var maker = context.Makers.Add(new Maker { MakerName = "Самсунг" });
-
                 var deviceModel = context.Models.Add(
                     new DeviceModel
                     {
                         DeviceType = deviceType,
                         Maker = maker,
-
                         ModelName = "LaserJet 1233"
 
                     });
@@ -252,7 +248,6 @@ namespace UI
 				};
 
 
-
                 var deviceItemEntities = context.Parameters.AddRange(
                     oids.Select(o => new DeviceItemEntity
                     {
@@ -261,7 +256,6 @@ namespace UI
                         Name = o.Item2,
                         DataType = o.Item3,
                     }));
-
 
                 var customer = context.Customers.Add(new Customer { CustomerName = "ГазНефтьАлмазБанк" });
 
@@ -289,7 +283,6 @@ namespace UI
 
 				InitReportParametersDataTypes(context);
                 context.SaveChanges();
-
             }
         }
 
