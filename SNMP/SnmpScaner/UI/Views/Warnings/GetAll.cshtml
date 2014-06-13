@@ -18,7 +18,6 @@
         <th>Действия
         </th>
     </tr>
-<<<<<<< HEAD
     @if (Model != null)
     {
         foreach (var item in Model)
@@ -39,24 +38,5 @@
         </tr>
         }
     }
-=======
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceModel.Maker.MakerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceModel.ModelName)
-        </td>
-        <td>
-            @Html.ActionLink("Подробности", "DetailsDevice", new {  id = item.IdDeviceEntity  })
-        </td>
-    </tr>
-}
-
->>>>>>> Просмотр текщи�
 </table>
