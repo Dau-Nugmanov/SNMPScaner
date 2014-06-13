@@ -9,6 +9,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
+    [Authorize]
     public class DeviceTypesController : Controller
     {
         public ActionResult GetAll()

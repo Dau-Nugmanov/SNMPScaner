@@ -49,7 +49,6 @@ namespace DAL
 
 		private static void InitMapping()
 		{
-
             Mapper.CreateMap<DevicesItems, DeviceItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdDevicesItems))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DeviceItemEntity.Name))

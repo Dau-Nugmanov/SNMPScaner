@@ -29,9 +29,7 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
-
         public static SnmpScanServer SnmpServer;
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -248,6 +246,7 @@ namespace UI
 #endregion
 				};
 
+
                 var deviceItemEntities = context.Parameters.AddRange(
                     oids.Select(o => new DeviceItemEntity
                     {
@@ -256,6 +255,7 @@ namespace UI
                         Name = o.Item2,
                         DataType = o.Item3,
                     }));
+
 
                 var customer = context.Customers.Add(new Customer { CustomerName = "ГазНефтьАлмазБанк" });
 

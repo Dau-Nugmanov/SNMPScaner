@@ -6,21 +6,24 @@
 
 <script>
 
-    $(document).ready(function () {
-
+    function updateParametersTable() {
         $.ajax({
             url: "/Warnings/GetParametersByDeviceId",
             type: "GET",
             data: { id: '@(Model.IdDeviceEntity)' },
             beforeSend: function () {
-                $('.mask').show();
+                //$('.mask').show();
             },
             success: function (data) {
                 $('.mask').hide();
                 $("#content").html('').html(data);
             }
-        });
+            });
+    }
 
+    $(document).ready(function () {
+        window.setInterval(function () { updateParametersTable() }, 2000);
+        //updateParametersTable();
     })
 
 </script>

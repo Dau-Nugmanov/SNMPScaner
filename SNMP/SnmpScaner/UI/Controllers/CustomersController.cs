@@ -9,6 +9,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         public ActionResult GetAll()

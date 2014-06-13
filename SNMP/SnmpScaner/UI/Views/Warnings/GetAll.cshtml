@@ -9,35 +9,33 @@
 
 <table class="table table-hover">
     <tr>
-        <th>
-           Название
+        <th>Название
         </th>
-        <th>
-            Производитель
+        <th>Производитель
         </th>
-        <th>
-            Модель
+        <th>Модель
         </th>
-        <th>
-            Действия
+        <th>Действия
         </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceModel.Maker.MakerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceModel.ModelName)
-        </td>
-        <td>
-            @Html.ActionLink("Подробности", "DetailsDevice", new {  id = item.IdDeviceEntity  })
-        </td>
-    </tr>
-}
-
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceModel.Maker.MakerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceModel.ModelName)
+            </td>
+            <td>
+                @Html.ActionLink("Подробности", "DetailsDevice", new { id = item.IdDeviceEntity })
+            </td>
+        </tr>
+        }
+    }
 </table>
