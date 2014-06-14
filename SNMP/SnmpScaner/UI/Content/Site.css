@@ -110,8 +110,11 @@ textarea
     margin-left:10px;
 }
 .critical {
-    border-color: #ff0000 !important;
+    background-color: rgb(255, 121, 121);
 }
+    tr.critical:hover {
+        background-color: rgb(255, 121, 121) !important;
+    }
 .warning-text {
     color: #FF1515; 
 }

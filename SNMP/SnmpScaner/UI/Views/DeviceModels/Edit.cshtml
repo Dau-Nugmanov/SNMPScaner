@@ -761,7 +761,7 @@
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "DeviceModels", FormMethod.Post, new { style="overflow:auto;" }))
 {
     @Html.ValidationSummary(true)
 

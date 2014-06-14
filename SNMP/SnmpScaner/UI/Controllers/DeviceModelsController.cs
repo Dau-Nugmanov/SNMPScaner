@@ -10,6 +10,7 @@ using DomainModel.EfModels;
 
 namespace UI.Controllers
 {
+    [Authorize]
     public class DeviceModelsController : Controller
     {
         public ActionResult GetAll()

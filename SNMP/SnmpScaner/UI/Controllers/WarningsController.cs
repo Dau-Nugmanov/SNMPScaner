@@ -27,7 +27,8 @@ namespace UI.Controllers
 
         public ActionResult GetParametersByDeviceId(long id)
         {
-            var notifs = MvcApplication.SnmpServer.GetAllNotifications(id);
+            var notifs = MvcApplication.SnmpServer.GetAllNotifications(id).Where(t => t.Level == DomainModel.Models.NotificationLevel.Hi
+                || t.Level == DomainModel.Models.NotificationLevel.Lo).ToList();
             TempData["notifs"] = notifs;
             return View(MvcApplication.SnmpServer.GetAllValues(id));
         }
@@ -53,16 +54,19 @@ namespace UI.Controllers
         [HttpPost]
         public JsonResult IsHavNewWarnings(int? currentNumber)
         {
-            int curCount = WarningsStorage.GetCount();
-            if ((currentNumber.HasValue && curCount > currentNumber)
-                || (!currentNumber.HasValue && curCount > 0))
-                return Json(new {state = true, count = curCount});
-            return Json(false);
+            var notifs = MvcApplication.SnmpServer.GetAllNotifications().Where(t => t.Level == DomainModel.Models.NotificationLevel.Hi
+                || t.Level == DomainModel.Models.NotificationLevel.Lo);
+            bool isHav = notifs.Any();
+            return Json(new {state = isHav});
         }
 
         public ActionResult GetAll()
         {
-            var notifs = MvcApplication.SnmpServer.GetAllNotifications();
+            var notifs = MvcApplication.SnmpServer.GetAllNotifications().Where(t => t.Level == DomainModel.Models.NotificationLevel.Hi 
+                || t.Level == DomainModel.Models.NotificationLevel.Lo).ToList();
+
+            if (!notifs.Any())
+                return View();
             var devItemsRepo = new DevicesItemsRepository(new SnmpDbContext());
             var devItems = devItemsRepo.GetAll().Where(t => notifs.Select(q => q.ItemId).Contains(t.IdDeviceItemEntity)).ToList();
             var devsR = new DevicesRepository(new SnmpDbContext());

@@ -57,25 +57,25 @@ namespace DomainModel.Models
 		{
 			try
 			{
-				var result = Messenger.Get(VersionCode,
-					new IPEndPoint(Ip, Port),
-					new OctetString("public"),
-					items
-						.Select(i => new Variable(i.Oid))
-						.ToList(),
-					Timeout);
+                //var result = Messenger.Get(VersionCode,
+                //    new IPEndPoint(Ip, Port),
+                //    new OctetString("public"),
+                //    items
+                //        .Select(i => new Variable(i.Oid))
+                //        .ToList(),
+                //    Timeout);
 
-				var timestamp = DateTime.Now;
+                //var timestamp = DateTime.Now;
 
-				_items
-					.Join(result, item => item.Oid, variable => variable.Id,
-						(item, variable) => new { item, variable })
-					.ToList()
-					.ForEach(p =>
-					{
-						p.item.UpdateValue(p.variable.Data, timestamp);
-						p.item.ExceptionType = null;
-					});
+                //_items
+                //    .Join(result, item => item.Oid, variable => variable.Id,
+                //        (item, variable) => new { item, variable })
+                //    .ToList()
+                //    .ForEach(p =>
+                //    {
+                //        p.item.UpdateValue(p.variable.Data, timestamp);
+                //        p.item.ExceptionType = null;
+                //    });
 			}
 			catch (ErrorException e)
 			{

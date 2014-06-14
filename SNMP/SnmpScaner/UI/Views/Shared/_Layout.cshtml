@@ -47,19 +47,18 @@
         }
 
         function checkWarnings() {
-            var currentNumber = $('#LastWarningTimeStamp').html();
-
             $.ajax({
                 url: "/Warnings/IsHavNewWarnings",
                 type: "POST",
-                data: {currentNumber: currentNumber},
                 beforeSend: function () {
                 },
                 success: function (data) {
-                    if (data) {
-                        $('#warningsMess').css("color", "#FF1515").html('<a href="#">(Есть непрочитанные оповещения)</a>');
-                        $('#LastWarningTimeStamp').html(data.count);
-                        alertNotification();
+                    if (data.state) {
+                        if ($('#LastWarningTimeStamp').html() == '') {
+                            $('#LastWarningTimeStamp').html('notification already was');
+                            $('#warningsMess').css("color", "#FF1515").html('<a href="#">(Есть непрочитанные оповещения)</a>');
+                            alertNotification();
+                        }
                     } else {
                         $('#warningsMess').css("color", '#A5A5A5').html('<a href="#">Оповещения</a>');
                     }
@@ -70,12 +69,7 @@
         //window.setInterval(function () { checkWarnings() }, intervalTime);
 
         $(document).ready(function () {
-
-           
-            $("#showPopupNotification").click(function () {
-                var d = new Date();                
-                popupNotification.show("ВНИМАНИЕ!!!!!", "error");
-            });
+            window.setInterval(function () { checkWarnings() }, intervalTime);
         })
     </script>
     @RenderSection("scripts", required: false)

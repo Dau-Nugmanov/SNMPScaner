@@ -90,9 +90,23 @@ namespace DAL.Repos
                 if (!newItems.Any(t => t.IdDevicesItems == item.IdDevicesItems))
                 {
                     RemoveItemsHistoryByItemId(item.IdDevicesItems);
+                    RemoveItemFromNotification(item.IdDevicesItems);
                     itemsRepo.RemoveById(item.IdDevicesItems);
                 }
             }
+        }
+
+        private void RemoveItemFromNotification(long id)
+        {
+            var notifsRepo = new NotificationsRepository(_context);
+            notifsRepo
+                .GetAll()
+                .Where(t => t.IdDevicesItems == id)
+                .ToList()
+                .ForEach(t =>
+                {
+                    notifsRepo.RemoveById(t.IdNotification);
+                });
         }
 
         private void RemoveItemsHistoryByItemId(long id)

@@ -29,7 +29,6 @@ namespace UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
-
         public static SnmpScanServer SnmpServer;
 
         protected void Application_Start()
@@ -187,7 +186,6 @@ namespace UI
 				{
 					new EmailEntity {Email = "SNMPEmailTest@gmail.com"}
 				};
-
                 var deviceType = context.DeviceTypes.Add(new DeviceType { DeviceTypeName = "Принтер" });
                 var maker = context.Makers.Add(new Maker { MakerName = "Самсунг" });
                 var deviceModel = context.Models.Add(
@@ -196,6 +194,7 @@ namespace UI
                         DeviceType = deviceType,
                         Maker = maker,
                         ModelName = "LaserJet 1233"
+
                     });
 
                 var oids = new List<Tuple<string, string, DeviceItemEntityDataType>>
@@ -247,6 +246,7 @@ namespace UI
 					new Tuple<string, string, DeviceItemEntityDataType>("1.3.6.1.2.1.1.9.1.2.35",  "Test 44",	DeviceItemEntityDataType.Integer32),
 #endregion
 				};
+
 
                 var deviceItemEntities = context.Parameters.AddRange(
                     oids.Select(o => new DeviceItemEntity

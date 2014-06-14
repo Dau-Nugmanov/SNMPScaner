@@ -9,6 +9,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
+    [Authorize]
     public class MakersController : Controller
     {
         public ActionResult GetAll()
