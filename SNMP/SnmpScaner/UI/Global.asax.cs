@@ -179,7 +179,7 @@ namespace UI
 
                 user.PhoneNumbers = new List<PhoneNumber>
 				{
-					new PhoneNumber {Number = "+7 123 456 7890"}
+					new PhoneNumber {Number = "+79376368732"}
 				};
 
                 user.Emails = new List<EmailEntity>
